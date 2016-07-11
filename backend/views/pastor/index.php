@@ -1,11 +1,12 @@
 <?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\helpers\Html;
+use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PastorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
 
 $this->title = 'Pastors';
 $this->params['breadcrumbs'][] = $this->title;
@@ -18,28 +19,38 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Pastor', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+
+    <?= ListView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+        'itemOptions' => ['class' => 'item'],
+        'itemView' => function ($model, $key, $index, $widget) {
+            echo Html::panel([
+                'heading' => 'Panel Heading',
 
-            'pastor_name',
-            //'front_title',
-            //'back_title',
-            'birth_place',
-             'birth_date',
-             'gender.description',
-            // 'address',
-            // 'address1',
-            // 'address2',
-             'handphone',
-             'email:email',
-            // 'remark:ntext',
-            // 'created_at',
-            // 'updated_at',
+                'body' => '<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, ' .
+                    'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>',
+                'postBody' => Html::listGroup([
+                    [
+                        'content' => 'Cras justo odio',
+                        'url' => '#',
+                        'badge' => '14'
+                    ],
+                    [
+                        'content' => 'Dapibus ac facilisis in',
+                        'url' => '#',
+                        'badge' => '2'
+                    ],
+                    [
+                        'content' => 'Morbi leo risus',
+                        'url' => '#',
+                        'badge' => '1'
+                    ],
+                ], [], 'ul', 'li'),
+                'footer'=> 'Panel Footer',
+                'headingTitle' => true,
+                'footerTitle' => true,
+            ], Html::TYPE_DEFAULT);
+        },
+    ]) ?>
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
 </div>
