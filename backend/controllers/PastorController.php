@@ -14,6 +14,8 @@ use yii\filters\VerbFilter;
  */
 class PastorController extends Controller
 {
+    public $layout = "column2";
+
     /**
      * @inheritdoc
      */

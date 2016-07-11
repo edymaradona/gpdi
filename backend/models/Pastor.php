@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use backend\models\Parameter;
 
 /**
  * This is the model class for table "pastor".
@@ -72,4 +73,10 @@ class Pastor extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function getGender()
+    {
+        return $this->hasOne(Parameter::className(), ['id' => 'gender_id'],['group_name'=>"gender"]);
+    }
+
 }
