@@ -43,7 +43,7 @@ use kartik\widgets\DatePicker;
         ArrayHelper::map(Parameter::find()->where('group_name = "gender"')->all(), 'id', 'description')); ?>
 
 
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
 
     <?= $form->field($model, 'address1')->textInput(['maxlength' => true]) ?>
 

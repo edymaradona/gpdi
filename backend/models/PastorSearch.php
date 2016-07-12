@@ -12,6 +12,60 @@ use backend\models\Pastor;
  */
 class PastorSearch extends Pastor
 {
+    public static function getRecentlyCreated()
+    {
+        $listarray = [];
+        $query = Pastor::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->orderBy('created_at DESC');
+        $query->limit(10);
+
+        foreach ($dataProvider->getModels() as $model) {
+            $listarray [] = [
+                'id' => $model->id,
+                'description' => $model->pastor_name,
+                'label' => $model->pastor_name,
+                'photo' => $model->photo_path,
+                'url' => ['view', 'id' => $model->id,
+                ],];
+        }
+
+        $returnarray = ['title' => 'Recently Added', 'icon' => 'circle-arrow-up', 'class' => 'info', 'list' => $listarray];
+
+        return $returnarray;
+    }
+
+    public static function getRecentlyUpdated()
+    {
+        $listarray = [];
+        $query = Pastor::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->orderBy('updated_at DESC');
+        $query->limit(10);
+
+        foreach ($dataProvider->getModels() as $model) {
+            $listarray [] = [
+                'id' => $model->id,
+                'description' => $model->pastor_name,
+                'label' => $model->pastor_name,
+                'photo' => $model->photo_path,
+                'url' => ['view', 'id' => $model->id,
+                ],];
+        }
+
+        $returnarray = ['title' => 'Recently Updated', 'icon' => 'circle-arrow-up', 'class' => 'info', 'list' => $listarray];
+
+        return $returnarray;
+    }
+
     /**
      * @inheritdoc
      */
@@ -79,4 +133,5 @@ class PastorSearch extends Pastor
 
         return $dataProvider;
     }
+
 }

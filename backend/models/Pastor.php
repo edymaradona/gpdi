@@ -4,6 +4,8 @@ namespace backend\models;
 
 use Yii;
 use backend\models\Parameter;
+use kartik\helpers\Html;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "pastor".
@@ -21,6 +23,7 @@ use backend\models\Parameter;
  * @property string $handphone
  * @property string $email
  * @property string $remark
+ * @property string $photo_path
  * @property integer $created_at
  * @property integer $updated_at
  */
@@ -46,7 +49,7 @@ class Pastor extends \yii\db\ActiveRecord
             [['remark'], 'string'],
             [['pastor_name', 'birth_place', 'handphone', 'email'], 'string', 'max' => 100],
             [['front_title', 'back_title'], 'string', 'max' => 25],
-            [['address', 'address1', 'address2'], 'string', 'max' => 255],
+            [['address', 'address1', 'address2', 'photo_path'], 'string', 'max' => 255],
         ];
     }
 
@@ -62,13 +65,15 @@ class Pastor extends \yii\db\ActiveRecord
             'back_title' => 'Back Title',
             'birth_place' => 'Birth Place',
             'birth_date' => 'Birth Date',
-            'gender_id' => 'Gender ID',
+            'gender_id' => 'Gender',
+            'gender.description' => 'Gender',
             'address' => 'Address',
-            'address1' => 'Address1',
-            'address2' => 'Address2',
+            'address1' => 'Kab/Kodya',
+            'address2' => 'Province',
             'handphone' => 'Handphone',
             'email' => 'Email',
             'remark' => 'Remark',
+            'photo_path' => 'Photo Path',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -79,4 +84,69 @@ class Pastor extends \yii\db\ActiveRecord
         return $this->hasOne(Parameter::className(), ['id' => 'gender_id'],['group_name'=>"gender"]);
     }
 
+    public function getPhotoExist()
+    {
+        if ($this->photo_path != null) {
+            if (is_file('@web/images/pastor/' . $this->photo_path)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public function getPhotoPath()
+    {
+        $options = ['width' => '100%', 'id' => 'photo', 'align' => 'left', 'class' => 'class-image'];
+        if ($this->photo_path != null && $this->PhotoExist) {
+            if ($this->getPhotoExistThumb()) {
+                $path = Html::img('@web/images/pastor/thumb/' . $this->photo_path, $options);
+            } else {
+                $path = Html::img('@web/images/pastor/' . $this->photo_path, $options);
+            }
+        } else {
+            if ($this->gender_id == 1) {
+                $path = Html::img('@web/images/nophoto.jpg', $options);
+            } else {
+                $path = Html::img('@web/images/nophotoW.jpg', $options);
+            }
+        }
+
+        return $path;
+    }
+
+    public function getPhotoExistThumb()
+    {
+        if ($this->photo_path != null) {
+            if (is_file('@web/images/pastor/thumb/' . $this->photo_path)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public function getPhotoPathReal()
+    {
+        if ($this->photo_path != null && $this->PhotoExist) {
+            if ($this->getPhotoExistThumb()) {
+                $path = '@web/images/pastor/thumb/' . $this->photo_path;
+            } else {
+                $path = '@web/images/pastor/' . $this->photo_path;
+            }
+        } else {
+            if ($this->gender_id == 1) {
+                $path = '@web/images/nophoto.jpg';
+            } else {
+                $path = '@web/images/nophotoW.jpg';
+            }
+        }
+
+        return $path;
+    }
+    
 }
