@@ -46,40 +46,31 @@ $this->params['createButton'] = [
         'itemView' => function ($model, $key, $index, $widget) {
             echo Html::panel([
                 'heading' => Html::a($model->pastor_name, ['/pastor/view', 'id' => $model->id]),
-                'body' => '
-                    <div class="panel-body">
-                        <div class="media">
-                          <div class="media-left"><img src="' .
-                    Yii::$app->request->baseUrl . '/images/' . $model->photo_path
-                    . '"></div>
-                          <div class="media-body">' .
-                    DetailView::widget([
-                        'model' => $model,
-                        'attributes' => [
-                            'birth_place',
-                            'birth_date',
-                            'gender.description',
-                            //'address',
-                            //'address1',
-                            //'address2',
-                            'handphone',
-                            'email:email',
-                        ],
-                    ])
-
-                    . '</div>
-                        </div>
-                    </div>',
+                'body' => '<div class="panel-body">' .
+                    Html::media(
+                        '',
+                        DetailView::widget([
+                            'model' => $model,
+                            'attributes' => [
+                                'birth_place',
+                                'birth_date',
+                                'gender.description',
+                                //'address',
+                                //'address1',
+                                //'address2',
+                                'handphone',
+                                'email:email',
+                            ],
+                        ]),
+                        ['/pastor/view', 'id' => $model->id],
+                        '@web/images/' . $model->photo_path
+                    ) . '</div>'
+                ,
                 'postBody' => Html::listGroup([
                     /*[
                         'content' => 'Cras justo odio',
                         'url' => '#',
                         'badge' => '14'
-                    ],
-                    [
-                        'content' => 'Dapibus ac facilisis in',
-                        'url' => '#',
-                        'badge' => '2'
                     ],
                     [
                         'content' => 'Morbi leo risus',
@@ -88,7 +79,6 @@ $this->params['createButton'] = [
                     ],*/
                 ], [], 'ul', 'li'),
                 //'footer'=> 'Panel Footer',
-                'headingTitle' => true,
                 //'footerTitle' => true,
             ], Html::TYPE_DEFAULT);
         },

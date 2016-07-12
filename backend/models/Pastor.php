@@ -43,10 +43,11 @@ class Pastor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pastor_name', 'birth_place', 'birth_date', 'created_at', 'updated_at'], 'required'],
+            [['pastor_name', 'birth_place', 'birth_date', 'address', 'handphone'], 'required'],
             [['birth_date'], 'safe'],
             [['gender_id', 'created_at', 'updated_at'], 'integer'],
             [['remark'], 'string'],
+            [['email'], 'email'],
             [['pastor_name', 'birth_place', 'handphone', 'email'], 'string', 'max' => 100],
             [['front_title', 'back_title'], 'string', 'max' => 25],
             [['address', 'address1', 'address2', 'photo_path'], 'string', 'max' => 255],
@@ -84,27 +85,14 @@ class Pastor extends \yii\db\ActiveRecord
         return $this->hasOne(Parameter::className(), ['id' => 'gender_id'],['group_name'=>"gender"]);
     }
 
-    public function getPhotoExist()
-    {
-        if ($this->photo_path != null) {
-            if (is_file('@web/images/pastor/' . $this->photo_path)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        return false;
-    }
-
     public function getPhotoPath()
     {
         $options = ['width' => '100%', 'id' => 'photo', 'align' => 'left', 'class' => 'class-image'];
-        if ($this->photo_path != null && $this->PhotoExist) {
+        if ($this->photo_path != null && $this->getPhotoExist()) {
             if ($this->getPhotoExistThumb()) {
-                $path = Html::img('@web/images/pastor/thumb/' . $this->photo_path, $options);
+                $path = Html::img('@web/images/thumb/' . $this->photo_path, $options);
             } else {
-                $path = Html::img('@web/images/pastor/' . $this->photo_path, $options);
+                $path = Html::img('@web/images/' . $this->photo_path, $options);
             }
         } else {
             if ($this->gender_id == 1) {
@@ -117,26 +105,29 @@ class Pastor extends \yii\db\ActiveRecord
         return $path;
     }
 
+    public function getPhotoExist()
+    {
+        if ($this->photo_path != null) {
+            return is_file(Yii::getAlias('@app') . '/web/images/' . $this->photo_path) ? true : false;
+        } else
+            return false;
+    }
+
     public function getPhotoExistThumb()
     {
         if ($this->photo_path != null) {
-            if (is_file('@web/images/pastor/thumb/' . $this->photo_path)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        return false;
+            return is_file(Yii::getAlias('@web') . '/web/images/thumb/' . $this->photo_path) ? true : false;
+        } else
+            return false;
     }
 
     public function getPhotoPathReal()
     {
         if ($this->photo_path != null && $this->PhotoExist) {
             if ($this->getPhotoExistThumb()) {
-                $path = '@web/images/pastor/thumb/' . $this->photo_path;
+                $path = '@web/images/thumb/' . $this->photo_path;
             } else {
-                $path = '@web/images/pastor/' . $this->photo_path;
+                $path = '@web/images/' . $this->photo_path;
             }
         } else {
             if ($this->gender_id == 1) {
