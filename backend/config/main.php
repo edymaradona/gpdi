@@ -29,14 +29,19 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /**/
         'urlManager' => [
             'enablePrettyUrl' => true,
             //'showScriptName' => false,
             'rules' => [
             ],
         ],
-        /**/
+        /*'formatter' => [
+           'class' => 'yii\i18n\Formatter',
+           'dateFormat' => 'php:d-m-Y',
+           'datetimeFormat' => 'php:d-m-Y H:i:s',
+           'timeFormat' => 'php:H:i:s',
+            'locale' => 'ID'
+       ],*/
     ],
     'params' => $params,
 ];

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 //use yii\grid\GridView;
 use kartik\grid\GridView;
 use backend\models\OrganizationRoleSearch;
+use backend\models\Parameter;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\OrganizationRoleSearch */
@@ -20,11 +21,58 @@ use backend\models\OrganizationRoleSearch;
         ['class' => 'yii\grid\SerialColumn'],
 
         'organization.organization_name',
-        'start_date',
-        'end_date',
-        'role.description',
+        [
+            'class' => 'kartik\grid\EditableColumn',
+            'attribute' => 'start_date',
+            'editableOptions' => [
+                'inputType' => 'widget',
+                'widgetClass' => '\kartik\widgets\DatePicker',
+                'formOptions' => ['action' => ['/pastor/editOrganization']],
+                'options' => [
+                    'pluginOptions' => [
+                        'format' => 'dd-mm-yyyy'
+                    ]
+                ]
+
+            ],
+        ],
+        [
+            'class' => 'kartik\grid\EditableColumn',
+            'attribute' => 'end_date',
+            'editableOptions' => [
+                'inputType' => 'widget',
+                'widgetClass' => '\kartik\widgets\DatePicker',
+                'formOptions' => ['action' => ['/pastor/editOrganization']],
+                'options' => [
+                    'pluginOptions' => [
+                        'format' => 'dd-mm-yyyy'
+                    ]
+                ]
+
+            ],
+        ],
+        [
+            'class' => 'kartik\grid\EditableColumn',
+            'attribute' => 'role_id',
+            'editableOptions' => [
+                'inputType' => 'dropDownList',
+                'displayValueConfig' => Parameter::getDropDown('pelayanan'),
+                'data' => Parameter::getDropdown('pelayanan'),
+                'formOptions' => ['action' => ['/pastor/editOrganization']]
+            ],
+        ],
         'reportTo.pastor_name',
-        'status.description',
+        [
+            'class' => 'kartik\grid\EditableColumn',
+            'attribute' => 'status_id',
+            'editableOptions' => [
+                'inputType' => 'dropDownList',
+                'displayValueConfig' => Parameter::getDropDown(),
+                'data' => Parameter::getDropdown(),
+                'formOptions' => ['action' => ['/pastor/editOrganization']],
+                'placement' => 'left',
+            ],
+        ],
 
         [
             'class' => 'yii\grid\ActionColumn',

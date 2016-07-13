@@ -5,6 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
+use common\components\IndoDateTimeBehavior;
 
 
 /**
@@ -83,13 +84,6 @@ class Family extends \yii\db\ActiveRecord
 
     public function behaviors()
     {
-        /*return   [
-            ' dateTimeStampBehavior '  => [
-                'class'  =>  DateTimeBehavior::className(),
-                'dateTimeFields'  =>  'birth_date' , //атрибут model that will change
-                'format'          =>  'd-m-Y H:i' ,    // date format for the user
-            ]
-        ];*/
         return [
             [
                 'class' => TimestampBehavior::className(),
@@ -97,6 +91,9 @@ class Family extends \yii\db\ActiveRecord
                 //'updatedAtAttribute' => 'update_time',
                 //'value' => new Expression('NOW()'),
             ],
+            'dateTimeBehavior' => [
+                'class' => IndoDateTimeBehavior::className(),
+            ]
         ];
 
     }

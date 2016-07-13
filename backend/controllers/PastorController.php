@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\OrganizationRole;
 use Yii;
 use backend\models\Pastor;
 use backend\models\PastorSearch;
@@ -11,6 +12,8 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use kartik\grid\EditableColumnAction;
 use backend\models\Family;
+use backend\models\Ministry;
+use backend\models\Organization;
 
 
 /**
@@ -53,6 +56,30 @@ class PastorController extends Controller
                 // 'ajaxOnly' => true,
                 // 'findModel' => function($id, $action) {},
                 // 'checkAccess' => function($action, $model) {}
+            ],
+            'editOrganization' => [
+                'class' => EditableColumnAction::className(),
+                'modelClass' => OrganizationRole::className(),
+                'outputValue' => function ($model, $attribute, $key, $index) {
+                    return $model->$attribute;
+                },
+                'outputMessage' => function ($model, $attribute, $key, $index) {
+                    return '';
+                },
+                'showModelErrors' => true,
+                'errorOptions' => ['header' => '']
+            ],
+            'editMinistry' => [
+                'class' => EditableColumnAction::className(),
+                'modelClass' => Ministry::className(),
+                'outputValue' => function ($model, $attribute, $key, $index) {
+                    return $model->$attribute;
+                },
+                'outputMessage' => function ($model, $attribute, $key, $index) {
+                    return '';
+                },
+                'showModelErrors' => true,
+                'errorOptions' => ['header' => '']
             ]
         ]);
     }

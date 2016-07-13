@@ -56,7 +56,21 @@ use backend\models\Parameter;
             'attribute' => 'birth_place',
             'editableOptions' => ['formOptions' => ['action' => ['/pastor/editFamily']]],
         ],
-        'birth_date',
+        [
+            'class' => 'kartik\grid\EditableColumn',
+            'attribute' => 'birth_date',
+            'editableOptions' => [
+                'inputType' => 'widget',
+                'widgetClass' => '\kartik\widgets\DatePicker',
+                'formOptions' => ['action' => ['/pastor/editFamily']],
+                'options' => [
+                    'pluginOptions' => [
+                        'format' => 'dd-mm-yyyy'
+                    ]
+                ]
+
+            ],
+        ],
         [
             'class' => 'kartik\grid\EditableColumn',
             'attribute' => 'gender_id',

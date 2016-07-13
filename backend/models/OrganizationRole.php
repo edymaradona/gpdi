@@ -4,6 +4,7 @@ namespace backend\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use common\components\IndoDateTimeBehavior;
 
 /**
  * This is the model class for table "organization_role".
@@ -93,6 +94,9 @@ class OrganizationRole extends \yii\db\ActiveRecord
             [
                 'class' => TimestampBehavior::className(),
             ],
+            'dateTimeBehavior' => [
+                'class' => IndoDateTimeBehavior::className(),
+            ]
         ];
 
     }

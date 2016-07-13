@@ -34,7 +34,7 @@ use kartik\widgets\DatePicker;
             //'value' => '23-Feb-1982',
             'pluginOptions' => [
                 'autoclose' => true,
-                'format' => 'yyyy-mm-dd',
+                'format' => 'dd-mm-yyyy',
             ], ]
     );
     ?>

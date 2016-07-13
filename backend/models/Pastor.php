@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use common\components\IndoDateTimeBehavior;
 use backend\models\Parameter;
 use kartik\helpers\Html;
 use yii\data\ActiveDataProvider;
@@ -148,6 +149,9 @@ class Pastor extends \yii\db\ActiveRecord
             [
                 'class' => TimestampBehavior::className(),
             ],
+            'dateTimeBehavior' => [
+                'class' => IndoDateTimeBehavior::className(),
+            ]
         ];
 
     }
