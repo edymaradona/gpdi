@@ -3,6 +3,9 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
+
 
 /**
  * This is the model class for table "family".
@@ -40,6 +43,7 @@ class Family extends \yii\db\ActiveRecord
             [['parent_id', 'relation_id', 'gender_id', 'created_at', 'updated_at'], 'integer'],
             [['birth_date'], 'safe'],
             [['remark'], 'string'],
+            [['email'], 'email'],
             [['family_name', 'birth_place', 'handphone', 'email'], 'string', 'max' => 100],
         ];
     }
@@ -77,5 +81,24 @@ class Family extends \yii\db\ActiveRecord
         return $this->hasOne(Parameter::className(), ['id' => 'gender_id'])->andWhere(['group_name' => "gender"]);
     }
 
+    public function behaviors()
+    {
+        /*return   [
+            ' dateTimeStampBehavior '  => [
+                'class'  =>  DateTimeBehavior::className(),
+                'dateTimeFields'  =>  'birth_date' , //атрибут model that will change
+                'format'          =>  'd-m-Y H:i' ,    // date format for the user
+            ]
+        ];*/
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                //'createdAtAttribute' => 'create_time',
+                //'updatedAtAttribute' => 'update_time',
+                //'value' => new Expression('NOW()'),
+            ],
+        ];
+
+    }
 
 }

@@ -8,6 +8,10 @@ use backend\models\PastorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
+use backend\models\Family;
+
 
 /**
  * PastorController implements the CRUD actions for Pastor model.
@@ -30,6 +34,29 @@ class PastorController extends Controller
             ],
         ];
     }
+
+    public function actions()
+    {
+        return ArrayHelper::merge(parent::actions(), [
+            'editFamily' => [                                       // identifier for your editable column action
+                'class' => EditableColumnAction::className(),     // action class name
+                'modelClass' => Family::className(),                // the model for the record being edited
+                'outputValue' => function ($model, $attribute, $key, $index) {
+                    return $model->$attribute;      // return any custom output value if desired
+                },
+                'outputMessage' => function ($model, $attribute, $key, $index) {
+                    return '';                                  // any custom error to return after model save
+                },
+                'showModelErrors' => true,                        // show model validation errors after save
+                'errorOptions' => ['header' => '']                // error summary HTML options
+                // 'postOnly' => true,
+                // 'ajaxOnly' => true,
+                // 'findModel' => function($id, $action) {},
+                // 'checkAccess' => function($action, $model) {}
+            ]
+        ]);
+    }
+
 
     /**
      * Lists all Pastor models.
@@ -56,6 +83,22 @@ class PastorController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    /**
+     * Finds the Pastor model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Pastor the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Pastor::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
     /**
@@ -106,21 +149,5 @@ class PastorController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Pastor model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Pastor the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Pastor::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
     }
 }

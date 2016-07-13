@@ -6,6 +6,8 @@ use Yii;
 use backend\models\Parameter;
 use kartik\helpers\Html;
 use yii\data\ActiveDataProvider;
+use yii\behaviors\TimestampBehavior;
+
 
 /**
  * This is the model class for table "pastor".
@@ -139,5 +141,15 @@ class Pastor extends \yii\db\ActiveRecord
 
         return $path;
     }
-    
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+            ],
+        ];
+
+    }
+
 }

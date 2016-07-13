@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use backend\models\MinistrySearch;
 
 /* @var $this yii\web\View */
@@ -14,6 +15,7 @@ use backend\models\MinistrySearch;
 <?= GridView::widget([
     'dataProvider' => MinistrySearch::getPastorGrid($model->id),
     //'filterModel' => $searchModel,
+    'condensed' => true,
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
 
@@ -27,6 +29,10 @@ use backend\models\MinistrySearch;
         //'ministry_address2',
         'phone_number',
 
-        ['class' => 'yii\grid\ActionColumn'],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{delete}'
+        ],
     ],
+
 ]); ?>

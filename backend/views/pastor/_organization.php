@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use backend\models\OrganizationRoleSearch;
 
 /* @var $this yii\web\View */
@@ -13,6 +14,7 @@ use backend\models\OrganizationRoleSearch;
 
 <?= GridView::widget([
     'dataProvider' => OrganizationRoleSearch::getPastorGrid($model->id),
+    'condensed' => true,
     //'filterModel' => $searchModel,
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
@@ -24,6 +26,9 @@ use backend\models\OrganizationRoleSearch;
         'reportTo.pastor_name',
         'status.description',
 
-        ['class' => 'yii\grid\ActionColumn'],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{delete}'
+        ],
     ],
 ]); ?>

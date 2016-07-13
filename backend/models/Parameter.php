@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "parameter".
@@ -22,6 +23,33 @@ class Parameter extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'parameter';
+    }
+
+    /**
+     * @param string $groupName
+     * @return array
+     */
+    public static function getDropDown($groupName = 'status')
+    {
+        $arrayList = [];
+
+        $query = Parameter::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andFilterWhere([
+            'group_name' => $groupName,
+        ]);
+
+
+        foreach ($dataProvider->getModels() as $model) {
+            $arrayList [$model->id] = $model->description;
+        }
+
+        return $arrayList;
+
     }
 
     /**
@@ -51,4 +79,5 @@ class Parameter extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
 }

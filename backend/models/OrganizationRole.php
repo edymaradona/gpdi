@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "organization_role".
@@ -84,6 +85,16 @@ class OrganizationRole extends \yii\db\ActiveRecord
     public function getRole()
     {
         return $this->hasOne(Parameter::className(), ['id' => 'role_id'])->andWhere(['group_name' => "pelayanan"]);
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+            ],
+        ];
+
     }
 
 }
