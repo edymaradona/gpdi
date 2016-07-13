@@ -49,16 +49,41 @@ class OrganizationRole extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parent_id' => 'Parent ID',
-            'organization_id' => 'Organization ID',
+            'parent_id' => 'Parent',
+            'organization_id' => 'Organization',
+            'organization.organization_name' => 'Organization',
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
-            'role_id' => 'Role ID',
+            'role_id' => 'Role',
+            'role.description' => 'Role',
             'title' => 'Title',
-            'report_to_id' => 'Report To ID',
-            'status_id' => 'Status ID',
+            'report_to_id' => 'Report To',
+            'reportTo.pastor_name' => 'Report To',
+            'status_id' => 'Status',
+            'status.description' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function getOrganization()
+    {
+        return $this->hasOne(Organization::className(), ['id' => 'organization_id']);
+    }
+
+    public function getStatus()
+    {
+        return $this->hasOne(Parameter::className(), ['id' => 'status_id'])->andWhere(['group_name' => "status"]);
+    }
+
+    public function getReportTo()
+    {
+        return $this->hasOne(Pastor::className(), ['id' => 'report_to_id']);
+    }
+
+    public function getRole()
+    {
+        return $this->hasOne(Parameter::className(), ['id' => 'role_id'])->andWhere(['group_name' => "pelayanan"]);
+    }
+
 }

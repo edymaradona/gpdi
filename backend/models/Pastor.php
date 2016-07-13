@@ -82,7 +82,7 @@ class Pastor extends \yii\db\ActiveRecord
 
     public function getGender()
     {
-        return $this->hasOne(Parameter::className(), ['id' => 'gender_id'],['group_name'=>"gender"]);
+        return $this->hasOne(Parameter::className(), ['id' => 'gender_id'])->andWhere(['group_name' => "gender"]);
     }
 
     public function getPhotoPath()

@@ -12,6 +12,22 @@ use backend\models\Family;
  */
 class FamilySearch extends Family
 {
+    public static function getPastorGrid($id)
+    {
+        $query = Family::find();
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andFilterWhere([
+            'parent_id' => $id,
+        ]);
+
+        return $dataProvider;
+    }
+
     /**
      * @inheritdoc
      */

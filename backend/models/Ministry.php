@@ -57,19 +57,34 @@ class Ministry extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'parent_id' => 'Parent ID',
-            'organization_parent_id' => 'Organization Parent ID',
-            'status_id' => 'Status ID',
+            'organization_parent_id' => 'Organization Parent',
+            'organizationParent.organization_name' => 'Organization Parent',
+            'status_id' => 'Status',
+            'status.description' => 'Status',
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
             'church_name' => 'Church Name',
-            'sk_number' => 'Sk Number',
-            'ministry_address' => 'Ministry Address',
-            'ministry_address1' => 'Ministry Address1',
-            'ministry_address2' => 'Ministry Address2',
+            'sk_number' => 'SK Number',
+            'ministry_address' => 'Address',
+            'ministry_address1' => 'Kab/Kodya',
+            'ministry_address2' => 'Province',
             'phone_number' => 'Phone Number',
             'remark' => 'Remark',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function getOrganizationParent()
+    {
+        return $this->hasOne(Organization::className(), ['id' => 'organization_parent_id']);
+    }
+
+    public function getStatus()
+    {
+        return $this->hasOne(Parameter::className(), ['id' => 'status_id'])->andWhere(['group_name' => "status"]);
+    }
+
+
+
 }

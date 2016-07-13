@@ -12,6 +12,22 @@ use backend\models\Ministry;
  */
 class MinistrySearch extends Ministry
 {
+    public static function getPastorGrid($id)
+    {
+        $query = Ministry::find();
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andFilterWhere([
+            'parent_id' => $id,
+        ]);
+
+        return $dataProvider;
+    }
+
     /**
      * @inheritdoc
      */
@@ -79,4 +95,5 @@ class MinistrySearch extends Ministry
 
         return $dataProvider;
     }
+
 }

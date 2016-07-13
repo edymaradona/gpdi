@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use backend\models\PastorSearch;
+use kartik\tabs\TabsX;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Pastor */
@@ -57,13 +58,70 @@ $this->params['createButton'] = [
                 'birth_place',
                 'birth_date',
                 'gender.description',
-                'address',
-                'address1',
-                'address2',
                 'handphone',
                 'email:email',
-                'remark:ntext',
             ],
         ]) ?>
     </div>
 </div>
+
+    <br/>
+
+<?=
+/*$items = [
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> Profile',
+        'content'=>$this->render('_profile',['model'=>$model]),
+        'active'=>true
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> Profile',
+        'content'=>$content2,
+        'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/site/tabs-data'])]
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',
+        'items'=>[
+            [
+                'label'=>'Option 1',
+                'encode'=>false,
+                'content'=>$content3,
+            ],
+            [
+                'label'=>'Option 2',
+                'encode'=>false,
+                'content'=>$content4,
+            ],
+        ],
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-king"></i> Disabled',
+        'headerOptions' => ['class'=>'disabled']
+    ],
+];*/
+
+TabsX::widget([
+    'items' => [
+        [
+            'label' => '<i class="glyphicon glyphicon-user"></i> Profile',
+            'content' => $this->render('_profile', ['model' => $model]),
+            'active' => true
+        ],
+        [
+            'label' => '<i class="glyphicon glyphicon-book"></i> Ministry',
+            'content' => $this->render('_ministry', ['model' => $model]),
+        ],
+        [
+            'label' => '<i class="glyphicon glyphicon-tree-conifer"></i> Organization',
+            'content' => $this->render('_organization', ['model' => $model]),
+        ],
+        [
+            'label' => '<i class="glyphicon glyphicon-cutlery"></i> Family',
+            'content' => $this->render('_family', ['model' => $model]),
+        ],
+    ],
+    'position' => TabsX::POS_ABOVE,
+    'encodeLabels' => false
+]);
+
+

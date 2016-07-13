@@ -12,6 +12,22 @@ use backend\models\OrganizationRole;
  */
 class OrganizationRoleSearch extends OrganizationRole
 {
+    public static function getPastorGrid($id)
+    {
+        $query = OrganizationRole::find();
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andFilterWhere([
+            'parent_id' => $id,
+        ]);
+
+        return $dataProvider;
+    }
+
     /**
      * @inheritdoc
      */
@@ -75,4 +91,5 @@ class OrganizationRoleSearch extends OrganizationRole
 
         return $dataProvider;
     }
+
 }

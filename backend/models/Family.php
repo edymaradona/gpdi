@@ -52,11 +52,13 @@ class Family extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'parent_id' => 'Parent ID',
-            'relation_id' => 'Relation ID',
+            'relation_id' => 'Relation',
+            'familyRelation.description' => 'Relation',
             'family_name' => 'Family Name',
             'birth_place' => 'Birth Place',
             'birth_date' => 'Birth Date',
-            'gender_id' => 'Gender ID',
+            'gender_id' => 'Gender',
+            'gender.description' => 'Gender',
             'handphone' => 'Handphone',
             'email' => 'Email',
             'remark' => 'Remark',
@@ -64,4 +66,16 @@ class Family extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function getFamilyRelation()
+    {
+        return $this->hasOne(Parameter::className(), ['id' => 'relation_id'])->andWhere(['group_name' => "family"]);
+    }
+
+    public function getGender()
+    {
+        return $this->hasOne(Parameter::className(), ['id' => 'gender_id'])->andWhere(['group_name' => "gender"]);
+    }
+
+
 }

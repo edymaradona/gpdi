@@ -79,4 +79,5 @@ class OrganizationSearch extends Organization
 
         return $dataProvider;
     }
+
 }
