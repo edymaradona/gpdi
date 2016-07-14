@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use backend\models\PastorSearch;
 use kartik\tabs\TabsX;
+use kartik\widgets\FileInput;
+use yii\helpers\Url;
+use kartik\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Pastor */
@@ -44,6 +47,18 @@ $this->params['createButton'] = [
 <div class="row">
     <div class="col-md-3">
         <?= $model->getPhotoPath() ?>
+        <?php $form = ActiveForm::begin([
+            'type' => ActiveForm::TYPE_INLINE,
+            'options' => ['enctype' => 'multipart/form-data'],
+            'action' => Url::to(['upload', 'id' => $model->id])
+        ]) ?>
+
+        <?= $form->field($model, 'imageFile')->fileInput() ?>
+        <?= Html::submitButton('Upload', ['class' => 'btn btn-primary btn-xs']) ?>
+
+        <?php ActiveForm::end() ?>
+
+
     </div>
     <div class="col-md-9">
         <?= DetailView::widget([

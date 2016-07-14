@@ -8,6 +8,8 @@ use backend\models\Parameter;
 use kartik\helpers\Html;
 use yii\data\ActiveDataProvider;
 use yii\behaviors\TimestampBehavior;
+use yii\web\UploadedFile;
+
 
 
 /**
@@ -32,6 +34,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Pastor extends \yii\db\ActiveRecord
 {
+    public $imageFile;
+
     /**
      * @inheritdoc
      */
@@ -54,7 +58,18 @@ class Pastor extends \yii\db\ActiveRecord
             [['pastor_name', 'birth_place', 'handphone', 'email'], 'string', 'max' => 100],
             [['front_title', 'back_title'], 'string', 'max' => 25],
             [['address', 'address1', 'address2', 'photo_path'], 'string', 'max' => 255],
+            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
+    }
+
+    public function upload()
+    {
+        //if ($this->validate()) {
+        $this->imageFile->saveAs('images/pastor/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+        return true;
+        //} else {
+        //    return false;
+        //}
     }
 
     /**
@@ -126,7 +141,7 @@ class Pastor extends \yii\db\ActiveRecord
 
     public function getPhotoPathReal()
     {
-        if ($this->photo_path != null && $this->PhotoExist) {
+        if ($this->photo_path != null && $this->getPhotoExist()) {
             if ($this->getPhotoExistThumb()) {
                 $path = '@web/images/thumb/' . $this->photo_path;
             } else {

@@ -14,7 +14,8 @@ use kartik\grid\EditableColumnAction;
 use backend\models\Family;
 use backend\models\Ministry;
 use backend\models\Organization;
-
+use yii\web\UploadedFile;
+use yii\helpers\Json;
 
 /**
  * PastorController implements the CRUD actions for Pastor model.
@@ -80,10 +81,14 @@ class PastorController extends Controller
                 },
                 'showModelErrors' => true,
                 'errorOptions' => ['header' => '']
-            ]
+            ],
         ]);
     }
 
+    public function successCallback($file)
+    {
+        $this->refresh();
+    }
 
     /**
      * Lists all Pastor models.
@@ -177,4 +182,21 @@ class PastorController extends Controller
 
         return $this->redirect(['index']);
     }
+
+    public function actionUpload($id)
+    {
+        $model = $this->findModel($id);
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload()) {
+                $model->photo_path = 'pastor/' . $model->imageFile->baseName . '.' . $model->imageFile->extension;
+                $model->save(false);
+                return $this->redirect(['view', 'id' => $id]);
+                //return true;
+            }
+        }
+
+    }
+
 }

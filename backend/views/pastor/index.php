@@ -34,12 +34,6 @@ $this->params['createButton'] = [
     <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php /*
-    <p>
-        <?= Html::a('Create Pastor', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    */ ?>
-
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
@@ -63,7 +57,7 @@ $this->params['createButton'] = [
                             ],
                         ]),
                         ['/pastor/view', 'id' => $model->id],
-                        '@web/images/' . $model->photo_path
+                        $model->getPhotoPathReal()
                     ) . '</div>'
                 ,
                 'postBody' => Html::listGroup([
