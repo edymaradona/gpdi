@@ -58,7 +58,7 @@ class Pastor extends \yii\db\ActiveRecord
             [['pastor_name', 'birth_place', 'handphone', 'email'], 'string', 'max' => 100],
             [['front_title', 'back_title'], 'string', 'max' => 25],
             [['address', 'address1', 'address2', 'photo_path'], 'string', 'max' => 255],
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
 
