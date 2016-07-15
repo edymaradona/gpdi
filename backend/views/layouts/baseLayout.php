@@ -7,6 +7,7 @@ use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use mdm\admin\components\MenuHelper;
 
 AppAsset::register($this);
 ?>
@@ -34,9 +35,12 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site']],
-        ['label' => 'Pastor', 'url' => ['/pastor']],
-        ['label' => 'Organization', 'url' => ['/organization']],
+        //['label' => 'Pastor', 'url' => ['/pastor']],
+        //['label' => 'Organization', 'url' => ['/organization']],
     ];
+
+    $menuItems = MenuHelper::getAssignedMenu(Yii::$app->user->id);
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {

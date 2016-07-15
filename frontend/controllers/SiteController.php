@@ -72,8 +72,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        //return $this->render('index');
-        return $this->redirect('/yii2/gpdi/backend/web');
+        return $this->render('index');
+        //return $this->redirect('/yii2/gpdi/backend/web');
     }
 
     /**
