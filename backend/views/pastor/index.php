@@ -40,16 +40,19 @@ $this->params['createButton'] = [
         'itemView' => function ($model, $key, $index, $widget) {
             echo Html::panel([
                 'heading' => Html::a($model->pastor_name, ['/pastor/view', 'id' => $model->id]),
-                'body' => '<div class="panel-body">' .
+                'body' =>
                     Html::media(
                         '',
                         DetailView::widget([
                             'model' => $model,
                             'attributes' => [
-                                'birth_place',
+                                'ministry.church_name',
+                                'ministry.ministryParent.organization_name',
+                                'ministry.ministryParent.organizationParent.organization_name',
+                                'address',
+                                //'birth_place',
                                 'birth_date',
                                 'gender.description',
-                                //'address',
                                 //'address1',
                                 //'address2',
                                 'handphone',
@@ -57,8 +60,8 @@ $this->params['createButton'] = [
                             ],
                         ]),
                         ['/pastor/view', 'id' => $model->id],
-                        $model->getPhotoPathReal()
-                    ) . '</div>'
+                        $model->getPhotoPathReal(), [], ['style' => 'width:150px'], [], [], ['class' => 'panel-body']
+                    )
                 ,
                 'postBody' => Html::listGroup([
                     /*[

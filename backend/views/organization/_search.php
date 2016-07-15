@@ -41,6 +41,8 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'remark') ?>
 
+    <?php // echo $form->field($model, 'photo_path') ?>
+
     <?php // echo $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>

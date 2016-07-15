@@ -57,6 +57,22 @@ class OrganizationController extends Controller
     }
 
     /**
+     * Finds the Organization model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Organization the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Organization::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
      * Creates a new Organization model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -106,19 +122,18 @@ class OrganizationController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Organization model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Organization the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
+    public function actionCustom($id)
     {
-        if (($model = Organization::findOne($id)) !== null) {
-            return $model;
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            return $this->renderAjax('custom', [
+                'model' => $model,
+            ]);
         }
     }
+
 }

@@ -19,7 +19,22 @@ class OrganizationSearch extends Organization
     {
         return [
             [['id', 'parent_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
-            [['start_date', 'end_date', 'organization_name', 'description', 'sk_number', 'ministry_address', 'ministry_address1', 'ministry_address2', 'phone_number', 'remark'], 'safe'],
+            [
+                [
+                    'start_date',
+                    'end_date',
+                    'organization_name',
+                    'description',
+                    'sk_number',
+                    'ministry_address',
+                    'ministry_address1',
+                    'ministry_address2',
+                    'phone_number',
+                    'remark',
+                    'photo_path'
+                ],
+                'safe'
+            ],
         ];
     }
 
@@ -51,11 +66,11 @@ class OrganizationSearch extends Organization
 
         $this->load($params);
 
-        if (!$this->validate()) {
+        //if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
-            return $dataProvider;
-        }
+        //    return $dataProvider;
+        //}
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -75,9 +90,9 @@ class OrganizationSearch extends Organization
             ->andFilterWhere(['like', 'ministry_address1', $this->ministry_address1])
             ->andFilterWhere(['like', 'ministry_address2', $this->ministry_address2])
             ->andFilterWhere(['like', 'phone_number', $this->phone_number])
-            ->andFilterWhere(['like', 'remark', $this->remark]);
+            ->andFilterWhere(['like', 'remark', $this->remark])
+            ->andFilterWhere(['like', 'photo_path', $this->photo_path]);
 
         return $dataProvider;
     }
-
 }

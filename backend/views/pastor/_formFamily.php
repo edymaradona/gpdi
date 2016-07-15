@@ -2,29 +2,31 @@
 
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use backend\models\Parameter;
+use yii\helpers\Url;
 use kartik\widgets\DatePicker;
+use backend\models\Parameter;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Pastor */
+/* @var $model backend\models\Family */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="pastor-form">
+<div class="family-form">
 
-    <?php
-    $form = ActiveForm::begin([
-        'id' => 'pastor-form-vertical',
-        'type' => ActiveForm::TYPE_HORIZONTAL
-    ]);
-    ?>
+    <? //php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'type' => ActiveForm::TYPE_HORIZONTAL,
+        'formConfig' => ['labelSpan' => 2, 'deviceSize' => ActiveForm::SIZE_SMALL],
+        'options' => ['id' => 'form-family-update-id', 'data-pjax' => true,]
+    ]); ?>
 
-    <?= $form->field($model, 'front_title')->textInput(['maxlength' => true]) ?>
+    <?= $form->errorSummary($model) ?>
 
-    <?= $form->field($model, 'pastor_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'relation_id')->dropDownList(
+        ArrayHelper::map(Parameter::find()->where('group_name = "family"')->all(), 'id', 'description')); ?>
 
-    <?= $form->field($model, 'back_title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'family_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'birth_place')->textInput(['maxlength' => true]) ?>
 
@@ -35,18 +37,13 @@ use kartik\widgets\DatePicker;
             'pluginOptions' => [
                 'autoclose' => true,
                 'format' => 'dd-mm-yyyy',
-            ], ]
+            ],
+        ]
     );
     ?>
 
     <?= $form->field($model, 'gender_id')->dropDownList(
         ArrayHelper::map(Parameter::find()->where('group_name = "gender"')->all(), 'id', 'description')); ?>
-
-    <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
-
-    <?= $form->field($model, 'address1')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'address2')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'handphone')->textInput(['maxlength' => true]) ?>
 
@@ -56,7 +53,8 @@ use kartik\widgets\DatePicker;
 
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update',
+            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

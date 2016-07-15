@@ -37,7 +37,7 @@ class OrganizationRole extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'organization_id', 'created_at', 'updated_at'], 'required'],
+            [['parent_id', 'organization_id'], 'required'],
             [['parent_id', 'organization_id', 'role_id', 'report_to_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
             [['start_date', 'end_date'], 'safe'],
             [['title'], 'string', 'max' => 100],
@@ -85,7 +85,7 @@ class OrganizationRole extends \yii\db\ActiveRecord
 
     public function getRole()
     {
-        return $this->hasOne(Parameter::className(), ['id' => 'role_id'])->andWhere(['group_name' => "pelayanan"]);
+        return $this->hasOne(Parameter::className(), ['id' => 'role_id'])->andWhere(['group_name' => "jabatanorg"]);
     }
 
     public function behaviors()

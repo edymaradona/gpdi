@@ -95,12 +95,19 @@ class Pastor extends \yii\db\ActiveRecord
             'photo_path' => 'Photo Path',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'ministry.ministryParent.organization_name' => 'Majelis Wilayah',
+            'ministry.ministryParent.organizationParent.organization_name' => 'Majelis Daerah'
         ];
     }
 
     public function getGender()
     {
         return $this->hasOne(Parameter::className(), ['id' => 'gender_id'])->andWhere(['group_name' => "gender"]);
+    }
+
+    public function getMinistry()
+    {
+        return $this->hasOne(Ministry::className(), ['parent_id' => 'id'])->orderBy('start_date DESC')->limit(1);
     }
 
     public function getPhotoPath()

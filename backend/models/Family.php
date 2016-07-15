@@ -40,7 +40,7 @@ class Family extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'family_name', 'birth_place', 'birth_date', 'created_at', 'updated_at'], 'required'],
+            [['parent_id', 'family_name', 'birth_place', 'birth_date'], 'required'],
             [['parent_id', 'relation_id', 'gender_id', 'created_at', 'updated_at'], 'integer'],
             [['birth_date'], 'safe'],
             [['remark'], 'string'],

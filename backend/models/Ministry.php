@@ -41,7 +41,7 @@ class Ministry extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'organization_parent_id', 'start_date', 'created_at', 'updated_at'], 'required'],
+            [['parent_id', 'organization_parent_id', 'start_date'], 'required'],
             [['parent_id', 'organization_parent_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
             [['start_date', 'end_date'], 'safe'],
             [['remark'], 'string'],
@@ -77,7 +77,7 @@ class Ministry extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getOrganizationParent()
+    public function getMinistryParent()
     {
         return $this->hasOne(Organization::className(), ['id' => 'organization_parent_id']);
     }

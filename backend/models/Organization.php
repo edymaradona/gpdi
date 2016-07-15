@@ -41,7 +41,7 @@ class Organization extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'start_date', 'organization_name', 'created_at', 'updated_at'], 'required'],
+            [['parent_id', 'start_date', 'organization_name'], 'required'],
             [['parent_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
             [['start_date', 'end_date'], 'safe'],
             [['remark'], 'string'],
@@ -86,6 +86,11 @@ class Organization extends \yii\db\ActiveRecord
             ]
         ];
 
+    }
+
+    public function getOrganizationParent()
+    {
+        return $this->hasOne(Organization::className(), ['id' => 'parent_id']);
     }
 
 }

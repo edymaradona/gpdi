@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use backend\models\OrganizationRole;
 use Yii;
 use backend\models\Pastor;
 use backend\models\PastorSearch;
@@ -13,6 +12,7 @@ use yii\helpers\ArrayHelper;
 use kartik\grid\EditableColumnAction;
 use backend\models\Family;
 use backend\models\Ministry;
+use backend\models\OrganizationRole;
 use backend\models\Organization;
 use yii\web\UploadedFile;
 use yii\helpers\Json;
@@ -167,6 +167,75 @@ class PastorController extends Controller
             return $this->render('update', [
                 'model' => $model,
             ]);
+        }
+    }
+
+    public function actionUpdatefamily($id)
+    {
+        $model = $this->findModelFamily($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateFamily', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    protected function findModelFamily($id)
+    {
+        if (($model = Family::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionUpdateministry($id)
+    {
+        $model = $this->findModelMinistry($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateMinistry', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    protected function findModelMinistry($id)
+    {
+        if (($model = Ministry::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionUpdateorganization($id)
+    {
+        $model = $this->findModelOrganization($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateOrganization', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    protected function findModelOrganization($id)
+    {
+        if (($model = OrganizationRole::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 

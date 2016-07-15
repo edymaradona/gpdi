@@ -5,6 +5,8 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use backend\models\OrganizationRoleSearch;
 use backend\models\Parameter;
+use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\OrganizationRoleSearch */
@@ -13,6 +15,7 @@ use backend\models\Parameter;
 
 <br/>
 
+<?php Pjax::begin(); ?>
 <?= GridView::widget([
     'dataProvider' => OrganizationRoleSearch::getPastorGrid($model->id),
     'condensed' => true,
@@ -21,7 +24,12 @@ use backend\models\Parameter;
         ['class' => 'yii\grid\SerialColumn'],
 
         'organization.organization_name',
-        [
+        'start_date',
+        'end_date',
+        'role.description',
+        'reportTo.pastor_name',
+        'status.description',
+        /*[
             'class' => 'kartik\grid\EditableColumn',
             'attribute' => 'start_date',
             'editableOptions' => [
@@ -72,11 +80,68 @@ use backend\models\Parameter;
                 'formOptions' => ['action' => ['/pastor/editOrganization']],
                 'placement' => 'left',
             ],
-        ],
+        ],*/
 
         [
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{delete}'
+            'template' => '{delete} {custom_update}',
+            'buttons' => [
+                'custom_update' => function ($url, $data) {
+                    // Html::a args: title, href, tag properties.
+                    return Html::a('<i class="glyphicon glyphicon-pencil"></i>',
+                        ['/pastor/updateorganization', 'id' => $data['id']],
+                        ['class' => 'btn btn-xs btn-default modalOrganizationButton', 'title' => 'view/edit',]
+                    );
+                },
+            ]
+
         ],
     ],
+    'id' => 'organization-container-id',
 ]); ?>
+<?php Pjax::end(); ?>
+
+
+<?php Modal::begin([
+    'header' => 'Organization Update',
+    'id' => 'editModalOrganizationId',
+    'class' => 'modal',
+    'size' => 'modal-md',
+]);
+echo "<div class='modalOrganizationContent'></div>";
+Modal::end();
+?>
+
+<script>
+    $(function () {
+        $('.modalOrganizationButton').click(function (e) {
+            e.preventDefault(); //for prevent default behavior of <a> tag.
+            var tagname = $(this)[0].tagName;
+            $('#editModalOrganizationId').modal('show').find('.modalOrganizationContent').load($(this).attr('href'));
+        });
+    });
+
+    $(function () {
+        $("body").on("beforeSubmit", "form#form-organization-update-id", function () {
+            var form = $(this);
+            // return false if form still have some validation errors
+            if (form.find(".has-error").length) {
+                return false;
+            }
+            // submit form
+            $.ajax({
+                url: form.attr("action"),
+                type: "post",
+                data: form.serialize(),
+                success: function (response) {
+                    $("#editModalOrganizationId").modal("toggle");
+                    $.pjax.reload({container: "#organization-container-id"}); //for pjax update
+                },
+                error: function () {
+                    //console.log("internal server error");
+                }
+            });
+            return false;
+        });
+    });
+</script>

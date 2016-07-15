@@ -27,8 +27,8 @@ class m160704_141220_audi extends Migration
             'email' => $this->string(100),
             'remark' => $this->text(),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ], $tableOptions);
 
         $this->createTable('{{%family}}', [
@@ -43,8 +43,8 @@ class m160704_141220_audi extends Migration
             'email' => $this->string(100),
             'remark' => $this->text(),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ], $tableOptions);
 
         $this->createTable('{{%ministry}}', [
@@ -62,8 +62,8 @@ class m160704_141220_audi extends Migration
             'phone_number' => $this->string(100),
             'remark' => $this->text(),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ], $tableOptions);
 
         $this->createTable('{{%report}}', [
@@ -77,8 +77,8 @@ class m160704_141220_audi extends Migration
             'phone_number' => $this->string(100),
             'remark' => $this->text(),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ], $tableOptions);
 
         $this->createTable('{{%organization_role}}', [
@@ -92,8 +92,8 @@ class m160704_141220_audi extends Migration
             'report_to_id' => $this->integer(),
             'status_id' => $this->smallInteger()->notNull()->defaultValue(1),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ], $tableOptions);
 
         $this->createTable('{{%parameter}}', [
@@ -102,8 +102,8 @@ class m160704_141220_audi extends Migration
             'description' => $this->string(100),
             'status_id' => $this->smallInteger()->notNull()->defaultValue(1),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ], $tableOptions);
 
         $this->createTable('{{%organization}}', [
@@ -121,8 +121,8 @@ class m160704_141220_audi extends Migration
             'status_id' => $this->smallInteger()->notNull()->defaultValue(1),
             'remark' => $this->text(),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ], $tableOptions);
     }
 
