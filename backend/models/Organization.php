@@ -5,6 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use common\components\IndoDateTimeBehavior;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "organization".
@@ -33,6 +34,66 @@ class Organization extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'organization';
+    }
+
+    public static function getDropDown($id = 1)
+    {
+        $arrayList = [];
+
+        $query = Organization::find();
+
+        $query->orderBy('parent_id,organization_name');
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andFilterWhere([
+            'parent_id' => $id,
+        ]);
+
+        foreach ($dataProvider->getModels() as $models) {
+            $query2 = Organization::find();
+            $query2->orderBy('parent_id,organization_name');
+            $query2->andFilterWhere([
+                'parent_id' => $models->id,
+            ]);
+
+            $dataProvider2 = new ActiveDataProvider([
+                'query' => $query2,
+            ]);
+
+            foreach ($dataProvider2->getModels() as $model) {
+                $arrayList [$model->organizationParent->organization_name][$model->id] = $model->organization_name;
+            }
+        }
+
+        return $arrayList;
+
+    }
+
+    public static function getDropDownAll()
+    {
+        $arrayList = [];
+
+        $query = Organization::find();
+
+        $query->orderBy('parent_id,organization_name');
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        //$query->andFilterWhere([
+        //    'parent_id' => $id,
+        //]);
+
+        foreach ($dataProvider->getModels() as $model) {
+            $arrayList [$model->id] = $model->organization_name;
+        }
+
+        return $arrayList;
+
     }
 
     /**

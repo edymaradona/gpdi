@@ -118,6 +118,12 @@ use yii\bootstrap\Modal;
                         ['class' => 'btn btn-xs btn-default modalFamilyButton', 'title' => 'view/edit',]
                     );
                 },
+                'delete' => function ($url, $data, $key) {
+                    return Html::a('<i class="glyphicon glyphicon-trash"></i>',
+                        ['/pastor/deletefamily', 'id' => $data['id']],
+                        ['class' => 'btn btn-xs btn-default', 'title' => 'delete',]
+                    );
+                },
             ]
 
         ],

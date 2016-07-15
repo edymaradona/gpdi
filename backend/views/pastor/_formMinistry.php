@@ -6,6 +6,10 @@ use yii\helpers\Url;
 use kartik\widgets\DatePicker;
 use yii\helpers\ArrayHelper;
 use backend\models\Parameter;
+use kartik\builder\FormGrid;
+use kartik\builder\Form;
+use backend\models\Organization;
+
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Family */
@@ -16,13 +20,89 @@ use backend\models\Parameter;
 
     <? //php $form = ActiveForm::begin(); ?>
     <?php $form = ActiveForm::begin([
-        'type' => ActiveForm::TYPE_HORIZONTAL,
-        'formConfig' => ['labelSpan' => 2, 'deviceSize' => ActiveForm::SIZE_SMALL],
+        'type' => ActiveForm::TYPE_VERTICAL,
+        //'formConfig' => ['labelSpan' => 2, 'deviceSize' => ActiveForm::SIZE_SMALL],
         'options' => ['id' => 'form-ministry-update-id', 'data-pjax' => true,]
     ]); ?>
 
-    <?= $form->errorSummary($model) ?>
+    <?= FormGrid::widget([
+        'model' => $model,
+        'form' => $form,
+        //'autoGenerateColumns'=>true,
+        'rows' => [
+            [
+                'attributes' => [       // 2 column layout
+                    'start_date' => [
+                        'type' => 'widget',
+                        'widgetClass' => '\kartik\widgets\DatePicker',
+                        'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
+                    ],
+                    'end_date' => [
+                        'type' => 'widget',
+                        'widgetClass' => '\kartik\widgets\DatePicker',
+                        'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
+                    ],
+                    'status_id' => [
+                        'type' => Form::INPUT_DROPDOWN_LIST,
+                        'items' => ArrayHelper::map(Parameter::find()->where('group_name = "status"')->all(), 'id',
+                            'description')
+                    ],
+                ]
+            ],
+            [
+                'attributes' => [
+                    'church_name' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your church name...']
+                    ],
+                    'organization_parent_id' => [
+                        'type' => Form::INPUT_DROPDOWN_LIST,
+                        'items' => Organization::getDropDown()
+                    ],
+                ]
+            ],
+            [
+                'attributes' => [
+                    'sk_number' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Input your SK...']],
+                    'phone_number' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your Phone Number...']
+                    ],
+                ]
+            ],
+            [
+                'attributes' => [
+                    'ministry_address' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your address...']
+                    ],
+                ]
+            ],
+            [
+                'attributes' => [
+                    'ministry_address1' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your Kab/Kodya...']
+                    ],
+                    'ministry_address2' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your Province...']
+                    ],
+                ]
+            ],
+            [
+                'attributes' => [
+                    'remark' => ['type' => Form::INPUT_TEXTAREA, 'options' => ['placeholder' => 'Input Remark...']],
+                ]
+            ],
 
+
+        ]
+    ]);
+
+    ?>
+
+    <?php /*
     <?= $form->field($model, 'start_date')->widget(DatePicker::classname(), [
             'name' => 'start_date',
             'type' => DatePicker::TYPE_INPUT,
@@ -64,6 +144,7 @@ use backend\models\Parameter;
     <?= $form->field($model, 'status_id')->dropDownList(
         ArrayHelper::map(Parameter::find()->where('group_name = "status"')->all(), 'id', 'description')); ?>
 
+    */ ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update',

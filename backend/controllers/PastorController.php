@@ -252,6 +252,30 @@ class PastorController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionDeleteministry($id)
+    {
+        $model = $this->findModelMinistry($id);
+        $model->delete();
+
+        return $this->redirect(['view', 'id' => $model->parent_id]);
+    }
+
+    public function actionDeleteorganization($id)
+    {
+        $model = $this->findModelOrganization($id);
+        $model->delete();
+
+        return $this->redirect(['view', 'id' => $model->parent_id]);
+    }
+
+    public function actionDeletefamily($id)
+    {
+        $model = $this->findModelFamily($id);
+        $model->delete();
+
+        return $this->redirect(['view', 'id' => $model->parent_id]);
+    }
+
     public function actionUpload($id)
     {
         $model = $this->findModel($id);

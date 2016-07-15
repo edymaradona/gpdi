@@ -27,8 +27,8 @@ use yii\bootstrap\Modal;
         'church_name',
         'ministryParent.organization_name',
         'ministryParent.organizationParent.organization_name',
-        'start_date',
-        'end_date',
+        //'start_date',
+        //'end_date',
         'status.description',
         'sk_number',
         'ministry_address',
@@ -111,6 +111,12 @@ use yii\bootstrap\Modal;
                         ['class' => 'btn btn-xs btn-default modalMinistryButton', 'title' => 'view/edit',]
                     );
                 },
+                'delete' => function ($url, $data, $key) {
+                    return Html::a('<i class="glyphicon glyphicon-trash"></i>',
+                        ['/pastor/deleteministry', 'id' => $data['id']],
+                        ['class' => 'btn btn-xs btn-default', 'title' => 'delete',]
+                    );
+                },
             ]
 
         ],
@@ -124,7 +130,7 @@ use yii\bootstrap\Modal;
     'header' => 'Ministry Update',
     'id' => 'editModalMinistryId',
     'class' => 'modal',
-    'size' => 'modal-md',
+    'size' => 'modal-lg',
 ]);
 echo "<div class='modalMinistryContent'></div>";
 Modal::end();

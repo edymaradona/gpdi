@@ -27,7 +27,7 @@ use yii\bootstrap\Modal;
         'start_date',
         'end_date',
         'role.description',
-        'reportTo.pastor_name',
+        //'reportTo.pastor_name',
         'status.description',
         /*[
             'class' => 'kartik\grid\EditableColumn',
@@ -91,6 +91,12 @@ use yii\bootstrap\Modal;
                     return Html::a('<i class="glyphicon glyphicon-pencil"></i>',
                         ['/pastor/updateorganization', 'id' => $data['id']],
                         ['class' => 'btn btn-xs btn-default modalOrganizationButton', 'title' => 'view/edit',]
+                    );
+                },
+                'delete' => function ($url, $data, $key) {
+                    return Html::a('<i class="glyphicon glyphicon-trash"></i>',
+                        ['/pastor/deleteorganization', 'id' => $data['id']],
+                        ['class' => 'btn btn-xs btn-default', 'title' => 'delete',]
                     );
                 },
             ]
