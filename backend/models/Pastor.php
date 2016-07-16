@@ -92,6 +92,7 @@ class Pastor extends \yii\db\ActiveRecord
             'handphone' => 'Handphone',
             'email' => 'Email',
             'remark' => 'Remark',
+            'user_id' => 'User',
             'photo_path' => 'Photo Path',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -108,6 +109,11 @@ class Pastor extends \yii\db\ActiveRecord
     public function getMinistry()
     {
         return $this->hasOne(Ministry::className(), ['parent_id' => 'id'])->orderBy('start_date DESC')->limit(1);
+    }
+
+    public function getMinistryMany()
+    {
+        return $this->hasMany(Ministry::className(), ['parent_id' => 'id'])->orderBy('start_date DESC');
     }
 
     public function getPhotoPath()

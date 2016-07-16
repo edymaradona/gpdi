@@ -13,6 +13,32 @@ return [
         'admin' => [
             'class' => 'mdm\admin\Module',
             'layout' => 'left-menu',
+            'mainLayout' => '@app/views/layouts/main.php',
+            /*'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'userClassName' => 'common\models\User',
+                    'idField' => 'id',
+                    'fullnameField' => 'pastorLink.pastor_name',
+                    'extraColumns' => [
+                        [
+                            'attribute' => 'full_name',
+                            'label' => 'Full Name',
+                            'value' => function($model, $key, $index, $column) {
+                                return $model->pastorLink->pastor_name;
+                            },
+                        ],
+                        [
+                            'attribute' => 'ministry',
+                            'label' => 'Ministry',
+                            'value' => function($model, $key, $index, $column) {
+                                return $model->pastorLink->ministry->pastor_name;
+                            },
+                        ],
+                    //],
+                    //'searchClass' => 'app\models\UserSearch'],
+                //]
+            ]*/
         ],
         'gridview' => [
             'class' => '\kartik\grid\Module'

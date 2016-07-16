@@ -41,3 +41,12 @@ $this->title = 'GPdI MD Jabar';
 
     </div>
 </div>
+
+<?php
+echo \common\models\User::getGroupId();
+//$lists=Yii::$app->getAuthManager()->getRolesByUser(Yii::$app->user->id);
+
+//echo "<pre>";
+//print_r($lists);
+//echo "</pre>";
+?>

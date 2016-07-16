@@ -2,6 +2,7 @@
 
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+
 ?>
 
 <?php $this->beginContent('@app/views/layouts/baseLayout.php'); ?>
@@ -14,7 +15,14 @@ use common\widgets\Alert;
 
     <?= $this->renderFile('@app/views/layouts/_alert.php'); ?>
 
-    <?= $content ?>
+    <div class="row">
+        <div class="col-md-9">
+            <?= $content; ?>
+        </div>
+        <div class="col-md-3">
+            <?= $this->renderFile('@app/views/layouts/_sbRightOperationBox.php'); ?>
+        </div>
+    </div>
 </div>
 
 

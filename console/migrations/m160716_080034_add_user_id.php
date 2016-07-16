@@ -2,16 +2,17 @@
 
 use yii\db\Migration;
 
-class m160712_045402_started_data_pastor extends Migration
+class m160716_080034_add_user_id extends Migration
 {
     public function up()
     {
-        //$this->insert('pastor',[''])
+        $this->addColumn('pastor', 'user_id', 'INTEGER(11) NULL AFTER `photo_path`');
+
     }
 
     public function down()
     {
-        echo "m160712_045402_started_data_pastor cannot be reverted.\n";
+        echo "m160716_080034_add_user_id cannot be reverted.\n";
 
         return false;
     }

@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use common\models\User;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -67,26 +68,6 @@ class PastorSearch extends Pastor
     }
 
     /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['id', 'gender_id', 'created_at', 'updated_at'], 'integer'],
-            [['pastor_name', 'front_title', 'back_title', 'birth_place', 'birth_date', 'address', 'address1', 'address2', 'handphone', 'email', 'remark'], 'safe'],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
-    }
-
-    /**
      * Creates data provider instance with search query applied
      *
      * @param array $params
@@ -95,7 +76,7 @@ class PastorSearch extends Pastor
      */
     public function search($params)
     {
-        $query = Pastor::find();
+        $query = Pastor::find()->joinWith('ministry');
 
         // add conditions that should always apply here
 
@@ -112,12 +93,14 @@ class PastorSearch extends Pastor
         //}
 
         // grid filtering conditions
+        if (!Yii::$app->user->can('AllModuleBundle')) {
+            $query->where('ministry.organization_parent_id =' . User::getGroupId());
+        }
+
         $query->andFilterWhere([
             'id' => $this->id,
             'birth_date' => $this->birth_date,
             'gender_id' => $this->gender_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'pastor_name', $this->pastor_name])
