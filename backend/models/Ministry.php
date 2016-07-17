@@ -45,7 +45,11 @@ class Ministry extends \yii\db\ActiveRecord
             [['parent_id', 'organization_parent_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
             [['start_date', 'end_date'], 'safe'],
             [['remark'], 'string'],
-            [['church_name', 'ministry_address', 'ministry_address1', 'ministry_address2'], 'string', 'max' => 255],
+            [
+                ['church_name', 'ministry_address', 'ministry_address1', 'ministry_address2', 'ministry_address3'],
+                'string',
+                'max' => 255
+            ],
             [['sk_number'], 'string', 'max' => 50],
             [['phone_number'], 'string', 'max' => 100],
         ];
@@ -68,8 +72,9 @@ class Ministry extends \yii\db\ActiveRecord
             'church_name' => 'Church Name',
             'sk_number' => 'SK Number',
             'ministry_address' => 'Address',
-            'ministry_address1' => 'Kab/Kodya',
-            'ministry_address2' => 'Province',
+            'ministry_address1' => 'Desa/Kelurahan',
+            'ministry_address2' => 'Kab/Kodya',
+            'ministry_address3' => 'Province',
             'phone_number' => 'Phone Number',
             'remark' => 'Remark',
             'created_at' => 'Created At',

@@ -5,6 +5,8 @@ use kartik\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use backend\models\Parameter;
 use kartik\widgets\DatePicker;
+use kartik\widgets\Typeahead;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Pastor */
@@ -44,9 +46,53 @@ use kartik\widgets\DatePicker;
 
     <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
 
-    <?= $form->field($model, 'address1')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'address1')->widget(Typeahead::classname(), [
+        'options' => ['placeholder' => 'Search desa/kelurahan and kecamatan...'],
+        'pluginOptions' => ['highlight' => true],
+        'dataset' => [
+            [
+                //'prefetch' => Url::to(['pastor/ackabupatenkota']),
+                'remote' => [
+                    'url' => Url::to(['pastor/acdesakelkecamatan']) . '?key=%QUERY',
+                    //'url' => Url::to(['pastor/ackabupatenkota','key'=>'%QUERY']),
+                    'wildcard' => '%QUERY'
+                ]
+            ]
+        ]
+    ]);
+    ?>
 
-    <?= $form->field($model, 'address2')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'address2')->widget(Typeahead::classname(), [
+        'options' => ['placeholder' => 'Search kabupaten or kota ...'],
+        'pluginOptions' => ['highlight' => true],
+        'dataset' => [
+            [
+                //'prefetch' => Url::to(['pastor/ackabupatenkota']),
+                'remote' => [
+                    'url' => Url::to(['pastor/ackabupatenkota']) . '?key=%QUERY',
+                    //'url' => Url::to(['pastor/ackabupatenkota','key'=>'%QUERY']),
+                    'wildcard' => '%QUERY'
+                ]
+            ]
+        ]
+    ]);
+    ?>
+
+    <?= $form->field($model, 'address3')->widget(Typeahead::classname(), [
+        'options' => ['placeholder' => 'Search province ...'],
+        'pluginOptions' => ['highlight' => true],
+        'dataset' => [
+            [
+                //'prefetch' => Url::to(['pastor/acprovince']),
+                'remote' => [
+                    'url' => Url::to(['pastor/acprovince']) . '?key=%QUERY',
+                    //'url' => Url::to(['pastor/ackabupatenkota','key'=>'%QUERY']),
+                    'wildcard' => '%QUERY'
+                ]
+            ]
+        ]
+    ]);
+    ?>
 
     <?= $form->field($model, 'handphone')->textInput(['maxlength' => true]) ?>
 

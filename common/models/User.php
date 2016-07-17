@@ -16,6 +16,7 @@ use yii\web\IdentityInterface;
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
+ * @property integer $default_group_id
  * @property string $auth_key
  * @property integer $status
  * @property integer $created_at
@@ -100,9 +101,9 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static function getGroupId()
     {
-        $query = Pastor::findOne(['user_id' => Yii::$app->user->id]);
+        $query = User::findOne(['default_group_id' => Yii::$app->user->id]);
 
-        return isset($query->ministry) ? $query->ministry->organization_parent_id : -1;
+        return isset($query) ? $query->default_group_id : -1;
     }
 
     /**

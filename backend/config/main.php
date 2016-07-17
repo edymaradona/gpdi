@@ -11,7 +11,12 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'treemanager' => [
+            'class' => '\kartik\tree\Module',
+            // other module settings, refer detailed documentation
+        ],
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',

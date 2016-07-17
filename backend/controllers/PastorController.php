@@ -2,6 +2,9 @@
 
 namespace backend\controllers;
 
+use backend\models\IndoKabupaten;
+use backend\models\IndoKelurahan;
+use backend\models\IndoProvinsi;
 use Yii;
 use backend\models\Pastor;
 use backend\models\PastorSearch;
@@ -16,6 +19,8 @@ use backend\models\OrganizationRole;
 use backend\models\Organization;
 use yii\web\UploadedFile;
 use yii\helpers\Json;
+use common\models\User;
+use yii\data\ActiveDataProvider;
 
 /**
  * PastorController implements the CRUD actions for Pastor model.
@@ -85,11 +90,6 @@ class PastorController extends Controller
         ]);
     }
 
-    public function successCallback($file)
-    {
-        $this->refresh();
-    }
-
     /**
      * Lists all Pastor models.
      * @return mixed
@@ -126,7 +126,16 @@ class PastorController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Pastor::findOne($id)) !== null) {
+        if (!Yii::$app->user->can('AllModuleBundle')) {
+            $model = Pastor::find()->joinWith('ministry')->where([
+                '`pastor`.`id`' => $id,
+                '`ministry`.`organization_parent_id`' => User::getGroupId()
+            ])->one();
+        } else {
+            $model = Pastor::findOne($id);
+        }
+
+        if ($model !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -289,6 +298,69 @@ class PastorController extends Controller
                 //return true;
             }
         }
+
+    }
+
+    public function actionAcdesakelkecamatan($key)
+    {
+        $arrayList = [];
+
+        $query = IndoKelurahan::find()->joinWith('parent');
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andFilterWhere(['like', '`indo_kelurahan`.`nama`', $key]);
+
+
+        foreach ($dataProvider->getModels() as $model) {
+            $arrayList [] = $model->nama . ',' . $model->parent->nama;
+        }
+
+        return Json::encode($arrayList);
+
+    }
+
+    public function actionAckabupatenkota($key)
+    {
+        $arrayList = [];
+
+        $query = IndoKabupaten::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andFilterWhere(['like', 'nama', $key]);
+
+
+        foreach ($dataProvider->getModels() as $model) {
+            $arrayList [] = $model->nama;
+        }
+
+        return Json::encode($arrayList);
+
+    }
+
+    public function actionAcprovince($key)
+    {
+        $arrayList = [];
+
+        $query = IndoProvinsi::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andFilterWhere(['like', 'nama', $key]);
+
+
+        foreach ($dataProvider->getModels() as $model) {
+            $arrayList [] = $model->nama;
+        }
+
+        return Json::encode($arrayList);
 
     }
 

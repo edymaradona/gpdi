@@ -23,9 +23,12 @@ class m160704_141220_audi extends Migration
             'address' => $this->string(),
             'address1' => $this->string(),
             'address2' => $this->string(),
+            'address3' => $this->string(),
             'handphone' => $this->string(100),
             'email' => $this->string(100),
             'remark' => $this->text(),
+            'photo_path' => $this->string(),
+            'user_id' => $this->integer(),
 
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
@@ -42,6 +45,7 @@ class m160704_141220_audi extends Migration
             'handphone' => $this->string(100),
             'email' => $this->string(100),
             'remark' => $this->text(),
+            'photo_path' => $this->string(),
 
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
@@ -59,6 +63,7 @@ class m160704_141220_audi extends Migration
             'ministry_address' => $this->string(),
             'ministry_address1' => $this->string(),
             'ministry_address2' => $this->string(),
+            'ministry_address3' => $this->string(),
             'phone_number' => $this->string(100),
             'remark' => $this->text(),
 
@@ -117,9 +122,11 @@ class m160704_141220_audi extends Migration
             'ministry_address' => $this->string(),
             'ministry_address1' => $this->string(),
             'ministry_address2' => $this->string(),
+            'ministry_address3' => $this->string(),
             'phone_number' => $this->string(100),
             'status_id' => $this->smallInteger()->notNull()->defaultValue(1),
             'remark' => $this->text(),
+            'photo_path' => $this->string(),
 
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),

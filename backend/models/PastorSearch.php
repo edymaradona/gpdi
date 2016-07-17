@@ -15,18 +15,23 @@ class PastorSearch extends Pastor
 {
     public static function getRecentlyCreated()
     {
-        $listarray = [];
+        $listArray = [];
         $query = Pastor::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        if (!Yii::$app->user->can('AllModuleBundle')) {
+            $query->joinWith('ministry');
+            $query->where('ministry.organization_parent_id =' . User::getGroupId());
+        }
 
         $query->orderBy('created_at DESC');
         $query->limit(10);
 
         foreach ($dataProvider->getModels() as $model) {
-            $listarray [] = [
+            $listArray [] = [
                 'id' => $model->id,
                 'description' => $model->pastor_name,
                 'label' => $model->pastor_name,
@@ -35,25 +40,35 @@ class PastorSearch extends Pastor
                 ],];
         }
 
-        $returnarray = ['title' => 'Recently Added', 'icon' => 'circle-arrow-up', 'class' => 'info', 'list' => $listarray];
+        $returnArray = [
+            'title' => 'Recently Added',
+            'icon' => 'circle-arrow-up',
+            'class' => 'info',
+            'list' => $listArray
+        ];
 
-        return $returnarray;
+        return $returnArray;
     }
 
     public static function getRecentlyUpdated()
     {
-        $listarray = [];
+        $listArray = [];
         $query = Pastor::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
+        if (!Yii::$app->user->can('AllModuleBundle')) {
+            $query->joinWith('ministry');
+            $query->where('ministry.organization_parent_id =' . User::getGroupId());
+        }
+
         $query->orderBy('updated_at DESC');
         $query->limit(10);
 
         foreach ($dataProvider->getModels() as $model) {
-            $listarray [] = [
+            $listArray [] = [
                 'id' => $model->id,
                 'description' => $model->pastor_name,
                 'label' => $model->pastor_name,
@@ -62,9 +77,14 @@ class PastorSearch extends Pastor
                 ],];
         }
 
-        $returnarray = ['title' => 'Recently Updated', 'icon' => 'circle-arrow-up', 'class' => 'info', 'list' => $listarray];
+        $returnArray = [
+            'title' => 'Recently Updated',
+            'icon' => 'circle-arrow-up',
+            'class' => 'info',
+            'list' => $listArray
+        ];
 
-        return $returnarray;
+        return $returnArray;
     }
 
     /**
@@ -76,7 +96,7 @@ class PastorSearch extends Pastor
      */
     public function search($params)
     {
-        $query = Pastor::find()->joinWith('ministry');
+        $query = Pastor::find();
 
         // add conditions that should always apply here
 
@@ -92,8 +112,8 @@ class PastorSearch extends Pastor
         //return $dataProvider;
         //}
 
-        // grid filtering conditions
         if (!Yii::$app->user->can('AllModuleBundle')) {
+            $query->joinWith('ministry');
             $query->where('ministry.organization_parent_id =' . User::getGroupId());
         }
 

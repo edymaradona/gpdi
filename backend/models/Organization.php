@@ -107,7 +107,11 @@ class Organization extends \yii\db\ActiveRecord
             [['start_date', 'end_date'], 'safe'],
             [['remark'], 'string'],
             [['organization_name', 'phone_number'], 'string', 'max' => 100],
-            [['description', 'ministry_address', 'ministry_address1', 'ministry_address2'], 'string', 'max' => 255],
+            [
+                ['description', 'ministry_address', 'ministry_address1', 'ministry_address2', 'ministry_address3'],
+                'string',
+                'max' => 255
+            ],
             [['sk_number'], 'string', 'max' => 50],
         ];
     }
@@ -125,9 +129,10 @@ class Organization extends \yii\db\ActiveRecord
             'organization_name' => 'Organization Name',
             'description' => 'Description',
             'sk_number' => 'Sk Number',
-            'ministry_address' => 'Ministry Address',
-            'ministry_address1' => 'Ministry Address1',
-            'ministry_address2' => 'Ministry Address2',
+            'ministry_address' => 'Address',
+            'ministry_address1' => 'Desa/Kelurahan',
+            'ministry_address2' => 'Kab/Kodya',
+            'ministry_address3' => 'Province',
             'phone_number' => 'Phone Number',
             'status_id' => 'Status ID',
             'remark' => 'Remark',

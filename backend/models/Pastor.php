@@ -51,15 +51,38 @@ class Pastor extends \yii\db\ActiveRecord
     {
         return [
             [['pastor_name', 'birth_place', 'birth_date', 'address', 'handphone'], 'required'],
-            [['birth_date'], 'safe'],
+            //[['birth_date'], 'safe'],
+            //['birth_date','validateUserBirthDate'],
+            [['birth_date'], 'date', 'format' => 'php:Y-m-d', 'min' => '1900-01-01', 'max' => '2010-01-01'],
             [['gender_id', 'created_at', 'updated_at'], 'integer'],
             [['remark'], 'string'],
             [['email'], 'email'],
-            [['pastor_name', 'birth_place', 'handphone', 'email'], 'string', 'max' => 100],
+            [
+                'handphone',
+                'match',
+                'pattern' => '/08\d{8,10}/',
+                'message' => 'Handphone number must be at least 10 digit, 
+            no space, no "-",  and started with 08xxxxxx '
+            ],
+            [['pastor_name', 'birth_place', 'email'], 'string', 'max' => 100],
             [['front_title', 'back_title'], 'string', 'max' => 25],
-            [['address', 'address1', 'address2', 'photo_path'], 'string', 'max' => 255],
+            [['address', 'address1', 'address2', 'address3', 'photo_path'], 'string', 'max' => 255],
             [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
+    }
+
+    public function validateUserBirthDate($attribute, $params)
+    {
+        $date = new \DateTime();
+        date_sub($date, date_interval_create_from_date_string('12 years'));
+        $minAgeDate = date_format($date, 'Y-m-d');
+        date_sub($date, date_interval_create_from_date_string('100 years'));
+        $maxAgeDate = date_format($date, 'Y-m-d');
+        if ($this->$attribute > $minAgeDate) {
+            $this->addError($attribute, 'Date is too small.');
+        } elseif ($this->$attribute < $maxAgeDate) {
+            $this->addError($attribute, 'Date is to big.');
+        }
     }
 
     public function upload()
@@ -87,8 +110,9 @@ class Pastor extends \yii\db\ActiveRecord
             'gender_id' => 'Gender',
             'gender.description' => 'Gender',
             'address' => 'Address',
-            'address1' => 'Kab/Kodya',
-            'address2' => 'Province',
+            'address1' => 'Desa/Kelurahan',
+            'address2' => 'Kab/Kodya',
+            'address3' => 'Province',
             'handphone' => 'Handphone',
             'email' => 'Email',
             'remark' => 'Remark',

@@ -25,7 +25,9 @@
         "kartik-v/yii2-grid": "@dev",
         "kartik-v/yii2-mpdf": "^1.0",
       "kartik-v/yii2-editable": "^1.7",
-      "kartik-v/yii2-builder": "^1.6"
+      "kartik-v/yii2-builder": "^1.6",
+      "mdmsoft/yii2-gii": "~1.0",
+      "kartik-v/yii2-tree-manager": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
