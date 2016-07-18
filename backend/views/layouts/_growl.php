@@ -6,6 +6,6 @@
  * Time: 5:45 PM
  */
 
-if (isset($this->params['alert'])) {
-    echo $this->params['alert'];
+if (isset($this->params['growl'])) {
+    echo $this->params['growl'];
 }

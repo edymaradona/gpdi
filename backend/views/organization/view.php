@@ -9,6 +9,8 @@ use yii\widgets\DetailView;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Organizations', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+isset($alert) ? $this->params['alert'] = $alert : null;
+
 ?>
 <div class="organization-view">
 

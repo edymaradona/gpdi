@@ -10,6 +10,8 @@ use yii\widgets\Pjax;
 
 $this->title = 'Organizations';
 $this->params['breadcrumbs'][] = $this->title;
+isset($alert) ? $this->params['alert'] = $alert : null;
+
 ?>
 <div class="organization-index">
 

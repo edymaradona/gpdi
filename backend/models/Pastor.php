@@ -51,9 +51,16 @@ class Pastor extends \yii\db\ActiveRecord
     {
         return [
             [['pastor_name', 'birth_place', 'birth_date', 'address', 'handphone'], 'required'],
-            //[['birth_date'], 'safe'],
             //['birth_date','validateUserBirthDate'],
-            [['birth_date'], 'date', 'format' => 'php:Y-m-d', 'min' => '1900-01-01', 'max' => '2010-01-01'],
+            [
+                'birth_date',
+                'date',
+                'format' => 'php:Y-m-d',
+                'min' => date('Y-m-d', strtotime('-15 years')),
+                'max' => date('Y-m-d', strtotime('-90 years')),
+                'tooBig' => 'Your birth date input seem invalid due it is more than 90 years',
+                'tooSmall' => 'Your birth date input seem invalid due it is less than 15 years',
+            ],
             [['gender_id', 'created_at', 'updated_at'], 'integer'],
             [['remark'], 'string'],
             [['email'], 'email'],
@@ -73,16 +80,14 @@ class Pastor extends \yii\db\ActiveRecord
 
     public function validateUserBirthDate($attribute, $params)
     {
-        $date = new \DateTime();
-        date_sub($date, date_interval_create_from_date_string('12 years'));
-        $minAgeDate = date_format($date, 'Y-m-d');
-        date_sub($date, date_interval_create_from_date_string('100 years'));
-        $maxAgeDate = date_format($date, 'Y-m-d');
-        if ($this->$attribute > $minAgeDate) {
+        $minAgeDate = strtotime('-10 years');
+        $maxAgeDate = strtotime('-100 years');
+        if (strtotime($this->$attribute) > $minAgeDate) {
             $this->addError($attribute, 'Date is too small.');
-        } elseif ($this->$attribute < $maxAgeDate) {
+        } elseif (strtotime($this->$attribute) < $maxAgeDate) {
             $this->addError($attribute, 'Date is to big.');
         }
+        $this->addError($attribute, 'Date is to big.');
     }
 
     public function upload()

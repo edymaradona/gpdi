@@ -12,6 +12,22 @@ use backend\models\PastorSearch;
 
 $this->title = 'Pastors';
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['growl'] =
+    \kartik\widgets\Growl::widget([
+        'type' => \kartik\widgets\Growl::TYPE_SUCCESS,
+        'title' => 'Well done!',
+        'icon' => 'glyphicon glyphicon-ok-sign',
+        'body' => 'You successfully read this important alert message.',
+        'showSeparator' => true,
+        'delay' => 0,
+        'pluginOptions' => [
+            'showProgressbar' => true,
+            'placement' => [
+                'from' => 'top',
+                'align' => 'right',
+            ]
+        ]
+    ]);
 
 $this->params['menuOperation'] = [
     'title' => 'Operation',

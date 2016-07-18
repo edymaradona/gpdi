@@ -13,6 +13,7 @@ use common\widgets\Alert;
     <?= $this->renderFile('@app/views/layouts/_breadcrumb.php'); ?>
 
     <?= $this->renderFile('@app/views/layouts/_alert.php'); ?>
+    <?= $this->renderFile('@app/views/layouts/_growl.php'); ?>
 
     <?= $content ?>
 </div>

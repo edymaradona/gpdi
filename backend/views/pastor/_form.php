@@ -23,6 +23,17 @@ use yii\helpers\Url;
     ?>
 
     <?= $form->field($model, 'front_title')->textInput(['maxlength' => true]) ?>
+    <? /*= $form->field($model, 'front_title')->widget(\kartik\widgets\Select2::classname(), [
+            'name' => 'front_title',
+            'value' => ['Pdt.'],
+            'options' => ['placeholder' => 'Input Front Title ...', 'multiple' => true],
+            'data' => ['Pdt.'=>'Pdt.','Pdm.'=>'Pdm.','Pdp.'=>'Pdp.'],
+            'pluginOptions' => [
+                'tags' => true,
+                'maximumInputLength' => 10
+            ]]
+    );*/
+    ?>
 
     <?= $form->field($model, 'pastor_name')->textInput(['maxlength' => true]) ?>
 
@@ -32,11 +43,14 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'birth_date')->widget(DatePicker::classname(), [
             'name' => 'birth_date',
-            'type' => DatePicker::TYPE_INPUT,
+            'type' => DatePicker::TYPE_COMPONENT_PREPEND,
             //'value' => '23-Feb-1982',
             'pluginOptions' => [
                 'autoclose' => true,
                 'format' => 'dd-mm-yyyy',
+                'startDate' => "01-01-1900",
+                'endDate' => "01-01-2000",
+                'startView' => 2
             ], ]
     );
     ?>
@@ -67,10 +81,8 @@ use yii\helpers\Url;
         'pluginOptions' => ['highlight' => true],
         'dataset' => [
             [
-                //'prefetch' => Url::to(['pastor/ackabupatenkota']),
                 'remote' => [
                     'url' => Url::to(['pastor/ackabupatenkota']) . '?key=%QUERY',
-                    //'url' => Url::to(['pastor/ackabupatenkota','key'=>'%QUERY']),
                     'wildcard' => '%QUERY'
                 ]
             ]
@@ -83,10 +95,8 @@ use yii\helpers\Url;
         'pluginOptions' => ['highlight' => true],
         'dataset' => [
             [
-                //'prefetch' => Url::to(['pastor/acprovince']),
                 'remote' => [
                     'url' => Url::to(['pastor/acprovince']) . '?key=%QUERY',
-                    //'url' => Url::to(['pastor/ackabupatenkota','key'=>'%QUERY']),
                     'wildcard' => '%QUERY'
                 ]
             ]
@@ -94,9 +104,16 @@ use yii\helpers\Url;
     ]);
     ?>
 
-    <?= $form->field($model, 'handphone')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'handphone', [
+        'feedbackIcon' => [
+            'default' => 'phone',
+            'success' => 'check-circle',
+            'error' => 'exclamation-sign',
+        ]
+    ])->textInput(['placeholder' => 'Input phone number']) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email',
+        ['addon' => ['prepend' => ['content' => '@']]])->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'remark')->textarea(['rows' => 6]) ?>
 

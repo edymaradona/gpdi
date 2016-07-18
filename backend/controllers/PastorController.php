@@ -99,9 +99,16 @@ class PastorController extends Controller
         $searchModel = new PastorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $alert = [
+            'type' => 'alert-success',
+            'title' => 'Test Title',
+            'body' => 'My Body',
+        ];
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'alert' => $alert,
         ]);
     }
 

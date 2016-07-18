@@ -16,7 +16,7 @@ $this->params['menuOperation'] = [
     //'class' => 'primary',
     'list' => [
         ['label' => 'Home', 'icon' => 'home', 'url' => ['/pastor']],
-        ['label' => 'Update', 'icon' => 'edit', 'url' => ['/pastor/update', 'id' => $model->id]],
+        //['label' => 'Update', 'icon' => 'edit', 'url' => ['/pastor/update', 'id' => $model->id]],
         ['label' => 'Report', 'icon' => 'print', 'url' => ['/pastor/report']],
     ],
 ];
