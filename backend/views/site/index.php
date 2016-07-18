@@ -3,18 +3,7 @@
 /* @var $this yii\web\View */
 
 $this->title = 'GPdI MD Jabar';
-$this->title = 'Pastors';
 $this->params['breadcrumbs'][] = $this->title;
-$this->params['alert'] =
-    \kartik\widgets\Alert::widget([
-        'type' => \kartik\widgets\Alert::TYPE_SUCCESS,
-        'title' => 'Well done!',
-        'icon' => 'glyphicon glyphicon-ok-sign',
-        'body' => 'You successfully read this important alert message.',
-        'showSeparator' => true,
-        'delay' => 2000
-    ]);
-
 
 ?>
 
