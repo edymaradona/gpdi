@@ -125,8 +125,8 @@ class Pastor extends \yii\db\ActiveRecord
             'photo_path' => 'Photo Path',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
-            'ministry.ministryParent.organization_name' => 'Majelis Wilayah',
-            'ministry.ministryParent.organizationParent.organization_name' => 'Majelis Daerah'
+            'ministry.parent.name' => 'Majelis Wilayah',
+            'ministry.parent.parent.name' => 'Majelis Daerah'
         ];
     }
 

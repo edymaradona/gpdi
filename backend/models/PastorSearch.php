@@ -7,6 +7,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Pastor;
+use kartik\helpers\Html;
 
 /**
  * PastorSearch represents the model behind the search form about `backend\models\Pastor`.
@@ -33,17 +34,18 @@ class PastorSearch extends Pastor
         foreach ($dataProvider->getModels() as $model) {
             $listArray [] = [
                 'id' => $model->id,
-                'description' => $model->pastor_name,
-                'label' => $model->pastor_name,
-                'photo' => $model->photo_path,
-                'url' => ['view', 'id' => $model->id,
-                ],];
+                //'heading' => $model->pastor_name,
+                'body' => $model->pastor_name,
+                'img' => $model->getPhotoPathReal(),
+                'src' => ['/pastor/view', 'id' => $model->id,],
+                'imgOptions' => ['style' => 'width:50px']
+            ];
         }
 
         $returnArray = [
             'title' => 'Recently Added',
             'icon' => 'circle-arrow-up',
-            'class' => 'info',
+            'type' => 'info',
             'list' => $listArray
         ];
 
@@ -70,17 +72,18 @@ class PastorSearch extends Pastor
         foreach ($dataProvider->getModels() as $model) {
             $listArray [] = [
                 'id' => $model->id,
-                'description' => $model->pastor_name,
-                'label' => $model->pastor_name,
-                'photo' => $model->photo_path,
-                'url' => ['view', 'id' => $model->id,
-                ],];
+                //'heading' => $model->pastor_name,
+                'body' => $model->pastor_name,
+                'img' => $model->getPhotoPathReal(),
+                'src' => ['pastor/view', 'id' => $model->id,],
+                'imgOptions' => ['style' => 'width:50px']
+            ];
         }
 
         $returnArray = [
             'title' => 'Recently Updated',
             'icon' => 'circle-arrow-up',
-            'class' => 'info',
+            'type' => 'info',
             'list' => $listArray
         ];
 

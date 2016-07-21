@@ -50,21 +50,29 @@ use backend\models\Pastor;
 
 <?php if (isset($this->params['menuRecentlyUpdated'])) : ?>
     <?=
-    SideNav::widget([
-        'type' => SideNav::TYPE_INFO,
+    Html::panel([
         'heading' => $this->params['menuRecentlyUpdated']['title'],
-        'items' => $this->params['menuRecentlyUpdated']['list']
-    ]);
+        'body' => '<div class="panel-body">' .
+            Html::mediaList(
+                $this->params['menuRecentlyUpdated']['list']
+            )
+            . '</div>',
+    ], $this->params['menuRecentlyUpdated']['type']);
+
     ?>
 <?php endif; ?>
 
 <?php if (isset($this->params['menuRecentlyAdded'])) : ?>
     <?=
-    SideNav::widget([
-        'type' => SideNav::TYPE_INFO,
+    Html::panel([
         'heading' => $this->params['menuRecentlyAdded']['title'],
-        'items' => $this->params['menuRecentlyAdded']['list']
-    ]);
+        'body' => '<div class="panel-body">' .
+            Html::mediaList(
+                $this->params['menuRecentlyAdded']['list']
+            )
+            . '</div>',
+    ], $this->params['menuRecentlyUpdated']['type']);
+
     ?>
 <?php endif; ?>
 

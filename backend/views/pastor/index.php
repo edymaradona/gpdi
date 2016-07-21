@@ -12,7 +12,7 @@ use backend\models\PastorSearch;
 
 $this->title = 'Pastors';
 $this->params['breadcrumbs'][] = $this->title;
-$this->params['growl'] =
+/*$this->params['growl'] =
     \kartik\widgets\Growl::widget([
         'type' => \kartik\widgets\Growl::TYPE_SUCCESS,
         'title' => 'Well done!',
@@ -27,7 +27,7 @@ $this->params['growl'] =
                 'align' => 'right',
             ]
         ]
-    ]);
+    ]);*/
 
 $this->params['menuOperation'] = [
     'title' => 'Operation',
@@ -63,8 +63,12 @@ $this->params['createButton'] = [
                             'model' => $model,
                             'attributes' => [
                                 'ministry.church_name',
-                                'ministry.ministryParent.organization_name',
-                                'ministry.ministryParent.organizationParent.organization_name',
+                                'ministry.ministryParent.name',
+                                [
+                                    'label' => 'MD',
+                                    'name' => 'id',
+                                    'value' => isset($model->ministry->id) ? $model->ministry->ministryParent->parents(1)->one()->name : '',
+                                ],
                                 'address',
                                 //'birth_place',
                                 'birth_date',

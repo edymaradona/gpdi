@@ -63,8 +63,8 @@ class Ministry extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'parent_id' => 'Parent ID',
-            'organization_parent_id' => 'Organization Parent',
-            'organizationParent.organization_name' => 'Organization Parent',
+            //'organization_parent_id' => 'Organization Parent',
+            //'organizationParent.organization_name' => 'Organization Parent',
             'status_id' => 'Status',
             'status.description' => 'Status',
             'start_date' => 'Start Date',

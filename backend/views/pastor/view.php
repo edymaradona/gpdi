@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 use backend\models\PastorSearch;
 use kartik\tabs\TabsX;
 use kartik\widgets\FileInput;
@@ -63,22 +63,38 @@ $this->params['createButton'] = [
     <div class="col-md-9">
         <?= DetailView::widget([
             'model' => $model,
-            'options' => ['class' => 'table table-striped table-bordered table-condensed detail-view'],
+            //'condensed'=>true,
+            'hover' => true,
+            'mode' => DetailView::MODE_VIEW,
+            'enableEditMode' => false,
             'attributes' => [
                 [
                     'name' => 'pastor_name',
                     'label' => 'Pastor Name',
                     'value' => $model->front_title . ' ' . $model->pastor_name . ', ' . $model->back_title,
                 ],
-                'ministry.church_name',
-                'ministry.ministryParent.organization_name',
-                'ministry.ministryParent.organizationParent.organization_name',
+                [
+                    'label' => 'Church Name',
+                    'value' => isset($model->ministry) ? $model->ministry->church_name : '',
+                ],
+                [
+                    'label' => 'Wilayah',
+                    'value' => isset($model->ministry) ? $model->ministry->ministryParent->name : '',
+                ],
+                [
+                    'label' => 'Daerah',
+                    'value' => isset($model->ministry) ? $model->ministry->ministryParent->parents(1)->one()->name : '',
+                ],
                 [
                     'name' => 'birth_date',
                     'label' => 'Birth Date',
                     'value' => $model->birth_place . ', ' . $model->birth_date,
                 ],
-                'gender.description',
+                [
+                    'name' => 'gender_id',
+                    'label' => 'Gender',
+                    'value' => $model->gender->description,
+                ],
                 'handphone',
                 'email:email',
             ],

@@ -25,8 +25,13 @@ use yii\bootstrap\Modal;
         ['class' => 'yii\grid\SerialColumn'],
 
         'church_name',
-        'ministryParent.organization_name',
-        'ministryParent.organizationParent.organization_name',
+        'ministryParent.name',
+        [
+            'label' => 'Daerah',
+            'value' => function ($data, $key, $index, $column) {
+                return $data->ministryParent->parents(1)->one()->name;
+            }
+        ],
         //'start_date',
         //'end_date',
         'status.description',

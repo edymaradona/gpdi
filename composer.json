@@ -27,9 +27,12 @@
       "kartik-v/yii2-editable": "^1.7",
       "kartik-v/yii2-builder": "^1.6",
       "mdmsoft/yii2-gii": "~1.0",
-      "kartik-v/yii2-tree-manager": "@dev",
       "miloschuman/yii2-highcharts-widget": "dev-master",
-      "philippfrenzel/yii2fullcalendar": "^2.5"
+        "philippfrenzel/yii2fullcalendar": "^2.5",
+        "kartik-v/yii2-detail-view": "^1.7",
+        "execut/yii2-widget-bootstraptreeview": "dev-master",
+        "creocoder/yii2-nested-sets": "^0.9.0",
+        "kartik-v/yii2-tree-manager": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

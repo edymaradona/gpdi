@@ -23,7 +23,7 @@ use yii\bootstrap\Modal;
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
 
-        'organization.organization_name',
+        'organization.name',
         'start_date',
         'end_date',
         'role.description',
