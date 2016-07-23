@@ -3,19 +3,19 @@
 use yii\helpers\Html;
 //use yii\grid\GridView;
 use kartik\grid\GridView;
-use backend\models\searchs\MinistrySearch;
-use backend\models\Parameter;
+use backend\modules\m1\models\searchs\MinistrySearch;
+use backend\modules\m1\models\Parameter;
 use kartik\widgets\DatePicker;
 use yii\widgets\Pjax;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\searchs\MinistrySearch */
+/* @var $searchModel backend\modules\m1\models\searchs\MinistrySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>
 
 <p>
-    <?= Html::a('Pelayanan Baru', ['/pastor/createministry', 'id' => $model->id],
+    <?= Html::a('Pelayanan Baru', ['/m1/pastor/createministry', 'id' => $model->id],
         ['class' => 'btn btn-success modalMinistryButton']) ?>
 </p>
 
@@ -43,7 +43,7 @@ use yii\bootstrap\Modal;
         /*[
             'class' => 'kartik\grid\EditableColumn',
             'attribute' => 'church_name',
-            'editableOptions' => ['formOptions' => ['action' => ['/pastor/editMinistry']]],
+            'editableOptions' => ['formOptions' => ['action' => ['/m1/pastor/editMinistry']]],
         ],
         [
             'class' => 'kartik\grid\EditableColumn',
@@ -51,7 +51,7 @@ use yii\bootstrap\Modal;
             'editableOptions' => [
                 'inputType' => 'widget',
                 'widgetClass' => '\kartik\widgets\DatePicker',
-                'formOptions' => ['action' => ['/pastor/editMinistry']],
+                'formOptions' => ['action' => ['/m1/pastor/editMinistry']],
                 'options' => [
                     'pluginOptions' => [
                         'format' => 'dd-mm-yyyy'
@@ -66,7 +66,7 @@ use yii\bootstrap\Modal;
             'editableOptions' => [
                 'inputType' => 'widget',
                 'widgetClass' => '\kartik\widgets\DatePicker',
-                'formOptions' => ['action' => ['/pastor/editMinistry']],
+                'formOptions' => ['action' => ['/m1/pastor/editMinistry']],
                 'options' => [
                     'pluginOptions' => [
                         'format' => 'dd-mm-yyyy'
@@ -82,14 +82,14 @@ use yii\bootstrap\Modal;
                 'inputType' => 'dropDownList',
                 'displayValueConfig' => Parameter::getDropDown(),
                 'data' => Parameter::getDropdown(),
-                'formOptions' => ['action' => ['/pastor/editMinistry']]
+                'formOptions' => ['action' => ['/m1/pastor/editMinistry']]
             ],
         ],
 
         /*[
             'class' => 'kartik\grid\EditableColumn',
             'attribute' => 'ministry_address',
-            'editableOptions' => ['formOptions' => ['action' => ['/pastor/editMinistry']]],
+            'editableOptions' => ['formOptions' => ['action' => ['/m1/pastor/editMinistry']]],
         ],
         //'ministry_address1',
         //'ministry_address2',
@@ -97,7 +97,7 @@ use yii\bootstrap\Modal;
             'class' => 'kartik\grid\EditableColumn',
             'attribute' => 'phone_number',
             'editableOptions' => [
-                'formOptions' => ['action' => ['/pastor/editMinistry']],
+                'formOptions' => ['action' => ['/m1/pastor/editMinistry']],
                 'placement' => 'left',
             ],
         ],*/
@@ -109,13 +109,13 @@ use yii\bootstrap\Modal;
                 'custom_update' => function ($url, $data) {
                     // Html::a args: title, href, tag properties.
                     return Html::a('<i class="glyphicon glyphicon-pencil"></i>',
-                        ['/pastor/updateministry', 'id' => $data['id']],
+                        ['/m1/pastor/updateministry', 'id' => $data['id']],
                         ['class' => 'btn btn-xs btn-default modalMinistryButton', 'title' => 'view/edit',]
                     );
                 },
                 'delete' => function ($url, $data, $key) {
                     return Html::a('<i class="glyphicon glyphicon-trash"></i>',
-                        ['/pastor/deleteministry', 'id' => $data['id']],
+                        ['/m1/pastor/deleteministry', 'id' => $data['id']],
                         ['class' => 'btn btn-xs btn-default', 'title' => 'delete',]
                     );
                 },

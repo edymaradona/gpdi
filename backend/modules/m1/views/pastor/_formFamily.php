@@ -10,7 +10,7 @@ use kartik\builder\FormGrid;
 use kartik\builder\Form;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Family */
+/* @var $model backend\modules\m1\models\Family */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

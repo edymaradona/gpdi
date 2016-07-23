@@ -3,10 +3,10 @@
 use kartik\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\DetailView;
-use backend\models\searchs\PastorSearch;
+use backend\modules\m1\models\searchs\PastorSearch;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\searchs\PastorSearch */
+/* @var $searchModel backend\modules\m1\models\searchs\PastorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 
@@ -32,8 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['menuOperation'] = [
     'title' => 'Operation',
     'list' => [
-        ['label' => 'Home', 'icon' => 'home', 'url' => ['/pastor']],
-        ['label' => 'Report', 'icon' => 'print', 'url' => ['/pastor/report']],
+        ['label' => 'Home', 'icon' => 'home', 'url' => ['/m1/pastor']],
+        ['label' => 'Report', 'icon' => 'print', 'url' => ['/m1/pastor/report']],
     ],
 ];
 
@@ -41,7 +41,7 @@ $this->params['menuRecentlyAdded'] = PastorSearch::getRecentlyCreated();
 $this->params['menuRecentlyUpdated'] = PastorSearch::getRecentlyUpdated();
 $this->params['createButton'] = [
     'title' => 'Create New Pastor',
-    'url' => ['/pastor/create']
+    'url' => ['/m1/pastor/create']
 ];
 
 ?>
@@ -55,7 +55,7 @@ $this->params['createButton'] = [
         'itemOptions' => ['class' => 'item'],
         'itemView' => function ($model, $key, $index, $widget) {
             echo Html::panel([
-                'heading' => Html::a($model->pastor_name, ['/pastor/view', 'id' => $model->id]),
+                'heading' => Html::a($model->pastor_name, ['/m1/pastor/view', 'id' => $model->id]),
                 'body' =>
                     Html::media(
                         '',
@@ -79,7 +79,7 @@ $this->params['createButton'] = [
                                 'email:email',
                             ],
                         ]),
-                        ['/pastor/view', 'id' => $model->id],
+                        ['/m1/pastor/view', 'id' => $model->id],
                         $model->getPhotoPathReal(), [], ['style' => 'width:150px'], [], [], ['class' => 'panel-body']
                     )
                 ,

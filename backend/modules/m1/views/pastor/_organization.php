@@ -3,18 +3,18 @@
 use yii\helpers\Html;
 //use yii\grid\GridView;
 use kartik\grid\GridView;
-use backend\models\searchs\OrganizationRoleSearch;
-use backend\models\Parameter;
+use backend\modules\m1\models\searchs\OrganizationRoleSearch;
+use backend\modules\m1\models\Parameter;
 use yii\widgets\Pjax;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\searchs\OrganizationRoleSearch */
+/* @var $searchModel backend\modules\m1\models\searchs\OrganizationRoleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>
 
 <p>
-    <?= Html::a('Jabatan Baru', ['/pastor/createorganization', 'id' => $model->id],
+    <?= Html::a('Jabatan Baru', ['/m1/pastor/createorganization', 'id' => $model->id],
         ['class' => 'btn btn-success modalOrganizationButton']) ?>
 </p>
 
@@ -38,7 +38,7 @@ use yii\bootstrap\Modal;
             'editableOptions' => [
                 'inputType' => 'widget',
                 'widgetClass' => '\kartik\widgets\DatePicker',
-                'formOptions' => ['action' => ['/pastor/editOrganization']],
+                'formOptions' => ['action' => ['/m1/pastor/editOrganization']],
                 'options' => [
                     'pluginOptions' => [
                         'format' => 'dd-mm-yyyy'
@@ -53,7 +53,7 @@ use yii\bootstrap\Modal;
             'editableOptions' => [
                 'inputType' => 'widget',
                 'widgetClass' => '\kartik\widgets\DatePicker',
-                'formOptions' => ['action' => ['/pastor/editOrganization']],
+                'formOptions' => ['action' => ['/m1/pastor/editOrganization']],
                 'options' => [
                     'pluginOptions' => [
                         'format' => 'dd-mm-yyyy'
@@ -69,7 +69,7 @@ use yii\bootstrap\Modal;
                 'inputType' => 'dropDownList',
                 'displayValueConfig' => Parameter::getDropDown('pelayanan'),
                 'data' => Parameter::getDropdown('pelayanan'),
-                'formOptions' => ['action' => ['/pastor/editOrganization']]
+                'formOptions' => ['action' => ['/m1/pastor/editOrganization']]
             ],
         ],
         'reportTo.pastor_name',
@@ -80,7 +80,7 @@ use yii\bootstrap\Modal;
                 'inputType' => 'dropDownList',
                 'displayValueConfig' => Parameter::getDropDown(),
                 'data' => Parameter::getDropdown(),
-                'formOptions' => ['action' => ['/pastor/editOrganization']],
+                'formOptions' => ['action' => ['/m1/pastor/editOrganization']],
                 'placement' => 'left',
             ],
         ],*/
@@ -92,13 +92,13 @@ use yii\bootstrap\Modal;
                 'custom_update' => function ($url, $data) {
                     // Html::a args: title, href, tag properties.
                     return Html::a('<i class="glyphicon glyphicon-pencil"></i>',
-                        ['/pastor/updateorganization', 'id' => $data['id']],
+                        ['/m1/pastor/updateorganization', 'id' => $data['id']],
                         ['class' => 'btn btn-xs btn-default modalOrganizationButton', 'title' => 'view/edit',]
                     );
                 },
                 'delete' => function ($url, $data, $key) {
                     return Html::a('<i class="glyphicon glyphicon-trash"></i>',
-                        ['/pastor/deleteorganization', 'id' => $data['id']],
+                        ['/m1/pastor/deleteorganization', 'id' => $data['id']],
                         ['class' => 'btn btn-xs btn-default', 'title' => 'delete',]
                     );
                 },

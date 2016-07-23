@@ -9,7 +9,7 @@ use kartik\widgets\Typeahead;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Pastor */
+/* @var $model backend\modules\m1\models\Pastor */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -51,7 +51,8 @@ use yii\helpers\Url;
                 'startDate' => "01-01-1900",
                 'endDate' => "01-01-2000",
                 'startView' => 2
-            ], ]
+            ],
+        ]
     );
     ?>
 
@@ -119,7 +120,8 @@ use yii\helpers\Url;
 
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update',
+            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

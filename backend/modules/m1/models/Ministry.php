@@ -1,10 +1,12 @@
 <?php
 
-namespace backend\models;
+namespace backend\modules\m1\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use common\components\IndoDateTimeBehavior;
+use backend\models\Organization;
+use backend\models\Parameter;
 
 /**
  * This is the model class for table "ministry".

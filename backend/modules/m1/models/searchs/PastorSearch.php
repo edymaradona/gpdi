@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\models\searchs;
+namespace backend\modules\m1\models\searchs;
 
 use common\models\User;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Pastor;
+use backend\modules\m1\models\Pastor;
 use kartik\helpers\Html;
 
 /**
- * PastorSearch represents the model behind the search form about `backend\models\Pastor`.
+ * PastorSearch represents the model behind the search form about `backend\modules\m1\models\Pastor`.
  */
 class PastorSearch extends Pastor
 {

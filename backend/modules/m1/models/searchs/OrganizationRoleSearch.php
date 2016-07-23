@@ -1,20 +1,20 @@
 <?php
 
-namespace backend\models\searchs;
+namespace backend\modules\m1\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Ministry;
+use backend\modules\m1\models\OrganizationRole;
 
 /**
- * MinistrySearch represents the model behind the search form about `backend\models\Ministry`.
+ * OrganizationRoleSearch represents the model behind the search form about `backend\modules\m1\models\OrganizationRole`.
  */
-class MinistrySearch extends Ministry
+class OrganizationRoleSearch extends OrganizationRole
 {
     public static function getPastorGrid($id)
     {
-        $query = Ministry::find();
+        $query = OrganizationRole::find();
 
 
         $dataProvider = new ActiveDataProvider([
@@ -29,6 +29,38 @@ class MinistrySearch extends Ministry
     }
 
     /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [
+                [
+                    'id',
+                    'parent_id',
+                    'organization_id',
+                    'role_id',
+                    'report_to_id',
+                    'status_id',
+                    'created_at',
+                    'updated_at'
+                ],
+                'integer'
+            ],
+            [['start_date', 'end_date', 'title'], 'safe'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        // bypass scenarios() implementation in the parent class
+        return Model::scenarios();
+    }
+
+    /**
      * Creates data provider instance with search query applied
      *
      * @param array $params
@@ -37,7 +69,7 @@ class MinistrySearch extends Ministry
      */
     public function search($params)
     {
-        $query = Ministry::find();
+        $query = OrganizationRole::find();
 
         // add conditions that should always apply here
 
@@ -57,21 +89,17 @@ class MinistrySearch extends Ministry
         $query->andFilterWhere([
             'id' => $this->id,
             'parent_id' => $this->parent_id,
-            'organization_parent_id' => $this->organization_parent_id,
-            'status_id' => $this->status_id,
+            'organization_id' => $this->organization_id,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
+            'role_id' => $this->role_id,
+            'report_to_id' => $this->report_to_id,
+            'status_id' => $this->status_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'church_name', $this->church_name])
-            ->andFilterWhere(['like', 'sk_number', $this->sk_number])
-            ->andFilterWhere(['like', 'ministry_address', $this->ministry_address])
-            ->andFilterWhere(['like', 'ministry_address1', $this->ministry_address1])
-            ->andFilterWhere(['like', 'ministry_address2', $this->ministry_address2])
-            ->andFilterWhere(['like', 'phone_number', $this->phone_number])
-            ->andFilterWhere(['like', 'remark', $this->remark]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
     }

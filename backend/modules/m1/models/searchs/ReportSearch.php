@@ -1,41 +1,28 @@
 <?php
 
-namespace backend\models\searchs;
+namespace backend\modules\m1\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Family;
+use backend\modules\m1\models\Report;
 
 /**
- * FamilySearch represents the model behind the search form about `backend\models\Family`.
+ * ReportSearch represents the model behind the search form about `backend\modules\m1\models\Report`.
  */
-class FamilySearch extends Family
+class ReportSearch extends Report
 {
-    public static function getPastorGrid($id)
-    {
-        $query = Family::find();
-
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        $query->andFilterWhere([
-            'parent_id' => $id,
-        ]);
-
-        return $dataProvider;
-    }
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'relation_id', 'gender_id', 'created_at', 'updated_at'], 'integer'],
-            [['family_name', 'birth_place', 'birth_date', 'handphone', 'email', 'remark'], 'safe'],
+            [
+                ['id', 'parent_id', 'period', 'congregation', 'sector', 'kom', 'pos_pi', 'created_at', 'updated_at'],
+                'integer'
+            ],
+            [['phone_number', 'remark'], 'safe'],
         ];
     }
 
@@ -57,7 +44,7 @@ class FamilySearch extends Family
      */
     public function search($params)
     {
-        $query = Family::find();
+        $query = Report::find();
 
         // add conditions that should always apply here
 
@@ -77,17 +64,16 @@ class FamilySearch extends Family
         $query->andFilterWhere([
             'id' => $this->id,
             'parent_id' => $this->parent_id,
-            'relation_id' => $this->relation_id,
-            'birth_date' => $this->birth_date,
-            'gender_id' => $this->gender_id,
+            'period' => $this->period,
+            'congregation' => $this->congregation,
+            'sector' => $this->sector,
+            'kom' => $this->kom,
+            'pos_pi' => $this->pos_pi,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'family_name', $this->family_name])
-            ->andFilterWhere(['like', 'birth_place', $this->birth_place])
-            ->andFilterWhere(['like', 'handphone', $this->handphone])
-            ->andFilterWhere(['like', 'email', $this->email])
+        $query->andFilterWhere(['like', 'phone_number', $this->phone_number])
             ->andFilterWhere(['like', 'remark', $this->remark]);
 
         return $dataProvider;

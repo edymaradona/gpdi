@@ -1,11 +1,12 @@
 <?php
 
-namespace backend\models;
+namespace backend\modules\m1\models;
 
 use Yii;
 use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
 use common\components\IndoDateTimeBehavior;
+use backend\models\Parameter;
 
 
 /**

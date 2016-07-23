@@ -1,15 +1,14 @@
 <?php
 
-namespace backend\models;
+namespace backend\modules\m1\models;
 
 use Yii;
 use common\components\IndoDateTimeBehavior;
-use backend\models\Parameter;
 use kartik\helpers\Html;
 use yii\data\ActiveDataProvider;
 use yii\behaviors\TimestampBehavior;
 use yii\web\UploadedFile;
-
+use backend\models\Parameter;
 
 
 /**
@@ -168,16 +167,18 @@ class Pastor extends \yii\db\ActiveRecord
     {
         if ($this->photo_path != null) {
             return is_file(Yii::getAlias('@app') . '/web/images/' . $this->photo_path) ? true : false;
-        } else
+        } else {
             return false;
+        }
     }
 
     public function getPhotoExistThumb()
     {
         if ($this->photo_path != null) {
             return is_file(Yii::getAlias('@web') . '/web/images/thumb/' . $this->photo_path) ? true : false;
-        } else
+        } else {
             return false;
+        }
     }
 
     public function getPhotoPathReal()

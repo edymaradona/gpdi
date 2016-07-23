@@ -1,27 +1,32 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\modules\m1\controllers;
 
-use backend\models\IndoKabupaten;
-use backend\models\IndoKelurahan;
-use backend\models\IndoProvinsi;
 use Yii;
-use backend\models\Pastor;
-use backend\models\searchs\PastorSearch;
+
+use yii\web\UploadedFile;
+use yii\helpers\Json;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+
 use kartik\grid\EditableColumnAction;
-use backend\models\Family;
-use backend\models\Ministry;
-use backend\models\OrganizationRole;
+
 use backend\models\Organization;
-use backend\models\Pendeta;
-use yii\web\UploadedFile;
-use yii\helpers\Json;
+use backend\models\IndoKabupaten;
+use backend\models\IndoKelurahan;
+use backend\models\IndoProvinsi;
+
+use backend\modules\m1\models\Pastor;
+use backend\modules\m1\models\searchs\PastorSearch;
+use backend\modules\m1\models\Family;
+use backend\modules\m1\models\Ministry;
+use backend\modules\m1\models\OrganizationRole;
+use backend\modules\m1\models\Pendeta;
+
 use common\models\User;
-use yii\data\ActiveDataProvider;
 
 /**
  * PastorController implements the CRUD actions for Pastor model.
@@ -308,7 +313,7 @@ class PastorController extends Controller
 
     public function actionCreateorganization($id)
     {
-        $model = new Organization();
+        $model = new OrganizationRole();
         $model->parent_id = $id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

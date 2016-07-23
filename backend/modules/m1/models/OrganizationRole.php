@@ -1,10 +1,12 @@
 <?php
 
-namespace backend\models;
+namespace backend\modules\m1\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use common\components\IndoDateTimeBehavior;
+use backend\models\Organization;
+use backend\models\Parameter;
 
 /**
  * This is the model class for table "organization_role".
@@ -38,7 +40,10 @@ class OrganizationRole extends \yii\db\ActiveRecord
     {
         return [
             [['parent_id', 'organization_id'], 'required'],
-            [['parent_id', 'organization_id', 'role_id', 'report_to_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
+            [
+                ['parent_id', 'organization_id', 'role_id', 'report_to_id', 'status_id', 'created_at', 'updated_at'],
+                'integer'
+            ],
             [['start_date', 'end_date'], 'safe'],
             [['title'], 'string', 'max' => 100],
         ];

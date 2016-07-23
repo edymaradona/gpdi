@@ -11,7 +11,7 @@ use kartik\builder\Form;
 use backend\models\Organization;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Family */
+/* @var $model backend\modules\m1\models\Family */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

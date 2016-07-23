@@ -12,7 +12,7 @@ use backend\models\Organization;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Pendeta */
+/* @var $model backend\modules\m1\models\Pendeta */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

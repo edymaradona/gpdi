@@ -3,19 +3,19 @@
 use yii\helpers\Html;
 //use yii\grid\GridView;
 use kartik\grid\GridView;
-use backend\models\searchs\PendetaSearch;
-use backend\models\Parameter;
+use backend\modules\m1\models\searchs\PendetaSearch;
+use backend\modules\m1\models\Parameter;
 use kartik\widgets\DatePicker;
 use yii\widgets\Pjax;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\searchs\PendetaSearch */
+/* @var $searchModel backend\modules\m1\models\searchs\PendetaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>
 
 <p>
-    <?= Html::a('Kependetaan Baru', ['/pastor/creatependeta', 'id' => $model->id],
+    <?= Html::a('Kependetaan Baru', ['/m1/pastor/creatependeta', 'id' => $model->id],
         ['class' => 'btn btn-success modalPendetaButton']) ?>
 </p>
 
@@ -43,13 +43,13 @@ use yii\bootstrap\Modal;
                 'custom_update' => function ($url, $data) {
                     // Html::a args: title, href, tag properties.
                     return Html::a('<i class="glyphicon glyphicon-pencil"></i>',
-                        ['/pastor/updatependeta', 'id' => $data['id']],
+                        ['/m1/pastor/updatependeta', 'id' => $data['id']],
                         ['class' => 'btn btn-xs btn-default modalPendetaButton', 'title' => 'view/edit',]
                     );
                 },
                 'delete' => function ($url, $data, $key) {
                     return Html::a('<i class="glyphicon glyphicon-trash"></i>',
-                        ['/pastor/deletependeta', 'id' => $data['id']],
+                        ['/m1/pastor/deletependeta', 'id' => $data['id']],
                         ['class' => 'btn btn-xs btn-default', 'title' => 'delete',]
                     );
                 },

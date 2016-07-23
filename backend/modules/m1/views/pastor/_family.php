@@ -3,18 +3,18 @@
 use yii\helpers\Html;
 //use yii\grid\GridView;
 use kartik\grid\GridView;
-use backend\models\searchs\FamilySearch;
-use backend\models\Parameter;
+use backend\modules\m1\models\searchs\FamilySearch;
+use backend\modules\m1\models\Parameter;
 use yii\widgets\Pjax;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\searchs\FamilySearch */
+/* @var $searchModel backend\modules\m1\models\searchs\FamilySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>
 
 <p>
-    <?= Html::a('Anggota Keluarga Baru', ['/pastor/createfamily', 'id' => $model->id],
+    <?= Html::a('Anggota Keluarga Baru', ['/m1/pastor/createfamily', 'id' => $model->id],
         ['class' => 'btn btn-success modalFamilyButton']) ?>
 </p>
 
@@ -34,13 +34,13 @@ use yii\bootstrap\Modal;
                 'inputType' => 'dropDownList',
                 'displayValueConfig' => Parameter::getDropDown('family'),
                 'data' => Parameter::getDropdown('family'),
-                'formOptions' => ['action' => ['/pastor/editFamily']]
+                'formOptions' => ['action' => ['/m1/pastor/editFamily']]
             ],
         ],
         [
             'class' => 'kartik\grid\EditableColumn',
             'attribute' => 'family_name',
-            'editableOptions' => ['formOptions' => ['action' => ['/pastor/editFamily']]],
+            'editableOptions' => ['formOptions' => ['action' => ['/m1/pastor/editFamily']]],
             /*'editableOptions'=> function ($model, $key, $index) {
                 return [
                     'header'=>'Family Name',
@@ -62,7 +62,7 @@ use yii\bootstrap\Modal;
         [
             'class' => 'kartik\grid\EditableColumn',
             'attribute' => 'birth_place',
-            'editableOptions' => ['formOptions' => ['action' => ['/pastor/editFamily']]],
+            'editableOptions' => ['formOptions' => ['action' => ['/m1/pastor/editFamily']]],
         ],
         [
             'class' => 'kartik\grid\EditableColumn',
@@ -70,7 +70,7 @@ use yii\bootstrap\Modal;
             'editableOptions' => [
                 'inputType' => 'widget',
                 'widgetClass' => '\kartik\widgets\DatePicker',
-                'formOptions' => ['action' => ['/pastor/editFamily']],
+                'formOptions' => ['action' => ['/m1/pastor/editFamily']],
                 'options' => [
                     'pluginOptions' => [
                         'format' => 'dd-mm-yyyy'
@@ -86,19 +86,19 @@ use yii\bootstrap\Modal;
                 'inputType' => 'dropDownList',
                 'displayValueConfig' => Parameter::getDropDown('gender'),
                 'data' => Parameter::getDropdown('gender'),
-                'formOptions' => ['action' => ['/pastor/editFamily']]
+                'formOptions' => ['action' => ['/m1/pastor/editFamily']]
             ],
         ],
         [
             'class' => 'kartik\grid\EditableColumn',
             'attribute' => 'handphone',
-            'editableOptions' => ['formOptions' => ['action' => ['/pastor/editFamily']]],
+            'editableOptions' => ['formOptions' => ['action' => ['/m1/pastor/editFamily']]],
         ],
         [
             'class' => 'kartik\grid\EditableColumn',
             'attribute' => 'email',
             'editableOptions' => [
-                'formOptions' => ['action' => ['/pastor/editFamily']],
+                'formOptions' => ['action' => ['/m1/pastor/editFamily']],
                 'placement' => 'left',
             ],
         ],*/
@@ -117,13 +117,13 @@ use yii\bootstrap\Modal;
                 'custom_update' => function ($url, $data) {
                     // Html::a args: title, href, tag properties.
                     return Html::a('<i class="glyphicon glyphicon-pencil"></i>',
-                        ['/pastor/updatefamily', 'id' => $data['id']],
+                        ['/m1/pastor/updatefamily', 'id' => $data['id']],
                         ['class' => 'btn btn-xs btn-default modalFamilyButton', 'title' => 'view/edit',]
                     );
                 },
                 'delete' => function ($url, $data, $key) {
                     return Html::a('<i class="glyphicon glyphicon-trash"></i>',
-                        ['/pastor/deletefamily', 'id' => $data['id']],
+                        ['/m1/pastor/deletefamily', 'id' => $data['id']],
                         ['class' => 'btn btn-xs btn-default', 'title' => 'delete',]
                     );
                 },

@@ -9,7 +9,7 @@
 use kartik\widgets\SideNav;
 use kartik\widgets\ActiveForm;
 use kartik\helpers\Html;
-use backend\models\Pastor;
+use backend\modules\m1\models\Pastor;
 
 ?>
 

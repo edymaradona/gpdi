@@ -1,15 +1,15 @@
 <?php
 
-namespace backend\models\searchs;
+namespace backend\modules\m1\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Pendeta;
+use backend\modules\m1\models\Pendeta;
 use common\models\User;
 
 /**
- * PendetaSearch represents the model behind the search form about `backend\models\Pendeta`.
+ * PendetaSearch represents the model behind the search form about `backend\modules\m1\models\Pendeta`.
  */
 class PendetaSearch extends Pendeta
 {
