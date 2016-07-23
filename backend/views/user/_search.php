@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\searchs\PastorSearch */
+/* @var $model backend\models\UserSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="pastor-search">
+<div class="user-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,29 +17,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'pastor_name') ?>
+    <?= $form->field($model, 'username') ?>
 
-    <?= $form->field($model, 'front_title') ?>
+    <?= $form->field($model, 'auth_key') ?>
 
-    <?= $form->field($model, 'back_title') ?>
+    <?= $form->field($model, 'password_hash') ?>
 
-    <?= $form->field($model, 'birth_place') ?>
+    <?= $form->field($model, 'password_reset_token') ?>
 
-    <?php // echo $form->field($model, 'birth_date') ?>
-
-    <?php // echo $form->field($model, 'gender_id') ?>
-
-    <?php // echo $form->field($model, 'address') ?>
-
-    <?php // echo $form->field($model, 'address1') ?>
-
-    <?php // echo $form->field($model, 'address2') ?>
-
-    <?php // echo $form->field($model, 'handphone') ?>
+    <?php // echo $form->field($model, 'default_group_id') ?>
 
     <?php // echo $form->field($model, 'email') ?>
 
-    <?php // echo $form->field($model, 'remark') ?>
+    <?php // echo $form->field($model, 'status') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

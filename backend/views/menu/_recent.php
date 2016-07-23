@@ -2,7 +2,7 @@
 
 use kartik\helpers\Html;
 use yii\helpers\Url;
-use backend\models\PastorSearch;
+use backend\models\searchs\PastorSearch;
 
 ?>
 

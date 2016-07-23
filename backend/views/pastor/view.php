@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\detail\DetailView;
-use backend\models\PastorSearch;
+use backend\models\searchs\PastorSearch;
 use kartik\tabs\TabsX;
 use kartik\widgets\FileInput;
 use yii\helpers\Url;
@@ -70,11 +70,11 @@ $this->params['createButton'] = [
             'attributes' => [
                 [
                     'name' => 'pastor_name',
-                    'label' => 'Pastor Name',
+                    'label' => 'Nama Gembala',
                     'value' => $model->front_title . ' ' . $model->pastor_name . ', ' . $model->back_title,
                 ],
                 [
-                    'label' => 'Church Name',
+                    'label' => 'Nama Gereja',
                     'value' => isset($model->ministry) ? $model->ministry->church_name : '',
                 ],
                 [
@@ -87,12 +87,12 @@ $this->params['createButton'] = [
                 ],
                 [
                     'name' => 'birth_date',
-                    'label' => 'Birth Date',
+                    'label' => 'Tanggal Lahir',
                     'value' => $model->birth_place . ', ' . $model->birth_date,
                 ],
                 [
                     'name' => 'gender_id',
-                    'label' => 'Gender',
+                    'label' => 'J. Kelamin',
                     'value' => $model->gender->description,
                 ],
                 'handphone',
@@ -140,20 +140,24 @@ $this->params['createButton'] = [
 TabsX::widget([
     'items' => [
         [
-            'label' => '<i class="glyphicon glyphicon-user"></i> Profile',
+            'label' => '<i class="glyphicon glyphicon-user"></i> Profil',
             'content' => $this->render('_profile', ['model' => $model]),
             'active' => true
         ],
         [
-            'label' => '<i class="glyphicon glyphicon-book"></i> Ministry',
+            'label' => '<i class="glyphicon glyphicon-book"></i> Pelayanan',
             'content' => $this->render('_ministry', ['model' => $model]),
         ],
         [
-            'label' => '<i class="glyphicon glyphicon-tree-conifer"></i> Organization',
+            'label' => '<i class="glyphicon glyphicon-book"></i> Kependetaan',
+            'content' => $this->render('_pendeta', ['model' => $model]),
+        ],
+        [
+            'label' => '<i class="glyphicon glyphicon-tree-conifer"></i> Organisasi',
             'content' => $this->render('_organization', ['model' => $model]),
         ],
         [
-            'label' => '<i class="glyphicon glyphicon-cutlery"></i> Family',
+            'label' => '<i class="glyphicon glyphicon-cutlery"></i> Keluarga',
             'content' => $this->render('_family', ['model' => $model]),
         ],
     ],

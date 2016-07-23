@@ -2,10 +2,8 @@
 
 namespace backend\controllers;
 
-use backend\models\Organization3;
 use Yii;
 use backend\models\Organization;
-use backend\models\OrganizationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

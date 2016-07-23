@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace backend\models\searchs;
 
 use common\models\User;
 use Yii;
@@ -110,8 +110,8 @@ class PastorSearch extends Pastor
         $this->load($params);
 
         //if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+        // uncomment the following line if you do not want to return any records when validation fails
+        // $query->where('0=1');
         //return $dataProvider;
         //}
 

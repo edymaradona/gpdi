@@ -3,17 +3,20 @@
 use yii\helpers\Html;
 //use yii\grid\GridView;
 use kartik\grid\GridView;
-use backend\models\OrganizationRoleSearch;
+use backend\models\searchs\OrganizationRoleSearch;
 use backend\models\Parameter;
 use yii\widgets\Pjax;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\OrganizationRoleSearch */
+/* @var $searchModel backend\models\searchs\OrganizationRoleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>
 
-<br/>
+<p>
+    <?= Html::a('Jabatan Baru', ['/pastor/createorganization', 'id' => $model->id],
+        ['class' => 'btn btn-success modalOrganizationButton']) ?>
+</p>
 
 <?php Pjax::begin(); ?>
 <?= GridView::widget([
@@ -109,7 +112,7 @@ use yii\bootstrap\Modal;
 
 
 <?php Modal::begin([
-    'header' => 'Organization Update',
+    'header' => 'Organization',
     'id' => 'editModalOrganizationId',
     'class' => 'modal',
     'size' => 'modal-md',

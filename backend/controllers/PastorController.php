@@ -7,7 +7,7 @@ use backend\models\IndoKelurahan;
 use backend\models\IndoProvinsi;
 use Yii;
 use backend\models\Pastor;
-use backend\models\PastorSearch;
+use backend\models\searchs\PastorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -17,6 +17,7 @@ use backend\models\Family;
 use backend\models\Ministry;
 use backend\models\OrganizationRole;
 use backend\models\Organization;
+use backend\models\Pendeta;
 use yii\web\UploadedFile;
 use yii\helpers\Json;
 use common\models\User;
@@ -159,6 +160,11 @@ class PastorController extends Controller
         $model = new Pastor();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $modelMinistry = new Ministry();
+            $modelMinistry->parent_id = $model->id;
+            $modelMinistry->organization_parent_id = User::getGroupId();
+            $modelMinistry->save(false);
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -181,6 +187,59 @@ class PastorController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionCreatependeta($id)
+    {
+        $model = new Pendeta();
+        $model->parent_id = $id;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updatePendeta', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionUpdatependeta($id)
+    {
+        $model = $this->findModelPendeta($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updatePendeta', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    protected function findModelPendeta($id)
+    {
+        if (($model = Pendeta::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionCreatefamily($id)
+    {
+        $model = new Family();
+        $model->parent_id = $id;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateFamily', [
                 'model' => $model,
             ]);
         }
@@ -209,6 +268,21 @@ class PastorController extends Controller
         }
     }
 
+    public function actionCreateministry($id)
+    {
+        $model = new Ministry();
+        $model->parent_id = $id;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateMinistry', [
+                'model' => $model,
+            ]);
+        }
+    }
+
     public function actionUpdateministry($id)
     {
         $model = $this->findModelMinistry($id);
@@ -229,6 +303,21 @@ class PastorController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionCreateorganization($id)
+    {
+        $model = new Organization();
+        $model->parent_id = $id;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateOrganization', [
+                'model' => $model,
+            ]);
         }
     }
 

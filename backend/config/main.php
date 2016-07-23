@@ -12,10 +12,9 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        'treemanager' => [
-            'class' => '\kartik\tree\Module',
-            // other module settings, refer detailed documentation
-        ]
+        'm1' => [
+            'class' => 'backend\modules\m1\Module',
+        ],
     ],
     'components' => [
         'user' => [

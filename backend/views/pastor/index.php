@@ -3,10 +3,10 @@
 use kartik\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\DetailView;
-use backend\models\PastorSearch;
+use backend\models\searchs\PastorSearch;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\PastorSearch */
+/* @var $searchModel backend\models\searchs\PastorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 
@@ -65,7 +65,7 @@ $this->params['createButton'] = [
                                 'ministry.church_name',
                                 'ministry.ministryParent.name',
                                 [
-                                    'label' => 'MD',
+                                    'label' => 'Daerah',
                                     'name' => 'id',
                                     'value' => isset($model->ministry->id) ? $model->ministry->ministryParent->parents(1)->one()->name : '',
                                 ],

@@ -3,17 +3,20 @@
 use yii\helpers\Html;
 //use yii\grid\GridView;
 use kartik\grid\GridView;
-use backend\models\FamilySearch;
+use backend\models\searchs\FamilySearch;
 use backend\models\Parameter;
 use yii\widgets\Pjax;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\FamilySearch */
+/* @var $searchModel backend\models\searchs\FamilySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>
 
-<br/>
+<p>
+    <?= Html::a('Anggota Keluarga Baru', ['/pastor/createfamily', 'id' => $model->id],
+        ['class' => 'btn btn-success modalFamilyButton']) ?>
+</p>
 
 <?php Pjax::begin(); ?>
 
@@ -134,7 +137,7 @@ use yii\bootstrap\Modal;
 
 
 <?php Modal::begin([
-    'header' => 'Family Update',
+    'header' => 'Family',
     'id' => 'editModalFamilyId',
     'class' => 'modal',
     'size' => 'modal-md',

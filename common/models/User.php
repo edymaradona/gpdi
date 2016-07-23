@@ -7,6 +7,8 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use backend\models\Organization;
+
 
 /**
  * User model
@@ -101,7 +103,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static function getGroupId()
     {
-        $query = User::findOne(['default_group_id' => Yii::$app->user->id]);
+        $query = User::find(['default_group_id' => (int)Yii::$app->user->id])->one();
 
         return isset($query) ? $query->default_group_id : -1;
     }
@@ -201,5 +203,18 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Pastor::className(), ['id' => 'id']);
     }
 
+    public function getDefaultGroup()
+    {
+        return $this->hasOne(Organization::className(), ['id' => 'default_group_id']);
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'status' => 'Status',
+            'defaultGroup.name' => 'Default Group',
+        ];
+    }
 
 }

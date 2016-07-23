@@ -1,41 +1,28 @@
 <?php
 
-namespace backend\models;
+namespace backend\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\OrganizationRole;
+use backend\models\Report;
 
 /**
- * OrganizationRoleSearch represents the model behind the search form about `backend\models\OrganizationRole`.
+ * ReportSearch represents the model behind the search form about `backend\models\Report`.
  */
-class OrganizationRoleSearch extends OrganizationRole
+class ReportSearch extends Report
 {
-    public static function getPastorGrid($id)
-    {
-        $query = OrganizationRole::find();
-
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        $query->andFilterWhere([
-            'parent_id' => $id,
-        ]);
-
-        return $dataProvider;
-    }
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'organization_id', 'role_id', 'report_to_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
-            [['start_date', 'end_date', 'title'], 'safe'],
+            [
+                ['id', 'parent_id', 'period', 'congregation', 'sector', 'kom', 'pos_pi', 'created_at', 'updated_at'],
+                'integer'
+            ],
+            [['phone_number', 'remark'], 'safe'],
         ];
     }
 
@@ -57,7 +44,7 @@ class OrganizationRoleSearch extends OrganizationRole
      */
     public function search($params)
     {
-        $query = OrganizationRole::find();
+        $query = Report::find();
 
         // add conditions that should always apply here
 
@@ -77,19 +64,18 @@ class OrganizationRoleSearch extends OrganizationRole
         $query->andFilterWhere([
             'id' => $this->id,
             'parent_id' => $this->parent_id,
-            'organization_id' => $this->organization_id,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-            'role_id' => $this->role_id,
-            'report_to_id' => $this->report_to_id,
-            'status_id' => $this->status_id,
+            'period' => $this->period,
+            'congregation' => $this->congregation,
+            'sector' => $this->sector,
+            'kom' => $this->kom,
+            'pos_pi' => $this->pos_pi,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['like', 'phone_number', $this->phone_number])
+            ->andFilterWhere(['like', 'remark', $this->remark]);
 
         return $dataProvider;
     }
-
 }

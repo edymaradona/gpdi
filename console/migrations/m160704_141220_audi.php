@@ -59,7 +59,6 @@ class m160704_141220_audi extends Migration
             'start_date' => $this->date()->notNull(),
             'end_date' => $this->date(),
             'church_name' => $this->string(),
-            'sk_number' => $this->string(50),
             'ministry_address' => $this->string(),
             'ministry_address1' => $this->string(),
             'ministry_address2' => $this->string(),
@@ -131,6 +130,22 @@ class m160704_141220_audi extends Migration
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ], $tableOptions);
+
+        $this->createTable('{{%pendeta}}', [
+            'id' => $this->primaryKey(),
+            'parent_id' => $this->integer()->notNull(),
+            'pendeta_id' => $this->smallInteger()->notNull()->defaultValue(1),
+            'start_date' => $this->date()->notNull(),
+            'sk_number' => $this->string(50),
+            'event_name' => $this->string(),
+            'place' => $this->string(),
+            'status_id' => $this->smallInteger()->notNull()->defaultValue(1),
+            'remark' => $this->text(),
+
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
+        ], $tableOptions);
+
     }
 
     public function down()

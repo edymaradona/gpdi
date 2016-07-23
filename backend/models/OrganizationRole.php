@@ -57,7 +57,7 @@ class OrganizationRole extends \yii\db\ActiveRecord
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
             'role_id' => 'Role',
-            'role.description' => 'Role',
+            'role.description' => 'Jabatan',
             'title' => 'Title',
             'report_to_id' => 'Report To',
             'reportTo.pastor_name' => 'Report To',

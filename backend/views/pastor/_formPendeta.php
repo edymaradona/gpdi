@@ -12,7 +12,7 @@ use backend\models\Organization;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Family */
+/* @var $model backend\models\Pendeta */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -32,6 +32,11 @@ use backend\models\Organization;
         'rows' => [
             [
                 'attributes' => [       // 2 column layout
+                    'pendeta_id' => [
+                        'type' => Form::INPUT_DROPDOWN_LIST,
+                        'items' => ArrayHelper::map(Parameter::find()->where('group_name = "pendeta"')->all(), 'id',
+                            'description')
+                    ],
                     'start_date' => [
                         'type' => 'widget',
                         'widgetClass' => '\kartik\widgets\DatePicker',
@@ -39,91 +44,31 @@ use backend\models\Organization;
                             'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
                         ],
                     ],
-                    'end_date' => [
-                        'type' => 'widget',
-                        'widgetClass' => '\kartik\widgets\DatePicker',
-                        'options' => [
-                            'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
-                        ],
+                ]
+            ],
+            [
+                'attributes' => [
+                    'sk_number' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your sk number...']
                     ],
+                    'event_name' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your event name...']
+                    ],
+                    'place' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your place...']
+                    ],
+                ]
+            ],
+            [
+                'attributes' => [
                     'status_id' => [
                         'type' => Form::INPUT_DROPDOWN_LIST,
                         'items' => ArrayHelper::map(Parameter::find()->where('group_name = "status"')->all(), 'id',
                             'description')
                     ],
-                ]
-            ],
-            [
-                'attributes' => [
-                    'church_name' => [
-                        'type' => Form::INPUT_TEXT,
-                        'options' => ['placeholder' => 'Input your church name...']
-                    ],
-                    'organization_parent_id' => [
-                        'type' => Form::INPUT_DROPDOWN_LIST,
-                        'items' => Organization::getDropDown()
-                    ],
-                ]
-            ],
-            [
-                'attributes' => [
-                    'ministry_address' => [
-                        'type' => Form::INPUT_TEXT,
-                        'options' => ['placeholder' => 'Input your address...']
-                    ],
-                ]
-            ],
-            [
-                'attributes' => [
-                    'ministry_address1' => [
-                        'type' => 'widget',
-                        'widgetClass' => '\kartik\widgets\Typeahead',
-                        'options' => [
-                            'options' => ['placeholder' => 'Input your Desa/Kelurahan...'],
-                            'dataset' => [
-                                [
-                                    'remote' => [
-                                        'url' => Url::to(['pastor/acdesakelkecamatan']) . '?key=%QUERY',
-                                        'wildcard' => '%QUERY'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ],
-                    'ministry_address2' => [
-                        'type' => 'widget',
-                        'widgetClass' => '\kartik\widgets\Typeahead',
-                        'options' => [
-                            'options' => ['placeholder' => 'Input your Desa/Kelurahan...'],
-                            'dataset' => [
-                                [
-                                    'remote' => [
-                                        'url' => Url::to(['pastor/ackabupatenkota']) . '?key=%QUERY',
-                                        'wildcard' => '%QUERY'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ],
-                    'ministry_address3' => [
-                        'type' => 'widget',
-                        'widgetClass' => '\kartik\widgets\Typeahead',
-                        'options' => [
-                            'options' => ['placeholder' => 'Input your Desa/Kelurahan...'],
-                            'dataset' => [
-                                [
-                                    'remote' => [
-                                        'url' => Url::to(['pastor/acprovince']) . '?key=%QUERY',
-                                        'wildcard' => '%QUERY'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ],
-                ]
-            ],
-            [
-                'attributes' => [
                     'remark' => ['type' => Form::INPUT_TEXTAREA, 'options' => ['placeholder' => 'Input Remark...']],
                 ]
             ],

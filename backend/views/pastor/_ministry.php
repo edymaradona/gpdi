@@ -3,18 +3,21 @@
 use yii\helpers\Html;
 //use yii\grid\GridView;
 use kartik\grid\GridView;
-use backend\models\MinistrySearch;
+use backend\models\searchs\MinistrySearch;
 use backend\models\Parameter;
 use kartik\widgets\DatePicker;
 use yii\widgets\Pjax;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\MinistrySearch */
+/* @var $searchModel backend\models\searchs\MinistrySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>
 
-<br/>
+<p>
+    <?= Html::a('Pelayanan Baru', ['/pastor/createministry', 'id' => $model->id],
+        ['class' => 'btn btn-success modalMinistryButton']) ?>
+</p>
 
 <?php Pjax::begin(); ?>
 <?= GridView::widget([
@@ -35,7 +38,6 @@ use yii\bootstrap\Modal;
         //'start_date',
         //'end_date',
         'status.description',
-        'sk_number',
         'ministry_address',
         //'phone_number',
         /*[
@@ -83,11 +85,6 @@ use yii\bootstrap\Modal;
                 'formOptions' => ['action' => ['/pastor/editMinistry']]
             ],
         ],
-        /*[
-            'class' => 'kartik\grid\EditableColumn',
-            'attribute' => 'sk_number',
-            'editableOptions' => ['formOptions' => ['action' => ['/pastor/editMinistry']]],
-        ],*/
 
         /*[
             'class' => 'kartik\grid\EditableColumn',
@@ -132,7 +129,7 @@ use yii\bootstrap\Modal;
 
 
 <?php Modal::begin([
-    'header' => 'Ministry Update',
+    'header' => 'Ministry',
     'id' => 'editModalMinistryId',
     'class' => 'modal',
     'size' => 'modal-lg',

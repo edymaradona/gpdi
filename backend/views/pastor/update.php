@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use backend\models\PastorSearch;
+use backend\models\searchs\PastorSearch;
 
 
 /* @var $this yii\web\View */

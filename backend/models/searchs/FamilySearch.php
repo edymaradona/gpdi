@@ -1,20 +1,20 @@
 <?php
 
-namespace backend\models;
+namespace backend\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Ministry;
+use backend\models\Family;
 
 /**
- * MinistrySearch represents the model behind the search form about `backend\models\Ministry`.
+ * FamilySearch represents the model behind the search form about `backend\models\Family`.
  */
-class MinistrySearch extends Ministry
+class FamilySearch extends Family
 {
     public static function getPastorGrid($id)
     {
-        $query = Ministry::find();
+        $query = Family::find();
 
 
         $dataProvider = new ActiveDataProvider([
@@ -34,8 +34,8 @@ class MinistrySearch extends Ministry
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'organization_parent_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
-            [['start_date', 'end_date', 'church_name', 'sk_number', 'ministry_address', 'ministry_address1', 'ministry_address2', 'phone_number', 'remark'], 'safe'],
+            [['id', 'parent_id', 'relation_id', 'gender_id', 'created_at', 'updated_at'], 'integer'],
+            [['family_name', 'birth_place', 'birth_date', 'handphone', 'email', 'remark'], 'safe'],
         ];
     }
 
@@ -57,7 +57,7 @@ class MinistrySearch extends Ministry
      */
     public function search($params)
     {
-        $query = Ministry::find();
+        $query = Family::find();
 
         // add conditions that should always apply here
 
@@ -77,23 +77,19 @@ class MinistrySearch extends Ministry
         $query->andFilterWhere([
             'id' => $this->id,
             'parent_id' => $this->parent_id,
-            'organization_parent_id' => $this->organization_parent_id,
-            'status_id' => $this->status_id,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
+            'relation_id' => $this->relation_id,
+            'birth_date' => $this->birth_date,
+            'gender_id' => $this->gender_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'church_name', $this->church_name])
-            ->andFilterWhere(['like', 'sk_number', $this->sk_number])
-            ->andFilterWhere(['like', 'ministry_address', $this->ministry_address])
-            ->andFilterWhere(['like', 'ministry_address1', $this->ministry_address1])
-            ->andFilterWhere(['like', 'ministry_address2', $this->ministry_address2])
-            ->andFilterWhere(['like', 'phone_number', $this->phone_number])
+        $query->andFilterWhere(['like', 'family_name', $this->family_name])
+            ->andFilterWhere(['like', 'birth_place', $this->birth_place])
+            ->andFilterWhere(['like', 'handphone', $this->handphone])
+            ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'remark', $this->remark]);
 
         return $dataProvider;
     }
-
 }
