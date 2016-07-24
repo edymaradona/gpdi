@@ -8,6 +8,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use mdm\admin\components\MenuHelper;
+use common\models\User;
 
 AppAsset::register($this);
 ?>
@@ -27,37 +28,42 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'GPdI MD Jabar',
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandLabel' => 'SIGEM GPdI',
+        //'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site']],
-        //['label' => 'Pastor', 'url' => ['/pastor']],
-        //['label' => 'Organization', 'url' => ['/organization']],
-    ];
 
-    $menuItems = MenuHelper::getAssignedMenu(Yii::$app->user->id);
+    if (!Yii::$app->user->isGuest) {
+        $menuItemsLeft = MenuHelper::getAssignedMenu(Yii::$app->user->id);
 
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav'],
+            'items' => $menuItemsLeft,
+        ]);
+
+        $menuItems2[] = ['label' => 'Reset Password', 'url' => ['/site/request-password-reset']];
+        $menuItems2[] = '<li><a>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'Logout',
                 ['class' => 'btn btn-link']
             )
             . Html::endForm()
-            . '</li>';
+            . '</a></li>';
+
+        $menuItems[] = ['label' => User::getFullname(), 'items' => $menuItems2];
+
+    } else {
+        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
     NavBar::end();
+
     ?>
 
     <?= $content ?>

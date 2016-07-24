@@ -200,6 +200,7 @@ class Pastor extends \yii\db\ActiveRecord
         return $path;
     }
 
+
     public function behaviors()
     {
         return [

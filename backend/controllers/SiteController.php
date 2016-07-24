@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use backend\models\SignupForm;
+use backend\models\PasswordResetRequestForm;
 
 /**
  * Site controller

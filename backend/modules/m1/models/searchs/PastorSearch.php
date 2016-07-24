@@ -35,7 +35,9 @@ class PastorSearch extends Pastor
             $listArray [] = [
                 'id' => $model->id,
                 //'heading' => $model->pastor_name,
-                'body' => $model->pastor_name,
+                'body' =>
+                    '<strong>' . $model->pastor_name . '</strong><br/>'
+                    . $model->address2 . ' ' . $model->address3,
                 'img' => $model->getPhotoPathReal(),
                 'src' => ['/pastor/view', 'id' => $model->id,],
                 'imgOptions' => ['style' => 'width:50px']
@@ -73,7 +75,9 @@ class PastorSearch extends Pastor
             $listArray [] = [
                 'id' => $model->id,
                 //'heading' => $model->pastor_name,
-                'body' => $model->pastor_name,
+                'body' =>
+                    '<strong>' . $model->pastor_name . '</strong><br/>'
+                    . $model->address2 . ' ' . $model->address3,
                 'img' => $model->getPhotoPathReal(),
                 'src' => ['pastor/view', 'id' => $model->id,],
                 'imgOptions' => ['style' => 'width:50px']
@@ -88,6 +92,39 @@ class PastorSearch extends Pastor
         ];
 
         return $returnArray;
+    }
+
+    public static function getBirthdayToday()
+    {
+
+        $listArray = [];
+        $query = Pastor::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        if (!Yii::$app->user->can('AllModuleBundle')) {
+            $query->joinWith('ministry');
+            $query->where('ministry.organization_parent_id =' . User::getGroupId());
+        }
+
+        $query->orderBy('updated_at DESC');
+        $query->limit(10);
+
+        $items = [];
+        $detail = [];
+        foreach ($dataProvider->getModels() as $model) {
+            $detail['title'] = $model->pastor_name;
+            $detail['start'] = date('Y') . '-' . date('m', strtotime($model->birth_date)) . '-' . date('d',
+                    strtotime($model->birth_date));
+            $detail['color'] = '#CC0000';
+            $detail['allDay'] = true;
+            //$detail['url'] = Html::url('/m1/person/view', ['id' => $model->id]);
+            $items[] = $detail;
+        }
+
+        return $items;
     }
 
     /**

@@ -6,7 +6,7 @@ use miloschuman\highcharts\Highcharts;
 
 $this->title = 'Menu';
 $this->params['breadcrumbs'][] = $this->title;
-$this->params['alert'] =
+/*$this->params['alert'] =
     \kartik\widgets\Alert::widget([
         'type' => \kartik\widgets\Alert::TYPE_SUCCESS,
         'title' => 'Well done!',
@@ -14,8 +14,7 @@ $this->params['alert'] =
         'body' => 'You successfully read this important alert message.',
         'showSeparator' => true,
         'delay' => 2000
-    ]);
-
+    ]); */
 
 ?>
 
@@ -23,7 +22,7 @@ $this->params['alert'] =
 
     <div class="body-content">
 
-        <?= $this->render('_graph'); ?>
+        <?= $this->render('_important'); ?>
         <br/>
         <?= $this->render('_recent'); ?>
         <br/>

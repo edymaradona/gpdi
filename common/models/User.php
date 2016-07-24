@@ -108,6 +108,13 @@ class User extends ActiveRecord implements IdentityInterface
         return isset($query) ? $query->default_group_id : -1;
     }
 
+    public static function getFullname()
+    {
+        $query = User::find(['id' => (int)Yii::$app->user->id])->one();
+
+        return isset($query) ? $query->fullname : '';
+    }
+
     /**
      * @inheritdoc
      */

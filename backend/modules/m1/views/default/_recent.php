@@ -37,7 +37,7 @@ use backend\modules\m1\models\searchs\PastorSearch;
     <div class="col-lg-4">
         <?=
         Html::panel([
-            'heading' => 'Incomplete Data',
+            'heading' => 'Activity',
             'body' => '<div class="panel-body">' . '</div>',
         ], 'info');
 
