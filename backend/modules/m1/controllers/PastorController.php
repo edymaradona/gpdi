@@ -26,7 +26,7 @@ use backend\modules\m1\models\Ministry;
 use backend\modules\m1\models\OrganizationRole;
 use backend\modules\m1\models\Pendeta;
 
-use common\models\User;
+use backend\models\User;
 
 /**
  * PastorController implements the CRUD actions for Pastor model.
@@ -104,17 +104,12 @@ class PastorController extends Controller
     {
         $searchModel = new PastorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        $alert = [
-            'type' => 'alert-success',
-            'title' => 'Test Title',
-            'body' => 'My Body',
-        ];
+        //print_r(Yii::$app->request->queryParams);
+        //die;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'alert' => $alert,
         ]);
     }
 
@@ -459,6 +454,27 @@ class PastorController extends Controller
 
         foreach ($dataProvider->getModels() as $model) {
             $arrayList [] = $model->nama;
+        }
+
+        return Json::encode($arrayList);
+
+    }
+
+    public function actionAcpastor($key)
+    {
+        $arrayList = [];
+
+        $query = Pastor::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andFilterWhere(['like', 'pastor_name', $key]);
+
+
+        foreach ($dataProvider->getModels() as $model) {
+            $arrayList [] = $model->pastor_name;
         }
 
         return Json::encode($arrayList);

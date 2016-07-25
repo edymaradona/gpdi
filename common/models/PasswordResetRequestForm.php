@@ -1,5 +1,5 @@
 <?php
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
@@ -22,7 +22,9 @@ class PasswordResetRequestForm extends Model
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'exist',
+            [
+                'email',
+                'exist',
                 'targetClass' => '\common\models\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
                 'message' => 'There is no user with such email.'
@@ -46,11 +48,11 @@ class PasswordResetRequestForm extends Model
         if (!$user) {
             return false;
         }
-        
+
         if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
             $user->generatePasswordResetToken();
         }
-        
+
         if (!$user->save()) {
             return false;
         }

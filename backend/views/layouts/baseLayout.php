@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use mdm\admin\components\MenuHelper;
-use common\models\User;
+use backend\models\User;
 
 AppAsset::register($this);
 ?>

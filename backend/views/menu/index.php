@@ -1,6 +1,7 @@
 <?php
 
 use miloschuman\highcharts\Highcharts;
+use heddy\pdf\AutoloadExample;
 
 /* @var $this yii\web\View */
 

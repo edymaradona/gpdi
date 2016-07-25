@@ -44,6 +44,7 @@ $this->params['createButton'] = [
     'url' => ['/m1/pastor/create']
 ];
 
+$this->params['searchModel'] = $searchModel;
 ?>
 <div class="pastor-index">
 

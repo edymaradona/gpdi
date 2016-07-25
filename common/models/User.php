@@ -30,7 +30,6 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
-
     /**
      * @inheritdoc
      */
@@ -101,19 +100,6 @@ class User extends ActiveRecord implements IdentityInterface
         return $timestamp + $expire >= time();
     }
 
-    public static function getGroupId()
-    {
-        $query = User::find(['default_group_id' => (int)Yii::$app->user->id])->one();
-
-        return isset($query) ? $query->default_group_id : -1;
-    }
-
-    public static function getFullname()
-    {
-        $query = User::find(['id' => (int)Yii::$app->user->id])->one();
-
-        return isset($query) ? $query->fullname : '';
-    }
 
     /**
      * @inheritdoc
@@ -203,25 +189,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
-    }
-
-    public function getPastorLink()
-    {
-        return $this->hasOne(Pastor::className(), ['id' => 'id']);
-    }
-
-    public function getDefaultGroup()
-    {
-        return $this->hasOne(Organization::className(), ['id' => 'default_group_id']);
-    }
-
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'status' => 'Status',
-            'defaultGroup.name' => 'Default Group',
-        ];
     }
 
 }

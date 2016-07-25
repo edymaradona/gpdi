@@ -2,7 +2,7 @@
 
 namespace backend\modules\m1\models\searchs;
 
-use common\models\User;
+use backend\models\User;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

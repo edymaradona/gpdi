@@ -28,16 +28,37 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'username',
                 'format' => 'raw',
                 'value' => function ($data) {
-                    return Html::a(Html::encode($data->username), 'user/view', ['id' => $data->id]);
+                    return Html::a(Html::encode($data->username), ['user/view', 'id' => $data->id]);
                 },
             ],
             'defaultGroup.name',
             'email:email',
             'status',
-            'created_at',
-            'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'created_at',
+                'value' => function ($data) {
+                    return Yii::$app->formatter->asRelativeTime($data->created_at);
+                }
+                ,
+            ],
+            [
+                'attribute' => 'updated_at',
+                'value' => function ($data) {
+                    return Yii::$app->formatter->asRelativeTime($data->updated_at);
+                }
+                ,
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update}{delete}{password}',
+                'buttons' => [
+                    'password' => function ($url, $data) {
+                        // Html::a args: title, href, tag properties.
+                        return Html::a('<i class="glyphicon glyphicon-user"></i>',
+                            ['/user/updatepassword', 'id' => $data['id']]);
+                    },
+                ]
+            ],
         ],
     ]); ?>
 </div>

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Update Password', ['updatepassword', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -23,22 +25,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a(($model->status == 10) ? 'Set Non Active' : 'Set Active', ['toggleactive', 'id' => $model->id], [
+            'class' => 'btn btn-default',
+            //'id' => 'toggleuser'
+        ]) ?>
     </p>
 
+    <?php Pjax::begin(); ?>
     <?= DetailView::widget([
         'model' => $model,
+        'id' => 'user-detail',
         'attributes' => [
             'id',
             'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
+            'fullname',
             'default_group_id',
             'email:email',
             'status',
-            'created_at',
-            'updated_at',
         ],
     ]) ?>
+    <?php Pjax::end(); ?>
 
 </div>

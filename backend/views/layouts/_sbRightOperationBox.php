@@ -10,24 +10,44 @@ use kartik\widgets\SideNav;
 use kartik\widgets\ActiveForm;
 use kartik\helpers\Html;
 use backend\modules\m1\models\Pastor;
+use yii\helpers\Url;
+use kartik\widgets\Typeahead;
 
 ?>
 
 <p>
+    <?php if (isset($this->params['searchModel'])) : ?>
+
     <?php
-    $model = new Pastor();
+    $model = $this->params['searchModel'];
 
     $form = ActiveForm::begin([
         'id' => 'login-form-vertical',
-        'type' => ActiveForm::TYPE_INLINE
+        'type' => ActiveForm::TYPE_INLINE,
+        'action' => ['index'],
+        'method' => 'get'
     ]);
     ?>
-    <?= $form->field($model, 'pastor_name') ?>
+    <? //= $form->field($model, 'pastor_name') ?>
+    <?= $form->field($model, 'pastor_name')->widget(Typeahead::classname(), [
+        'options' => ['placeholder' => 'Search pastor...'],
+        'pluginOptions' => ['highlight' => true],
+        'dataset' => [
+            [
+                'remote' => [
+                    'url' => Url::to(['pastor/acpastor']) . '?key=%QUERY',
+                    'wildcard' => '%QUERY'
+                ]
+            ]
+        ]
+    ]);
+    ?>
 
-<div class="form-group">
-    <?= Html::submitButton('Search', ['class' => 'btn btn-primary btn-block']) ?>
-</div>
+    <div class="form-group">
+        <?= Html::submitButton('Search', ['class' => 'btn btn-primary btn-block']) ?>
+    </div>
 <?php ActiveForm::end(); ?>
+<?php endif; ?>
 
 </p>
 

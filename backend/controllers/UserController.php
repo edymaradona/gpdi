@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\User;
+use backend\models\User;
 use backend\models\searchs\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -80,14 +80,19 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
+        $model->setScenario('password');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->password_hash = Yii::$app->security->generatePasswordHash($model->password);
+            $model->auth_key = Yii::$app->security->generateRandomString();
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -108,6 +113,41 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function actionUpdatepassword($id)
+    {
+        $this->layout = 'column2';
+        $model = $this->findModel($id);
+        $model->setScenario('password');
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->password_hash = Yii::$app->security->generatePasswordHash($model->password);
+            $model->auth_key = Yii::$app->security->generateRandomString();
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+
+        return $this->render('updatePassword', [
+            'model' => $model,
+        ]);
+
+    }
+
+    public function actionToggleactive($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->status == 10) {
+            $model->status = 11;
+            $model->save(false);
+        } else {
+            $model->status = 10;
+            $model->save(false);
+        }
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
+
 
     /**
      * Deletes an existing User model.
