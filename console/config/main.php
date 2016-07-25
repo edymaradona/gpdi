@@ -23,6 +23,10 @@ return [
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
         ],
+        'urlManager' => [
+            'scriptUrl' => 'http://localhost',
+            //'showScriptName' => false,
+        ],
     ],
     'params' => $params,
 ];
