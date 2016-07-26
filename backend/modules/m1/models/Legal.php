@@ -38,9 +38,9 @@ class Legal extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'start_date', 'end_date'], 'required'],
+            [['parent_id', 'sk_number', 'start_date', 'end_date'], 'required'],
             [['parent_id', 'type_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
-            [['start_date', 'end_date'], 'safe'],
+            [['start_date', 'end_date'], 'date', 'format' => 'php:d-m-Y'],
             [['description', 'remark'], 'string'],
             [['sk_number'], 'string', 'max' => 50],
         ];

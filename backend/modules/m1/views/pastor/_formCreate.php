@@ -146,6 +146,26 @@ use backend\models\Organization;
                     'remark' => ['type' => Form::INPUT_TEXTAREA, 'options' => ['placeholder' => 'Input Remark...']],
                 ]
             ],
+            // NEW MINISTRY
+            [
+                'attributes' => [       // 2 column layout
+                    'start_date' => [
+                        'type' => 'widget',
+                        'widgetClass' => '\kartik\widgets\DatePicker',
+                        'options' => [
+                            'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
+                        ],
+                    ],
+                    'organization_parent_id' => [
+                        'type' => Form::INPUT_DROPDOWN_LIST,
+                        'items' => Organization::getDropDown()
+                    ],
+                    'church_name' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your church name...']
+                    ],
+                ]
+            ],
         ]
     ]);
 

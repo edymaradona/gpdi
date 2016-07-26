@@ -43,7 +43,15 @@ class Family extends \yii\db\ActiveRecord
         return [
             [['parent_id', 'family_name', 'birth_place', 'birth_date'], 'required'],
             [['parent_id', 'relation_id', 'gender_id', 'created_at', 'updated_at'], 'integer'],
-            [['birth_date'], 'safe'],
+            [
+                'birth_date',
+                'date',
+                'format' => 'php:d-m-Y',
+                'max' => date('d-m-Y', strtotime('-15 years')),
+                'min' => date('d-m-Y', strtotime('-90 years')),
+                'tooSmall' => 'Periksa kembali inputan anda karena tanggal lahirnya lebih dari 90 tahun',
+                'tooBig' => 'Periksa kembali inputan anda karena tanggal lahirnya kurang dari 15 tahun',
+            ],
             [['remark'], 'string'],
             [['email'], 'email'],
             [['family_name', 'birth_place', 'handphone', 'email'], 'string', 'max' => 100],

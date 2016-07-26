@@ -42,9 +42,9 @@ class Ministry extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'organization_parent_id', 'start_date'], 'required'],
+            [['parent_id', 'organization_parent_id', 'church_name', 'start_date'], 'required'],
             [['parent_id', 'organization_parent_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
-            [['start_date', 'end_date'], 'safe'],
+            [['start_date', 'end_date'], 'date', 'format' => 'php:d-m-Y'],
             [['remark'], 'string'],
             [
                 ['church_name', 'ministry_address', 'ministry_address1', 'ministry_address2', 'ministry_address3'],
@@ -63,8 +63,7 @@ class Ministry extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'parent_id' => 'Parent ID',
-            //'organization_parent_id' => 'Organization Parent',
-            //'organizationParent.organization_name' => 'Organization Parent',
+            'organization_parent_id' => 'Organization Parent',
             'status_id' => 'Status',
             'status.description' => 'Status',
             'start_date' => 'Tgl Mulai',

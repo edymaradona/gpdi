@@ -18,7 +18,6 @@ use backend\models\Organization;
 
 <div class="legal-form">
 
-    <? //php $form = ActiveForm::begin(); ?>
     <?php $form = ActiveForm::begin([
         'type' => ActiveForm::TYPE_VERTICAL,
         //'formConfig' => ['labelSpan' => 2, 'deviceSize' => ActiveForm::SIZE_SMALL],

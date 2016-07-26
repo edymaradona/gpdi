@@ -16,7 +16,6 @@ use kartik\builder\Form;
 
 <div class="family-form">
 
-    <? //php $form = ActiveForm::begin(); ?>
     <?php $form = ActiveForm::begin([
         'type' => ActiveForm::TYPE_VERTICAL,
         //'formConfig' => ['labelSpan' => 2, 'deviceSize' => ActiveForm::SIZE_SMALL],

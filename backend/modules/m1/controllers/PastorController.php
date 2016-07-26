@@ -159,11 +159,14 @@ class PastorController extends Controller
     public function actionCreate()
     {
         $model = new Pastor();
+        $model->setScenario('newpastor');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $modelMinistry = new Ministry();
             $modelMinistry->parent_id = $model->id;
-            $modelMinistry->organization_parent_id = User::getGroupId();
+            $modelMinistry->start_date = $model->start_date;
+            $modelMinistry->organization_parent_id = $model->organization_parent_id;
+            $modelMinistry->church_name = $model->church_name;
             $modelMinistry->save(false);
 
             return $this->redirect(['view', 'id' => $model->id]);

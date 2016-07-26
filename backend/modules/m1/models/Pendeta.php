@@ -38,9 +38,9 @@ class Pendeta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'start_date'], 'required'],
+            [['parent_id', 'start_date', 'sk_number'], 'required'],
             [['parent_id', 'pendeta_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
-            [['start_date'], 'safe'],
+            [['start_date'], 'date', 'format' => 'php:d-m-Y'],
             [['remark'], 'string'],
             [['sk_number'], 'string', 'max' => 50],
             [['event_name', 'place'], 'string', 'max' => 255],

@@ -33,7 +33,7 @@ $this->params['createButton'] = [
 
     <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <?= $this->render('_formCreate', [
         'model' => $model,
     ]) ?>
 

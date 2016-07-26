@@ -34,6 +34,9 @@ use backend\models\Parameter;
 class Pastor extends \yii\db\ActiveRecord
 {
     public $imageFile;
+    public $organization_parent_id; //default ministry
+    public $start_date;             //default ministry
+    public $church_name;            //default ministry
 
     /**
      * @inheritdoc
@@ -50,19 +53,24 @@ class Pastor extends \yii\db\ActiveRecord
     {
         return [
             [['pastor_name', 'birth_place', 'birth_date', 'address', 'handphone'], 'required'],
+            [['organization_parent_id', 'start_date', 'church_name'], 'required', 'on' => 'newpastor'],
+
             //['birth_date','validateUserBirthDate'],
             [
                 'birth_date',
                 'date',
-                'format' => 'php:Y-m-d',
-                'max' => date('Y-m-d', strtotime('-15 years')),
-                'min' => date('Y-m-d', strtotime('-90 years')),
-                'tooBig' => 'Your birth date input seem invalid due it is more than 90 years',
-                'tooSmall' => 'Your birth date input seem invalid due it is less than 15 years',
+                'format' => 'php:d-m-Y',
+                'max' => date('d-m-Y', strtotime('-15 years')),
+                'min' => date('d-m-Y', strtotime('-90 years')),
+                'tooSmall' => 'Your birth date input seem invalid due it is more than 90 years',
+                'tooBig' => 'Your birth date input seem invalid due it is less than 15 years',
             ],
-            [['gender_id', 'created_at', 'updated_at'], 'integer'],
+            ['start_date', 'date', 'format' => 'php:d-m-Y'],
+
+            [['gender_id', 'created_at', 'updated_at', 'organization_parent_id'], 'integer'],
             [['remark'], 'string'],
             [['email'], 'email'],
+
             [
                 'handphone',
                 'match',
@@ -70,9 +78,10 @@ class Pastor extends \yii\db\ActiveRecord
                 'message' => 'Handphone number must be at least 10 digit, 
             no space, no "-",  and started with 08xxxxxx '
             ],
+
             [['pastor_name', 'birth_place', 'email'], 'string', 'max' => 100],
             [['front_title', 'back_title'], 'string', 'max' => 25],
-            [['address', 'address1', 'address2', 'address3', 'photo_path'], 'string', 'max' => 255],
+            [['address', 'address1', 'address2', 'address3', 'photo_path', 'church_name'], 'string', 'max' => 255],
             [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
@@ -125,6 +134,9 @@ class Pastor extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'ministry.ministryParent.name' => 'Wilayah',
+            'organization_parent_id' => 'Organization Parent',
+            'start_date' => 'Tgl. Mulai',
+            'church_name' => 'Nama Gereja',
         ];
     }
 

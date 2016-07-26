@@ -18,9 +18,9 @@ class Organization extends \kartik\tree\models\Tree
     {
         $list = [];
         $md = Organization::findOne(['name' => 'MP']);
-        $children = $md->children(1)->all();
+        $children = $md->children(1)->andWhere(['active' => 1])->all();
         foreach ($children as $child) {
-            foreach ($child->children(1)->all() as $c) {
+            foreach ($child->children(1)->andWhere(['active' => 1])->all() as $c) {
                 $list[$child->name][$c->id] = $c->name;
             }
         }
@@ -33,14 +33,14 @@ class Organization extends \kartik\tree\models\Tree
     {
         $list = [];
         $md = Organization::findOne(['name' => 'MP']);
-        $children = $md->children(1)->all();
+        $children = $md->children(1)->andWhere(['active' => 1])->all();
 
         foreach ($children as $child) {
             $list['MP'][$child->id] = $child->name;
         }
 
         foreach ($children as $child) {
-            foreach ($child->children(1)->all() as $c) {
+            foreach ($child->children(1)->andWhere(['active' => 1])->all() as $c) {
                 $list[$child->name][$c->id] = $c->name;
             }
         }
