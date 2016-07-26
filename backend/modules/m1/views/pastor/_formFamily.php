@@ -59,7 +59,9 @@ use kartik\builder\Form;
                     'birth_date' => [
                         'type' => 'widget',
                         'widgetClass' => '\kartik\widgets\DatePicker',
-                        'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
+                        'options' => [
+                            'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
+                        ]
                     ],
                 ]
             ],

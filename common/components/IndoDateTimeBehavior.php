@@ -39,9 +39,9 @@ class IndoDateTimeBehavior extends Behavior
             ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
             ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeSave',
 
-            ActiveRecord::EVENT_AFTER_VALIDATE => 'afterFind',
-            ActiveRecord::EVENT_AFTER_INSERT => 'afterFind',
-            ActiveRecord::EVENT_AFTER_UPDATE => 'afterFind',
+            //ActiveRecord::EVENT_AFTER_VALIDATE => 'afterFind',
+            //ActiveRecord::EVENT_AFTER_INSERT => 'afterFind',
+            //ActiveRecord::EVENT_AFTER_UPDATE => 'afterFind',
             ActiveRecord::EVENT_AFTER_FIND => 'afterFind',
         ];
     }
@@ -74,9 +74,9 @@ class IndoDateTimeBehavior extends Behavior
                 $event->sender->$columnName = null;
                 continue;
             }
-            if ($column->dbType == 'date') {
+            if ($column->dbType == 'date' && $event->sender->$columnName != null) {
                 $event->sender->$columnName = Yii::$app->formatter->asDate($event->sender->$columnName, $this->indoFormatDate);
-            } elseif ($column->dbType == 'datetime') {
+            } elseif ($column->dbType == 'datetime' && $event->sender->$columnName != null) {
                 $event->sender->$columnName = Yii::$app->formatter->asDate($event->sender->$columnName, $this->indoFormatDateTime);
             }
         }

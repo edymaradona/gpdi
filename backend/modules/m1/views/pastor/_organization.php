@@ -97,9 +97,10 @@ use yii\bootstrap\Modal;
                     );
                 },
                 'delete' => function ($url, $data, $key) {
-                    return Html::a('<i class="glyphicon glyphicon-trash"></i>',
+                    return Html::a(
+                        '<span class="glyphicon glyphicon-trash"></span>',
                         ['/m1/pastor/deleteorganization', 'id' => $data['id']],
-                        ['class' => 'btn btn-xs btn-default', 'title' => 'delete',]
+                        ['class' => 'organizationDelete', 'title' => 'delete']
                     );
                 },
             ]
@@ -151,6 +152,21 @@ Modal::end();
                 }
             });
             return false;
+        });
+        $('.organizationDelete').on('click', function (e) {
+            e.preventDefault();
+            var deleteUrl = $(this).attr('href');
+            if (!confirm('Are you sure you want to delete this item?')) return false;
+            $.ajax({
+                url: deleteUrl,
+                type: 'post',
+                error: function (xhr, status, error) {
+                    alert('There was an error with your request.'
+                        + xhr.responseText);
+                }
+            }).done(function (data) {
+                $.pjax.reload({container: "#organization-container-id"}); //for pjax update
+            });
         });
     });
 </script>

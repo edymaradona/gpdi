@@ -27,81 +27,6 @@ use yii\bootstrap\Modal;
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
 
-        /*[
-            'class' => 'kartik\grid\EditableColumn',
-            'attribute' => 'relation_id',
-            'editableOptions' => [
-                'inputType' => 'dropDownList',
-                'displayValueConfig' => Parameter::getDropDown('family'),
-                'data' => Parameter::getDropdown('family'),
-                'formOptions' => ['action' => ['/m1/pastor/editFamily']]
-            ],
-        ],
-        [
-            'class' => 'kartik\grid\EditableColumn',
-            'attribute' => 'family_name',
-            'editableOptions' => ['formOptions' => ['action' => ['/m1/pastor/editFamily']]],
-            /*'editableOptions'=> function ($model, $key, $index) {
-                return [
-                    'header'=>'Family Name',
-                    'size'=>'md',
-                    'beforeInput' => function ($form, $widget) use ($model, $index) {
-                        echo $form->field($model, "family_name")->widget(\kartik\widgets\DatePicker::classname(), [
-                            'options' => ['id' => "family_name{$index}"]
-                        ]);
-                    },
-                    'afterInput' => function ($form, $widget) use ($model, $index) {
-                    echo $form->field($model, "[{$index}]color")->widget(\kartik\widgets\ColorInput::classname(), [
-                        'options' => ['id' => "family_name_{$index}"]
-                    ]);
-                }
-                ];
-            }*/
-        /*],
-
-        [
-            'class' => 'kartik\grid\EditableColumn',
-            'attribute' => 'birth_place',
-            'editableOptions' => ['formOptions' => ['action' => ['/m1/pastor/editFamily']]],
-        ],
-        [
-            'class' => 'kartik\grid\EditableColumn',
-            'attribute' => 'birth_date',
-            'editableOptions' => [
-                'inputType' => 'widget',
-                'widgetClass' => '\kartik\widgets\DatePicker',
-                'formOptions' => ['action' => ['/m1/pastor/editFamily']],
-                'options' => [
-                    'pluginOptions' => [
-                        'format' => 'dd-mm-yyyy'
-                    ]
-                ]
-
-            ],
-        ],
-        [
-            'class' => 'kartik\grid\EditableColumn',
-            'attribute' => 'gender_id',
-            'editableOptions' => [
-                'inputType' => 'dropDownList',
-                'displayValueConfig' => Parameter::getDropDown('gender'),
-                'data' => Parameter::getDropdown('gender'),
-                'formOptions' => ['action' => ['/m1/pastor/editFamily']]
-            ],
-        ],
-        [
-            'class' => 'kartik\grid\EditableColumn',
-            'attribute' => 'handphone',
-            'editableOptions' => ['formOptions' => ['action' => ['/m1/pastor/editFamily']]],
-        ],
-        [
-            'class' => 'kartik\grid\EditableColumn',
-            'attribute' => 'email',
-            'editableOptions' => [
-                'formOptions' => ['action' => ['/m1/pastor/editFamily']],
-                'placement' => 'left',
-            ],
-        ],*/
         'familyRelation.description',
         'family_name',
         'birth_place',
@@ -122,9 +47,10 @@ use yii\bootstrap\Modal;
                     );
                 },
                 'delete' => function ($url, $data, $key) {
-                    return Html::a('<i class="glyphicon glyphicon-trash"></i>',
+                    return Html::a(
+                        '<span class="glyphicon glyphicon-trash"></span>',
                         ['/m1/pastor/deletefamily', 'id' => $data['id']],
-                        ['class' => 'btn btn-xs btn-default', 'title' => 'delete',]
+                        ['class' => 'familyDelete', 'title' => 'delete']
                     );
                 },
             ]
@@ -176,6 +102,22 @@ Modal::end();
                 }
             });
             return false;
+        });
+
+        $('.familyDelete').on('click', function (e) {
+            e.preventDefault();
+            var deleteUrl = $(this).attr('href');
+            if (!confirm('Are you sure you want to delete this item?')) return false;
+            $.ajax({
+                url: deleteUrl,
+                type: 'post',
+                error: function (xhr, status, error) {
+                    alert('There was an error with your request.'
+                        + xhr.responseText);
+                }
+            }).done(function (data) {
+                $.pjax.reload({container: "#family-container-id"}); //for pjax update
+            });
         });
     });
 </script>

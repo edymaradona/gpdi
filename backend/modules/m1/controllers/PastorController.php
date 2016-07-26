@@ -401,7 +401,7 @@ class PastorController extends Controller
         $model = $this->findModelMinistry($id);
         $model->delete();
 
-        return $this->redirect(['view', 'id' => $model->parent_id]);
+        //return $this->redirect(['view', 'id' => $model->parent_id]);
     }
 
     public function actionDeleteorganization($id)
@@ -409,15 +409,30 @@ class PastorController extends Controller
         $model = $this->findModelOrganization($id);
         $model->delete();
 
-        return $this->redirect(['view', 'id' => $model->parent_id]);
+        //return $this->redirect(['view', 'id' => $model->parent_id]);
     }
 
     public function actionDeletefamily($id)
     {
         $model = $this->findModelFamily($id);
         $model->delete();
+        //return $this->redirect(['view', 'id' => $model->parent_id]);
+    }
 
-        return $this->redirect(['view', 'id' => $model->parent_id]);
+    public function actionDeletependeta($id)
+    {
+        $model = $this->findModelPendeta($id);
+        $model->delete();
+
+        //return $this->redirect(['view', 'id' => $model->parent_id]);
+    }
+
+    public function actionDeletelegal($id)
+    {
+        $model = $this->findModelLegal($id);
+        $model->delete();
+
+        //return $this->redirect(['view', 'id' => $model->parent_id]);
     }
 
     public function actionUpload($id)
