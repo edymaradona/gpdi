@@ -39,7 +39,7 @@ class PastorSearch extends Pastor
                     '<strong>' . $model->pastor_name . '</strong><br/>'
                     . $model->address2 . ' ' . $model->address3,
                 'img' => $model->getPhotoPathReal(),
-                'src' => ['/pastor/view', 'id' => $model->id,],
+                'src' => ['/m1/pastor/view', 'id' => $model->id,],
                 'imgOptions' => ['style' => 'width:50px']
             ];
         }
@@ -79,7 +79,7 @@ class PastorSearch extends Pastor
                     '<strong>' . $model->pastor_name . '</strong><br/>'
                     . $model->address2 . ' ' . $model->address3,
                 'img' => $model->getPhotoPathReal(),
-                'src' => ['pastor/view', 'id' => $model->id,],
+                'src' => ['/m1/pastor/view', 'id' => $model->id,],
                 'imgOptions' => ['style' => 'width:50px']
             ];
         }

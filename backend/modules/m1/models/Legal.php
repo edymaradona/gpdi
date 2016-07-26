@@ -3,33 +3,33 @@
 namespace backend\modules\m1\models;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
-use common\components\IndoDateTimeBehavior;
 use backend\models\Parameter;
+use common\components\IndoDateTimeBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "pendeta".
+ * This is the model class for table "legal".
  *
  * @property integer $id
  * @property integer $parent_id
- * @property integer $pendeta_id
+ * @property integer $type_id
  * @property string $start_date
+ * @property string $end_date
  * @property string $sk_number
- * @property string $event_name
- * @property string $place
+ * @property string $description
  * @property integer $status_id
  * @property string $remark
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Pendeta extends \yii\db\ActiveRecord
+class Legal extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'pendeta';
+        return 'legal';
     }
 
     /**
@@ -38,12 +38,11 @@ class Pendeta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'start_date'], 'required'],
-            [['parent_id', 'pendeta_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
-            [['start_date'], 'safe'],
-            [['remark'], 'string'],
+            [['parent_id', 'start_date', 'end_date'], 'required'],
+            [['parent_id', 'type_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
+            [['start_date', 'end_date'], 'safe'],
+            [['description', 'remark'], 'string'],
             [['sk_number'], 'string', 'max' => 50],
-            [['event_name', 'place'], 'string', 'max' => 255],
         ];
     }
 
@@ -54,30 +53,29 @@ class Pendeta extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parent_id' => 'Parent',
-            'pendeta_id' => 'Status Pendeta',
-            'pendeta.description' => 'Status Pendeta',
-            'start_date' => 'Tgl. Mulai',
-            'sk_number' => 'No SK',
-            'event_name' => 'Pada Acara',
-            'place' => 'Tempat',
-            'status_id' => 'Status',
-            'status.description' => 'Status',
-            'remark' => 'Keterangan',
+            'parent_id' => 'Parent ID',
+            'type_id' => 'Type ID',
+            'start_date' => 'Start Date',
+            'end_date' => 'End Date',
+            'sk_number' => 'Sk Number',
+            'description' => 'Description',
+            'status_id' => 'Status ID',
+            'remark' => 'Remark',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
     }
 
-    public function getPendeta()
+    public function getType()
     {
-        return $this->hasOne(Parameter::className(), ['id' => 'pendeta_id'])->andWhere(['group_name' => "pendeta"]);
+        return $this->hasOne(Parameter::className(), ['id' => 'type_id'])->andWhere(['group_name' => "legal"]);
     }
 
     public function getStatus()
     {
         return $this->hasOne(Parameter::className(), ['id' => 'status_id'])->andWhere(['group_name' => "status"]);
     }
+
 
     public function behaviors()
     {

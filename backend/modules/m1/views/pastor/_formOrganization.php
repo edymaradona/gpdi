@@ -94,46 +94,6 @@ use backend\models\Organization;
     ]);
 
     ?>
-    <?php /*
-    <?= $form->errorSummary($model) ?>
-
-    <?= $form->field($model, 'organization_id')->textInput() ?>
-
-    <?= $form->field($model, 'start_date')->widget(DatePicker::classname(), [
-            'name' => 'start_date',
-            'type' => DatePicker::TYPE_INPUT,
-            //'value' => '23-Feb-1982',
-            'pluginOptions' => [
-                'autoclose' => true,
-                'format' => 'dd-mm-yyyy',
-            ],
-        ]
-    );
-    ?>
-
-    <?= $form->field($model, 'end_date')->widget(DatePicker::classname(), [
-            'name' => 'end_date',
-            'type' => DatePicker::TYPE_INPUT,
-            //'value' => '23-Feb-1982',
-            'pluginOptions' => [
-                'autoclose' => true,
-                'format' => 'dd-mm-yyyy',
-            ],
-        ]
-    );
-    ?>
-
-    <?= $form->field($model, 'role_id')->dropDownList(
-        ArrayHelper::map(Parameter::find()->where('group_name = "jabatanorg"')->all(), 'id', 'description')); ?>
-
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'report_to_id')->textInput() ?>
-
-    <?= $form->field($model, 'status_id')->dropDownList(
-        ArrayHelper::map(Parameter::find()->where('group_name = "status"')->all(), 'id', 'description')); ?>
-
-    */ ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update',

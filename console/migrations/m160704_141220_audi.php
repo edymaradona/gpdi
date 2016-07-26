@@ -146,6 +146,21 @@ class m160704_141220_audi extends Migration
             'updated_at' => $this->integer(),
         ], $tableOptions);
 
+        $this->createTable('{{%legal}}', [
+            'id' => $this->primaryKey(),
+            'parent_id' => $this->integer()->notNull(),
+            'type_id' => $this->smallInteger()->notNull()->defaultValue(1),
+            'start_date' => $this->date()->notNull(),
+            'end_date' => $this->date()->notNull(),
+            'sk_number' => $this->string(50),
+            'description' => $this->text(),
+            'status_id' => $this->smallInteger()->notNull()->defaultValue(1),
+            'remark' => $this->text(),
+
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
+        ], $tableOptions);
+
     }
 
     public function down()

@@ -4,6 +4,7 @@ namespace backend\models;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "parameter".
@@ -58,7 +59,7 @@ class Parameter extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'created_at', 'updated_at'], 'required'],
+            [['id', 'group_name', 'description'], 'required'],
             [['id', 'status_id', 'created_at', 'updated_at'], 'integer'],
             [['group_name'], 'string', 'max' => 10],
             [['description'], 'string', 'max' => 100],
@@ -77,6 +78,13 @@ class Parameter extends \yii\db\ActiveRecord
             'status_id' => 'Status ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
         ];
     }
 

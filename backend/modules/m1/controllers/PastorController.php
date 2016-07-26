@@ -25,6 +25,7 @@ use backend\modules\m1\models\Family;
 use backend\modules\m1\models\Ministry;
 use backend\modules\m1\models\OrganizationRole;
 use backend\modules\m1\models\Pendeta;
+use backend\modules\m1\models\Legal;
 
 use backend\models\User;
 
@@ -189,6 +190,44 @@ class PastorController extends Controller
             return $this->render('update', [
                 'model' => $model,
             ]);
+        }
+    }
+
+    public function actionCreatelegal($id)
+    {
+        $model = new Legal();
+        $model->parent_id = $id;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateLegal', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionUpdatelegal($id)
+    {
+        $model = $this->findModelLegal($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateLegal', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    protected function findModelLegal($id)
+    {
+        if (($model = Legal::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 

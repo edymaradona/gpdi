@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\modules\m1\models\searchs;
+namespace backend\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\m1\models\Report;
+use backend\models\Parameter;
 
 /**
- * ReportSearch represents the model behind the search form about `backend\modules\m1\models\Report`.
+ * ParameterSearch represents the model behind the search form about `backend\models\Parameter`.
  */
-class ReportSearch extends Report
+class ParameterSearch extends Parameter
 {
     /**
      * @inheritdoc
@@ -18,11 +18,8 @@ class ReportSearch extends Report
     public function rules()
     {
         return [
-            [
-                ['id', 'parent_id', 'period', 'congregation', 'sector', 'kom', 'pos_pi', 'created_at', 'updated_at'],
-                'integer'
-            ],
-            [['phone_number', 'remark'], 'safe'],
+            [['idd', 'id', 'status_id', 'created_at', 'updated_at'], 'integer'],
+            [['group_name', 'description'], 'safe'],
         ];
     }
 
@@ -44,7 +41,7 @@ class ReportSearch extends Report
      */
     public function search($params)
     {
-        $query = Report::find();
+        $query = Parameter::find();
 
         // add conditions that should always apply here
 
@@ -62,19 +59,15 @@ class ReportSearch extends Report
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'idd' => $this->idd,
             'id' => $this->id,
-            'parent_id' => $this->parent_id,
-            'period' => $this->period,
-            'congregation' => $this->congregation,
-            'sector' => $this->sector,
-            'kom' => $this->kom,
-            'pos_pi' => $this->pos_pi,
+            'status_id' => $this->status_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'phone_number', $this->phone_number])
-            ->andFilterWhere(['like', 'remark', $this->remark]);
+        $query->andFilterWhere(['like', 'group_name', $this->group_name])
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

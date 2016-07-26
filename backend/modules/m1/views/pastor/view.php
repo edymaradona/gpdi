@@ -156,6 +156,10 @@ TabsX::widget([
             'content' => $this->render('_pendeta', ['model' => $model]),
         ],
         [
+            'label' => '<i class="glyphicon glyphicon-book"></i> Surat Pelayanan',
+            'content' => $this->render('_legal', ['model' => $model]),
+        ],
+        [
             'label' => '<i class="glyphicon glyphicon-tree-conifer"></i> Organisasi',
             'content' => $this->render('_organization', ['model' => $model]),
         ],

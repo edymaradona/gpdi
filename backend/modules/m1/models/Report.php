@@ -4,6 +4,7 @@ namespace backend\modules\m1\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use common\components\IndoDateTimeBehavior;
 
 /**
  * This is the model class for table "report".
@@ -69,6 +70,9 @@ class Report extends \yii\db\ActiveRecord
             [
                 'class' => TimestampBehavior::className(),
             ],
+            'dateTimeBehavior' => [
+                'class' => IndoDateTimeBehavior::className(),
+            ]
         ];
 
     }
