@@ -34,7 +34,7 @@ use yii\bootstrap\Modal;
         'gender.description',
         'handphone',
         'email',
-        'status.name',
+        'status.description',
 
         [
             'class' => 'yii\grid\ActionColumn',

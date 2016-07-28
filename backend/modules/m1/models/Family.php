@@ -47,10 +47,6 @@ class Family extends \yii\db\ActiveRecord
                 'birth_date',
                 'date',
                 'format' => 'php:d-m-Y',
-                'max' => date('d-m-Y', strtotime('-15 years')),
-                'min' => date('d-m-Y', strtotime('-90 years')),
-                'tooSmall' => 'Periksa kembali inputan anda karena tanggal lahirnya lebih dari 90 tahun',
-                'tooBig' => 'Periksa kembali inputan anda karena tanggal lahirnya kurang dari 15 tahun',
             ],
             [['remark'], 'string'],
             [['email'], 'email'],
@@ -95,7 +91,7 @@ class Family extends \yii\db\ActiveRecord
 
     public function getStatus()
     {
-        return $this->hasOne(Parameter::className(), ['id' => 'gender_id'])->andWhere(['group_name' => "statusfamily"]);
+        return $this->hasOne(Parameter::className(), ['id' => 'status_id'])->andWhere(['group_name' => "statusfamily"]);
     }
 
     public function behaviors()
