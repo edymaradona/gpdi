@@ -108,37 +108,6 @@ $this->params['createButton'] = [
     <br/>
 
 <?=
-/*$items = [
-    [
-        'label'=>'<i class="glyphicon glyphicon-user"></i> Profile',
-        'content'=>$this->render('_profile',['model'=>$model]),
-        'active'=>true
-    ],
-    [
-        'label'=>'<i class="glyphicon glyphicon-user"></i> Profile',
-        'content'=>$content2,
-        'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/site/tabs-data'])]
-    ],
-    [
-        'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',
-        'items'=>[
-            [
-                'label'=>'Option 1',
-                'encode'=>false,
-                'content'=>$content3,
-            ],
-            [
-                'label'=>'Option 2',
-                'encode'=>false,
-                'content'=>$content4,
-            ],
-        ],
-    ],
-    [
-        'label'=>'<i class="glyphicon glyphicon-king"></i> Disabled',
-        'headerOptions' => ['class'=>'disabled']
-    ],
-];*/
 
 TabsX::widget([
     'items' => [
@@ -166,6 +135,10 @@ TabsX::widget([
         [
             'label' => '<i class="glyphicon glyphicon-cutlery"></i> Keluarga',
             'content' => $this->render('_family', ['model' => $model]),
+        ],
+        [
+            'label' => '<i class="glyphicon glyphicon-book"></i> Education',
+            'content' => $this->render('_education', ['model' => $model]),
         ],
     ],
     'position' => TabsX::POS_ABOVE,

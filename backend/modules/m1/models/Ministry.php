@@ -43,7 +43,7 @@ class Ministry extends \yii\db\ActiveRecord
     {
         return [
             [['parent_id', 'organization_parent_id', 'church_name', 'start_date'], 'required'],
-            [['parent_id', 'organization_parent_id', 'status_id', 'created_at', 'updated_at'], 'integer'],
+            [['parent_id', 'organization_parent_id', 'status_id', 'created_at', 'updated_at', 'type_id', 'ownership_id', 'pastor_status_id'], 'integer'],
             [['start_date', 'end_date'], 'date', 'format' => 'php:d-m-Y'],
             [['remark'], 'string'],
             [
@@ -66,6 +66,8 @@ class Ministry extends \yii\db\ActiveRecord
             'organization_parent_id' => 'Organization Parent',
             'status_id' => 'Status',
             'status.description' => 'Status',
+            'type_id' => 'Type',
+            'ownership_id' => 'Kepemilikan',
             'start_date' => 'Tgl Mulai',
             'end_date' => 'Tgl Akhir',
             'church_name' => 'Nama Gereja',
@@ -74,6 +76,7 @@ class Ministry extends \yii\db\ActiveRecord
             'ministry_address2' => 'Kab/Kodya',
             'ministry_address3' => 'Propinsi',
             'phone_number' => 'No. Telpon',
+            'pastor_status_id' => 'Jabatan Pelayanan',
             'remark' => 'Keterangan',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

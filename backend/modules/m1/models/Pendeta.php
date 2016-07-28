@@ -43,7 +43,7 @@ class Pendeta extends \yii\db\ActiveRecord
             [['start_date'], 'date', 'format' => 'php:d-m-Y'],
             [['remark'], 'string'],
             [['sk_number'], 'string', 'max' => 50],
-            [['event_name', 'place'], 'string', 'max' => 255],
+            [['event_name', 'place','pastor_ref'], 'string', 'max' => 255],
         ];
     }
 
@@ -59,6 +59,7 @@ class Pendeta extends \yii\db\ActiveRecord
             'pendeta.description' => 'Status Pendeta',
             'start_date' => 'Tgl. Mulai',
             'sk_number' => 'No SK',
+            'pastor_ref' => 'No. Induk Pendeta',
             'event_name' => 'Pada Acara',
             'place' => 'Tempat',
             'status_id' => 'Status',

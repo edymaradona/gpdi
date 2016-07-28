@@ -26,6 +26,7 @@ use backend\modules\m1\models\Ministry;
 use backend\modules\m1\models\OrganizationRole;
 use backend\modules\m1\models\Pendeta;
 use backend\modules\m1\models\Legal;
+use backend\modules\m1\models\Education;
 
 use backend\models\User;
 
@@ -193,6 +194,44 @@ class PastorController extends Controller
             return $this->render('update', [
                 'model' => $model,
             ]);
+        }
+    }
+
+    public function actionCreateeducation($id)
+    {
+        $model = new Education();
+        $model->parent_id = $id;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateEducation', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionUpdateeducation($id)
+    {
+        $model = $this->findModelEducation($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateEducation', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    protected function findModelEducation($id)
+    {
+        if (($model = Education::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 

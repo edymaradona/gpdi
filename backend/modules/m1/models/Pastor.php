@@ -79,8 +79,8 @@ class Pastor extends \yii\db\ActiveRecord
             no space, no "-",  and started with 08xxxxxx '
             ],
 
-            [['pastor_name', 'birth_place', 'email'], 'string', 'max' => 100],
-            [['front_title', 'back_title'], 'string', 'max' => 25],
+            [['pastor_name', 'birth_place', 'email', 'home_phone'], 'string', 'max' => 100],
+            [['front_title', 'back_title', 'pos_code'], 'string', 'max' => 25],
             [['address', 'address1', 'address2', 'address3', 'photo_path', 'church_name'], 'string', 'max' => 255],
             [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
@@ -126,7 +126,8 @@ class Pastor extends \yii\db\ActiveRecord
             'address1' => 'Desa/Kelurahan',
             'address2' => 'Kab/Kodya',
             'address3' => 'Propinsi',
-            'handphone' => 'Henpon',
+            'handphone' => 'Handphone',
+            'home_phone' => 'Tel. Rumah',
             'email' => 'Email',
             'remark' => 'Keterangan',
             'user_id' => 'User',

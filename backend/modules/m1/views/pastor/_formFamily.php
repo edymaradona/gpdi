@@ -71,6 +71,11 @@ use kartik\builder\Form;
                         'options' => ['placeholder' => 'Input your handphone number...']
                     ],
                     'email' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Input your email...']],
+                    'status_id' => [
+                        'type' => Form::INPUT_DROPDOWN_LIST,
+                        'items' => ArrayHelper::map(Parameter::find()->where('group_name = "famstatus"')->all(), 'id',
+                            'description')
+                    ],
                 ]
             ],
             [

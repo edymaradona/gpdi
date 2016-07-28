@@ -45,9 +45,9 @@ use backend\models\Organization;
                             'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
                         ],
                     ],
-                    'status_id' => [
+                    'type_id' => [
                         'type' => Form::INPUT_DROPDOWN_LIST,
-                        'items' => ArrayHelper::map(Parameter::find()->where('group_name = "status"')->all(), 'id',
+                        'items' => ArrayHelper::map(Parameter::find()->where('group_name = "mintype"')->all(), 'id',
                             'description')
                     ],
                 ]
@@ -62,12 +62,17 @@ use backend\models\Organization;
                         'type' => Form::INPUT_DROPDOWN_LIST,
                         'items' => Organization::getDropDown()
                     ],
+                    'ownership_id' => [
+                        'type' => Form::INPUT_DROPDOWN_LIST,
+                        'items' => ArrayHelper::map(Parameter::find()->where('group_name = "ownership"')->all(), 'id',
+                            'description')
+                    ],
                 ]
             ],
             [
                 'attributes' => [
                     'ministry_address' => [
-                        'type' => Form::INPUT_TEXT,
+                        'type' => Form::INPUT_TEXTAREA,
                         'options' => ['placeholder' => 'Input your address...']
                     ],
                 ]
@@ -124,6 +129,20 @@ use backend\models\Organization;
             [
                 'attributes' => [
                     'remark' => ['type' => Form::INPUT_TEXTAREA, 'options' => ['placeholder' => 'Input Remark...']],
+                ]
+            ],
+            [
+                'attributes' => [
+                    'pastor_status_id' => [
+                        'type' => Form::INPUT_DROPDOWN_LIST,
+                        'items' => ArrayHelper::map(Parameter::find()->where('group_name = "pstype"')->all(), 'id',
+                            'description')
+                    ],
+                    'status_id' => [
+                        'type' => Form::INPUT_DROPDOWN_LIST,
+                        'items' => ArrayHelper::map(Parameter::find()->where('group_name = "status"')->all(), 'id',
+                            'description')
+                    ],
                 ]
             ],
 

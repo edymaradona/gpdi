@@ -124,6 +124,10 @@ use backend\models\Organization;
             ],
             [
                 'attributes' => [
+                    'pos_code' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your pos code...']
+                    ],
                     'handphone' => [
                         'type' => Form::INPUT_TEXT,
                         'options' => [
@@ -135,9 +139,13 @@ use backend\models\Organization;
                             ]
                         ]
                     ],
+                    'home_phone' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your home phone...']
+                    ],
                     'email' => [
                         'type' => Form::INPUT_TEXT,
-                        'options' => ['placeholder' => 'Input your place...']
+                        'options' => ['placeholder' => 'Input your email...']
                     ],
                 ]
             ],

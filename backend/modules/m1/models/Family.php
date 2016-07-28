@@ -42,7 +42,7 @@ class Family extends \yii\db\ActiveRecord
     {
         return [
             [['parent_id', 'family_name', 'birth_place', 'birth_date'], 'required'],
-            [['parent_id', 'relation_id', 'gender_id', 'created_at', 'updated_at'], 'integer'],
+            [['parent_id', 'relation_id', 'gender_id', 'created_at', 'updated_at', 'status_id'], 'integer'],
             [
                 'birth_date',
                 'date',
@@ -73,8 +73,10 @@ class Family extends \yii\db\ActiveRecord
             'birth_date' => 'Tgl. Lahir',
             'gender_id' => 'J. Kelamin',
             'gender.description' => 'J. Kelamin',
-            'handphone' => 'Henpon',
+            'handphone' => 'Handphone',
             'email' => 'Email',
+            'status_id' => 'Status',
+            'status.name' => 'Status',
             'remark' => 'Keterangan',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -89,6 +91,11 @@ class Family extends \yii\db\ActiveRecord
     public function getGender()
     {
         return $this->hasOne(Parameter::className(), ['id' => 'gender_id'])->andWhere(['group_name' => "gender"]);
+    }
+
+    public function getStatus()
+    {
+        return $this->hasOne(Parameter::className(), ['id' => 'gender_id'])->andWhere(['group_name' => "statusfamily"]);
     }
 
     public function behaviors()

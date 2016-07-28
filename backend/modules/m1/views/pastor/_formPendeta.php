@@ -43,13 +43,17 @@ use backend\models\Organization;
                             'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
                         ],
                     ],
+                    'sk_number' => [
+                        'type' => Form::INPUT_TEXT,
+                        'options' => ['placeholder' => 'Input your sk number...']
+                    ],
                 ]
             ],
             [
                 'attributes' => [
-                    'sk_number' => [
+                    'pastor_ref' => [
                         'type' => Form::INPUT_TEXT,
-                        'options' => ['placeholder' => 'Input your sk number...']
+                        'options' => ['placeholder' => 'Input your No Induk Pendeta...']
                     ],
                     'event_name' => [
                         'type' => Form::INPUT_TEXT,
@@ -68,6 +72,10 @@ use backend\models\Organization;
                         'items' => ArrayHelper::map(Parameter::find()->where('group_name = "status"')->all(), 'id',
                             'description')
                     ],
+                ]
+            ],
+            [
+                'attributes' => [
                     'remark' => ['type' => Form::INPUT_TEXTAREA, 'options' => ['placeholder' => 'Input Remark...']],
                 ]
             ],
