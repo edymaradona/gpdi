@@ -42,4 +42,9 @@ class MenuController extends Controller
         exit;
     }
 
+    public function actiontest()
+    {
+        return null;
+    }
+
 }
