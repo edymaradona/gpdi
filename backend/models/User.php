@@ -36,7 +36,7 @@ class User extends \yii\db\ActiveRecord
 
     public static function getGroupId()
     {
-        $query = User::find(['default_group_id' => (int)Yii::$app->user->id])->one();
+        $query = User::find()->where(['id' => (int)Yii::$app->user->id])->one();
 
         return isset($query) ? $query->default_group_id : -1;
     }
