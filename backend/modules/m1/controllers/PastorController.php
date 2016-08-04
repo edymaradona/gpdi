@@ -27,6 +27,7 @@ use backend\modules\m1\models\OrganizationRole;
 use backend\modules\m1\models\Pendeta;
 use backend\modules\m1\models\Legal;
 use backend\modules\m1\models\Education;
+use backend\modules\m1\models\Report;
 
 use backend\models\User;
 
@@ -425,6 +426,35 @@ class PastorController extends Controller
         }
     }
 
+    public function actionCreatereport($id)
+    {
+        $model = new Report();
+        $model->parent_id = $id;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateReport', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionUpdatereport($id)
+    {
+        $model = $this->findModelLegal($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect( Yii::$app->request->referrer );
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateReport', [
+                'model' => $model,
+            ]);
+        }
+    }
+
     /**
      * Deletes an existing Pastor model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -475,6 +505,23 @@ class PastorController extends Controller
         $model->delete();
 
         //return $this->redirect(['view', 'id' => $model->parent_id]);
+    }
+
+    public function actionDeletereport($id)
+    {
+        $model = $this->findModelReport($id);
+        $model->delete();
+
+        //return $this->redirect(['view', 'id' => $model->parent_id]);
+    }
+
+    protected function findModelReport($id)
+    {
+        if (($model = Report::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
     public function actionUpload($id)

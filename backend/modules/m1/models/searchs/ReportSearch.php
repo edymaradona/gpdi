@@ -12,27 +12,21 @@ use backend\modules\m1\models\Report;
  */
 class ReportSearch extends Report
 {
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [
-                ['id', 'parent_id', 'period', 'congregation', 'sector', 'kom', 'pos_pi', 'created_at', 'updated_at'],
-                'integer'
-            ],
-            [['phone_number', 'remark'], 'safe'],
-        ];
-    }
 
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
+    public static function getPastorGrid($id)
     {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        $query = Report::find();
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andFilterWhere([
+            'parent_id' => $id,
+        ]);
+
+        return $dataProvider;
     }
 
     /**

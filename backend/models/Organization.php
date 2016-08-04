@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use backend\modules\m1\models\Ministry;
 
 class Organization extends \kartik\tree\models\Tree
 {
@@ -29,6 +30,23 @@ class Organization extends \kartik\tree\models\Tree
 
     }
 
+    public static function getDropDownLocal()
+    {
+        $list = [];
+        $md = Organization::findOne(['name' => 'MD Jabar']);
+        $children = $md->children(1)->andWhere(['active' => 1])->all();
+        foreach ($children as $child) {
+            foreach ($child->getLocalChurchs() as $c) {
+                //print_r($c);
+                //die;
+                $list[$child->name][$c->id] = $c->church_name;
+            }
+        }
+
+        return $list;
+
+    }
+
     public static function getDropDownAll()
     {
         $list = [];
@@ -47,6 +65,11 @@ class Organization extends \kartik\tree\models\Tree
 
         return $list;
 
+    }
+
+    public function getLocalChurchs()
+    {
+        return $this->hasMany(Ministry::className(), ['organization_parent_id' => 'id'])->orderBy('start_date DESC');
     }
 
     /**

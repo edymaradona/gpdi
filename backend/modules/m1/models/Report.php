@@ -37,7 +37,7 @@ class Report extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'created_at', 'updated_at'], 'required'],
+            [['parent_id', 'period'], 'required'],
             [['parent_id', 'period', 'congregation', 'sector', 'kom', 'pos_pi', 'created_at', 'updated_at'], 'integer'],
             [['remark'], 'string'],
             [['phone_number'], 'string', 'max' => 100],

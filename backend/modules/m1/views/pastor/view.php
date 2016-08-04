@@ -140,6 +140,10 @@ TabsX::widget([
             'label' => '<i class="glyphicon glyphicon-book"></i> Education',
             'content' => $this->render('_education', ['model' => $model]),
         ],
+        [
+            'label' => '<i class="glyphicon glyphicon-print"></i> Laporan',
+            'content' => $this->render('_report', ['model' => $model]),
+        ],
     ],
     'position' => TabsX::POS_ABOVE,
     'encodeLabels' => false
