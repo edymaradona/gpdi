@@ -57,9 +57,9 @@ class IndoDateTimeBehavior extends Behavior
             }
             if (($column->dbType == 'datetime')) {
                 if (strlen($event->sender->$columnName) == 5)
-                    $event->sender->$columnName = date("d-m-Y") . " " . $event->sender->$columnName;
+                    $event->sender->$columnName = date("Y-m-d") . " " . $event->sender->$columnName;
 
-                $event->sender->$columnName = Yii::$app->formatter->asDate($event->sender->$columnName, 'PHP:Y-m-d H:i:s');
+                $event->sender->$columnName = Yii::$app->formatter->asDate($event->sender->$columnName, 'php:Y-m-d H:i:s');
             }
         }
         return true;
@@ -77,7 +77,7 @@ class IndoDateTimeBehavior extends Behavior
             if ($column->dbType == 'date' && $event->sender->$columnName != null) {
                 $event->sender->$columnName = Yii::$app->formatter->asDate($event->sender->$columnName, $this->indoFormatDate);
             } elseif ($column->dbType == 'datetime' && $event->sender->$columnName != null) {
-                $event->sender->$columnName = Yii::$app->formatter->asDate($event->sender->$columnName, $this->indoFormatDateTime);
+                $event->sender->$columnName = Yii::$app->formatter->asDatetime($event->sender->$columnName, $this->indoFormatDateTime);
             }
         }
         return true;

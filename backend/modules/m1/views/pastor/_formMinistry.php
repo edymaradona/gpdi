@@ -60,7 +60,7 @@ use backend\models\Organization;
                     ],
                     'organization_parent_id' => [
                         'type' => Form::INPUT_DROPDOWN_LIST,
-                        'items' => Organization::getDropDown()
+                        'items' => Organization::getDropDownOrganizationGroup()
                     ],
                     'ownership_id' => [
                         'type' => Form::INPUT_DROPDOWN_LIST,

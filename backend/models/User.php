@@ -34,20 +34,6 @@ class User extends \yii\db\ActiveRecord
         return 'user';
     }
 
-    public static function getGroupId()
-    {
-        $query = User::find()->where(['id' => (int)Yii::$app->user->id])->one();
-
-        return isset($query) ? $query->default_group_id : -1;
-    }
-
-    public static function getFullname()
-    {
-        $query = User::find()->where(['id' => Yii::$app->user->id])->one();
-
-        return isset($query) ? $query->fullname : $query->username;
-    }
-
     /**
      * @inheritdoc
      */
@@ -104,6 +90,27 @@ class User extends \yii\db\ActiveRecord
     public function getDefaultGroup()
     {
         return $this->hasOne(Organization::className(), ['id' => 'default_group_id']);
+    }
+
+    public static function getGroupId()
+    {
+        $query = User::find()->where(['id' => (int)Yii::$app->user->id])->one();
+
+        return isset($query) ? $query->default_group_id : -1;
+    }
+
+    public static function getGroupOrganization()
+    {
+        $query = User::find()->where(['id' => (int)Yii::$app->user->id])->one();
+
+        return isset($query) ? $query->defaultGroup : '';
+    }
+
+    public static function getFullname()
+    {
+        $query = User::find()->where(['id' => Yii::$app->user->id])->one();
+
+        return isset($query) ? $query->fullname : $query->username;
     }
 
     public function behaviors()

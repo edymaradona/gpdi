@@ -4,6 +4,7 @@ namespace backend\models;
 
 use Yii;
 use backend\modules\m1\models\Ministry;
+use Yii\helpers\ArrayHelper;
 
 class Organization extends \kartik\tree\models\Tree
 {
@@ -30,18 +31,18 @@ class Organization extends \kartik\tree\models\Tree
 
     }
 
-    public static function getDropDownLocal()
+    public static function getDropDownOrganizationGroup()
     {
         $list = [];
-        $md = Organization::findOne(['name' => 'MD Jabar']);
+
+        $OrganizationParent = User::getGroupOrganization()->parents(1)->one()->name;
+
+        $md = Organization::findOne(['name' => $OrganizationParent]);
         $children = $md->children(1)->andWhere(['active' => 1])->all();
-        foreach ($children as $child) {
-            foreach ($child->getLocalChurchs() as $c) {
-                //print_r($c);
-                //die;
-                $list[$child->name][$c->id] = $c->church_name;
-            }
-        }
+        $list = ArrayHelper::map($children,'id','name');
+        //foreach ($children as $child) {
+        //    $list[$child->parents(1)->one()->name][$child->id] = $child->name;
+        //}
 
         return $list;
 
@@ -57,10 +58,12 @@ class Organization extends \kartik\tree\models\Tree
             $list['MP'][$child->id] = $child->name;
         }
 
-        foreach ($children as $child) {
-            foreach ($child->children(1)->andWhere(['active' => 1])->all() as $c) {
-                $list[$child->name][$c->id] = $c->name;
-            }
+        $OrganizationParent = User::getGroupOrganization()->parents(1)->one()->name;
+        $md1 = Organization::findOne(['name' => $OrganizationParent]);
+        $children1 = $md1->children(1)->andWhere(['active' => 1])->all();
+
+        foreach ($children1 as $child) {
+            $list[$child->parents(1)->one()->name][$child->id] = $child->name;
         }
 
         return $list;

@@ -21,6 +21,7 @@ class PastorSearch extends Pastor
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => false
         ]);
 
         if (!Yii::$app->user->can('AllModuleBundle')) {
@@ -61,6 +62,7 @@ class PastorSearch extends Pastor
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => false
         ]);
 
         if (!Yii::$app->user->can('AllModuleBundle')) {
@@ -102,6 +104,7 @@ class PastorSearch extends Pastor
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => false
         ]);
 
         if (!Yii::$app->user->can('AllModuleBundle')) {

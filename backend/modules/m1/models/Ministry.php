@@ -77,7 +77,7 @@ class Ministry extends \yii\db\ActiveRecord
             'ministry_address3' => 'Propinsi',
             'phone_number' => 'No. Telpon',
             'pastor_status_id' => 'Jabatan Pelayanan',
-            'remark' => 'Keterangan',
+            'remark' => 'Ket.',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'ministryParent.name' => 'Wilayah'

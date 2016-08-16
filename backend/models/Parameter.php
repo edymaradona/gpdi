@@ -34,20 +34,9 @@ class Parameter extends \yii\db\ActiveRecord
     {
         $arrayList = [];
 
-        $query = Parameter::find();
+        $query = Parameter::find()->where(['group_name'=>$groupName]);
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        $query->andFilterWhere([
-            'group_name' => $groupName,
-        ]);
-
-
-        foreach ($dataProvider->getModels() as $model) {
-            $arrayList [$model->id] = $model->description;
-        }
+        $arrayList = arrayHelper::map($query,'id','description');        
 
         return $arrayList;
 

@@ -57,7 +57,7 @@ use backend\models\Organization;
                     ],
                     'kom' => [
                         'type' => Form::INPUT_TEXT,
-                        'options' => ['placeholder' => 'Input your sk number...']
+                        'options' => ['placeholder' => 'Input jumlah kom...']
                     ],
                     'pos_pi' => [
                         'type' => Form::INPUT_TEXT,

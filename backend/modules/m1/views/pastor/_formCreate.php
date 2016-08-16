@@ -10,6 +10,7 @@ use yii\helpers\Url;
 use kartik\builder\FormGrid;
 use kartik\builder\Form;
 use backend\models\Organization;
+use backend\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\m1\models\Pastor */
@@ -166,7 +167,7 @@ use backend\models\Organization;
                     ],
                     'organization_parent_id' => [
                         'type' => Form::INPUT_DROPDOWN_LIST,
-                        'items' => Organization::getDropDown()
+                        'items' => Organization::getDropDownOrganizationGroup()
                     ],
                     'church_name' => [
                         'type' => Form::INPUT_TEXT,
