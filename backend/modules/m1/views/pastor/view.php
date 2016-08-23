@@ -21,7 +21,7 @@ $this->params['menuOperation'] = [
     //'class' => 'primary',
     'list' => [
         ['label' => 'Home', 'icon' => 'home', 'url' => ['/m1/pastor']],
-        ['label' => 'Update', 'icon' => 'edit', 'url' => ['/m1/pastor/update', 'id' => $model->id]],
+        //['label' => 'Update', 'icon' => 'edit', 'url' => ['/m1/pastor/update', 'id' => $model->id]],
         [
             'label' => 'Delete',
             'icon' => 'edit',
@@ -137,13 +137,20 @@ TabsX::widget([
             'content' => $this->render('_family', ['model' => $model]),
         ],
         [
-            'label' => '<i class="glyphicon glyphicon-book"></i> Education',
-            'content' => $this->render('_education', ['model' => $model]),
-        ],
-        [
-            'label' => '<i class="glyphicon glyphicon-print"></i> Laporan',
-            'content' => $this->render('_report', ['model' => $model]),
-        ],
+            'label' => '<i class="glyphicon glyphicon-option-vertical"></i> Lainnya',
+            'items' => [
+                [
+                    'label' => '<i class="glyphicon glyphicon-book"></i> Pendidikan',
+                    'encode'=>false,
+                    'content' => $this->render('_education', ['model' => $model]),
+                ],
+                [
+                    'label' => '<i class="glyphicon glyphicon-print"></i> Laporan',
+                    'encode'=>false,
+                    'content' => $this->render('_report', ['model' => $model]),
+                ],
+            ]
+        ]
     ],
     'position' => TabsX::POS_ABOVE,
     'encodeLabels' => false

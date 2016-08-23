@@ -530,12 +530,13 @@ class PastorController extends Controller
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload()) {
+            if ($model->upload() && $model->imageFile != null) {
                 $model->photo_path = 'pastor/' . $model->imageFile->baseName . '.' . $model->imageFile->extension;
                 $model->save(false);
-                return $this->redirect(['view', 'id' => $id]);
+                //return $this->redirect(['view', 'id' => $id]);
                 //return true;
             }
+                return $this->redirect(['view', 'id' => $id]);
         }
 
     }

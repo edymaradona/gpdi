@@ -1,10 +1,14 @@
 <?php
 
 use kartik\detail\DetailView;
+use yii\helpers\Html;
 
 ?>
 
-<br/>
+<p>
+    <?= Html::a('Update', ['/m1/pastor/update', 'id' => $model->id],
+        ['class' => 'btn btn-success']) ?>
+</p>
 
 <?=
 DetailView::widget([

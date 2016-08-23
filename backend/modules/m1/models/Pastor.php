@@ -100,12 +100,12 @@ class Pastor extends \yii\db\ActiveRecord
 
     public function upload()
     {
-        //if ($this->validate()) {
-        $this->imageFile->saveAs('images/pastor/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-        return true;
-        //} else {
-        //    return false;
-        //}
+        if ($this->validate() && $this->imageFile != null) {
+            $this->imageFile->saveAs('images/pastor/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
