@@ -121,11 +121,11 @@ TabsX::widget([
             'content' => $this->render('_ministry', ['model' => $model]),
         ],
         [
-            'label' => '<i class="glyphicon glyphicon-book"></i> Kependetaan',
+            'label' => '<i class="glyphicon glyphicon-book"></i> Pendeta',
             'content' => $this->render('_pendeta', ['model' => $model]),
         ],
         [
-            'label' => '<i class="glyphicon glyphicon-book"></i> Surat Pelayanan',
+            'label' => '<i class="glyphicon glyphicon-book"></i> Pelayanan',
             'content' => $this->render('_legal', ['model' => $model]),
         ],
         [
@@ -136,9 +136,9 @@ TabsX::widget([
             'label' => '<i class="glyphicon glyphicon-cutlery"></i> Keluarga',
             'content' => $this->render('_family', ['model' => $model]),
         ],
-        [
-            'label' => '<i class="glyphicon glyphicon-option-vertical"></i> Lainnya',
-            'items' => [
+        //[
+            //'label' => '<i class="glyphicon glyphicon-option-vertical"></i> Lainnya',
+            //'items' => [
                 [
                     'label' => '<i class="glyphicon glyphicon-book"></i> Pendidikan',
                     'encode'=>false,
@@ -149,11 +149,14 @@ TabsX::widget([
                     'encode'=>false,
                     'content' => $this->render('_report', ['model' => $model]),
                 ],
-            ]
-        ]
+            //]
+        //]
     ],
-    'position' => TabsX::POS_ABOVE,
-    'encodeLabels' => false
+    //'position' => TabsX::POS_ABOVE,
+    'position'=>TabsX::POS_LEFT,
+    'encodeLabels' => false,
+    'bordered'=>true,
+    //'sideways'=>true,
 ]);
 
 

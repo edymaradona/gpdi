@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'SIGEM GPdI',
+        'brandLabel' => 'D50',
         //'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -56,7 +56,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => User::getFullname(), 'items' => $menuItems2];
 
     } else {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => '', 'url' => ['/site/login']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

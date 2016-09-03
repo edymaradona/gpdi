@@ -43,28 +43,29 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+
+        //if (!Yii::$app->user->isGuest) {
+        //    return $this->goHome();
+        //}
+
+        $model = new LoginForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()) { 
+
+           //return $this->goBack();
+        }
+
         if (!Yii::$app->user->isGuest) {
             return $this->redirect(['/menu']);
-        } else {
-            return $this->render('index');
-        }
+        } else
+            return $this->render('index', [
+                'model' => $model,
+            ]);
     }
 
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            //return $this->goBack();
-            return $this->redirect(['/menu']);
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
+        return $this->redirect(['index']);
     }
 
     public function actionLogout()

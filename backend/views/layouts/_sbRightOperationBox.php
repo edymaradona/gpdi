@@ -28,9 +28,8 @@ use kartik\widgets\Typeahead;
         'method' => 'get'
     ]);
     ?>
-    <? //= $form->field($model, 'pastor_name') ?>
     <?= $form->field($model, 'pastor_name')->widget(Typeahead::classname(), [
-        'options' => ['placeholder' => 'Search pastor...'],
+        'options' => ['placeholder' => 'Cari Nama ...'],
         'pluginOptions' => ['highlight' => true],
         'dataset' => [
             [

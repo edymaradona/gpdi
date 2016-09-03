@@ -608,7 +608,15 @@ class PastorController extends Controller
     {
         $arrayList = [];
 
-        $query = Pastor::find();
+        if (!Yii::$app->user->can('AllModuleBundle')) {
+            $query = Pastor::find()->joinWith('ministry')->where([
+                '`pastor`.`id`' => $id,
+                '`ministry`.`organization_parent_id`' => User::getGroupId()
+            ]);
+        } else {
+            $query = Pastor::find();
+        }
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -616,7 +624,7 @@ class PastorController extends Controller
 
         $query->andFilterWhere(['like', 'pastor_name', $key]);
 
-
+        //$arrayList = ArrayHelper::map($dataProvider->getModels(),'id','pastor_name');
         foreach ($dataProvider->getModels() as $model) {
             $arrayList [] = $model->pastor_name;
         }
