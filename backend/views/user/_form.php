@@ -23,7 +23,7 @@ use backend\models\Organization;
 
     <?= $form->field($model, 'default_group_id')->dropDownList(Organization::getDropDown()); ?>
     <?= $form->field($model, 'email')->textInput() ?>
-    <? //= $form->field($model, 'status')->textInput() ?>
+    <? /* = $form->field($model, 'status')->textInput() */ ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update',
