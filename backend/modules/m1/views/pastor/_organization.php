@@ -116,7 +116,7 @@ use yii\bootstrap\Modal;
     'header' => 'Organization',
     'id' => 'editModalOrganizationId',
     'class' => 'modal',
-    'size' => 'modal-md',
+    'size' => 'modal-lg',
 ]);
 echo "<div class='modalOrganizationContent'></div>";
 Modal::end();

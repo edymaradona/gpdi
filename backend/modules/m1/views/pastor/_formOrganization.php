@@ -41,13 +41,18 @@ use backend\models\Organization;
                     'start_date' => [
                         'type' => 'widget',
                         'widgetClass' => '\kartik\widgets\DatePicker',
-                        'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
+                        'options' => [
+                            'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
+                        ],
                     ],
                     'end_date' => [
                         'type' => 'widget',
                         'widgetClass' => '\kartik\widgets\DatePicker',
-                        'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
+                        'options' => [
+                            'pluginOptions' => ['autoclose' => true, 'format' => 'dd-mm-yyyy',]
+                        ],
                     ],
+
                     'status_id' => [
                         'type' => Form::INPUT_DROPDOWN_LIST,
                         'items' => ArrayHelper::map(Parameter::find()->where('group_name = "status"')->all(), 'id',
